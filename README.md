@@ -12,7 +12,7 @@
 ```bash
 https://some-demo-link.demo-link
 ```
-
+ 
 **Admin access:**
 Username: admin@email.com
 Password: admin3141592

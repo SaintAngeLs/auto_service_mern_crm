@@ -28,6 +28,6 @@ class ColumnChart extends Component {
       />
     );
   }
-}
+};
 
 export default ColumnChart;

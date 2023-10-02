@@ -14,7 +14,7 @@ import CountUpComponent from "components/countUpComponent/countUpComponent";
 // Custom icons
 import React from "react";
 
-export default function Default(props) {
+function Default(props) {
   const { startContent, endContent, name, growth, value } = props;
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const textColorSecondary = "secondaryGray.600";
@@ -62,4 +62,6 @@ export default function Default(props) {
       </Flex>
     </Card>
   );
-}
+};
+
+export default Default;

@@ -7,7 +7,8 @@ import TransparentMenu from "components/menu/TransparentMenu";
 // Custom icons
 import { IoEllipsisVertical } from "react-icons/io5";
 
-export default function Default(props) {
+
+function Default(props) {
   const { avatar, name, job, ...rest } = props;
   const textColor = useColorModeValue("secondaryGray.900", "white");
   const bg = useColorModeValue("white", "#1B254B");
@@ -53,4 +54,6 @@ export default function Default(props) {
       </Flex>
     </Card>
   );
-}
+};
+
+export default Default;
