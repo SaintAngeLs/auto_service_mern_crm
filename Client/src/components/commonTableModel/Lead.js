@@ -151,7 +151,7 @@ export default function LeadTable(props) {
                           </Text>
                         </Flex>
                       );
-                    } else if (cell?.column.Header === "Lead Name") {
+                    } else if (cell?.column.Header === "First Names") {
                       data = (
                         <Link to={user?.role !== 'admin' ? `/leadView/${cell?.row?.values._id}` : `/admin/leadView/${cell?.row?.values._id}`}>
                           <Text
@@ -165,7 +165,7 @@ export default function LeadTable(props) {
                           </Text>
                         </Link>
                       );
-                    } else if (cell?.column.Header === "Lead Email") {
+                    } else if (cell?.column.Header === "Last Name") {
                       data = (
                         <Text
                           me="10px"
@@ -176,7 +176,7 @@ export default function LeadTable(props) {
                           {cell?.value}
                         </Text>
                       );
-                    } else if (cell?.column.Header === "Lead PhoneNumber") {
+                    } else if (cell?.column.Header === "Email") {
                       data = (
                         <Text
                           me="10px"
@@ -187,7 +187,7 @@ export default function LeadTable(props) {
                           {cell?.value}
                         </Text>
                       );
-                    } else if (cell?.column.Header === "Lead Address") {
+                    } else if (cell?.column.Header === "Phone Number") {
                       data = (
                         <Text color={textColor} fontSize="sm" fontWeight="700">
                           {cell?.value}

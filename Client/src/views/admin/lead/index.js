@@ -10,12 +10,12 @@ const Index = () => {
 
     const tableColumns = [
         { Header: "#", accessor: "_id", isSortable: false, width: 10 },
-        { Header: 'Lead Name', accessor: 'leadName', width: 20 },
-        { Header: "Lead Status", accessor: "leadStatus", },
-        { Header: "Lead Email", accessor: "leadEmail", },
-        { Header: "Lead PhoneNumber", accessor: "leadPhoneNumber", },
-        { Header: "Lead Address", accessor: "leadAddress", },
-        { Header: "Lead Owner", accessor: "leadOwner", },
+        { Header: 'First Name', accessor: 'leadName', width: 20 },
+        { Header: "Last Name", accessor: "leadStatus", },
+        { Header: "Email", accessor: "leadEmail", },
+        { Header: "PhoneNumber", accessor: "leadPhoneNumber", },
+        { Header: "Address", accessor: "leadAddress", },
+        { Header: "Owner", accessor: "leadOwner", },
         { Header: "Lead Score", accessor: "leadScore", },
     ];
     const { isOpen, onOpen, onClose } = useDisclosure()

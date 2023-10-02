@@ -15,13 +15,13 @@ const ContactModel = (props) => {
 
     const columns = [
         { Header: "#", accessor: "_id", isSortable: false, width: 10 },
-        { Header: 'Lead Name', accessor: 'leadName', width: 20 },
-        { Header: "Lead Email", accessor: "leadEmail", },
-        { Header: "Lead PhoneNumber", accessor: "leadPhoneNumber", },
-        { Header: "Lead Address", accessor: "leadAddress", },
+        { Header: 'First Name', accessor: 'firstName', width: 20 },
+        { Header: "Last Name", accessor: "lastName", },
+        { Header: "Email", accessor: "email", },
+        { Header: "Phone Number", accessor: "phoneNumber", },
+        { Header: "Mobile Number", accessor: "mobileNumber", },
+        { Header: "Physical Address", accessor: "physicalAddress", },
         { Header: "Lead Status", accessor: "leadStatus", },
-        { Header: "Lead Owner", accessor: "leadOwner", },
-        { Header: "Lead Score", accessor: "leadScore", },
     ];
 
     const user = JSON.parse(localStorage.getItem("user"))
