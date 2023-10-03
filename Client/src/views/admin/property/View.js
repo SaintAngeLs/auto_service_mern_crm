@@ -135,18 +135,7 @@ const View = () => {
                                                     <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> VIN </Text>
                                                     <Text>{data?.VIN ? data?.VIN : 'N/A'}</Text>
                                                 </GridItem>
-                                                <GridItem colSpan={{ base: 12, md: 6 }}>
-                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Chicke </Text>
-                                                    <Text>{data?.numberofBathrooms ? data?.numberofBathrooms : 'N/A'}</Text>
-                                                </GridItem>
-                                                <GridItem colSpan={{ base: 12, md: 6 }}>
-                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Previous Owners</Text>
-                                                    <Text>{data?.previousOwners ? data?.previousOwners : 'N/A'}</Text>
-                                                </GridItem>
-                                                <GridItem colSpan={{ base: 12, md: 6 }}>
-                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Property Address</Text>
-                                                    <Text>{data?.propertyAddress ? data?.propertyAddress : 'N/A'}</Text>
-                                                </GridItem>
+                                              
                                                 <GridItem colSpan={{ base: 12 }}>
                                                     <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Vhickle Description </Text>
                                                     <Text>{data?.vehicleDescription ? data?.vehicleDescription : 'N/A'}</Text>

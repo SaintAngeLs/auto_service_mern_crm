@@ -184,7 +184,7 @@ const Add = (props) => {
                                     fontSize='sm'
                                     onChange={handleChange} onBlur={handleBlur}
                                     value={values.vehicleDescription}
-                                    type='number'
+                                    type='string'
                                     min={0}
                                     name="vehicleDescription"
                                     placeholder="Enter vehicle's Description"
@@ -297,10 +297,10 @@ const Add = (props) => {
                                 <Text mb='10px' color={'red'}>{errors.parkingAvailability && touched.parkingAvailability && errors.parkingAvailability}</Text>
                             </GridItem> */}
 
-                            <GridItem colSpan={{ base: 12 }}>
+                            {/* <GridItem colSpan={{ base: 12 }}>
                                 <HSeparator />
                                 <Heading mt={2} as="h1" size="md" >
-                                    3. Listing and Marketing Details
+                                    3. Listing Status  and Marketing Details
                                 </Heading>
                             </GridItem>
                             <GridItem colSpan={{ base: 12, sm: 6 }}>
@@ -380,13 +380,69 @@ const Add = (props) => {
                                     borderColor={errors.multipleListingService && touched.multipleListingService ? "red.300" : null}
                                 />
                                 <Text mb='10px' color={'red'}>{errors.multipleListingService && touched.multipleListingService && errors.multipleListingService}</Text>
-                            </GridItem>
-
+                            </GridItem> */}
 
                             <GridItem colSpan={{ base: 12 }}>
                                 <HSeparator />
                                 <Heading mt={2} as="h1" size="md" >
-                                    4. Property History
+                                    3. Avgailability and pricing
+                                </Heading>
+                            </GridItem>
+                            <GridItem colSpan={{ base: 12, sm: 6 }}>
+                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
+                                    AvailabilityStatus Status
+                                </FormLabel>
+                                <Select
+                                    value={values.availabilityStatus}
+                                    name="listingStatus"
+                                    onChange={handleChange}
+                                    fontWeight='500'
+                                    placeholder={'Select Listing Status'}
+                                    borderColor={errors.availabilityStatus && touched.availabilityStatus ? "red.300" : null}
+                                >
+                                    <option value='active'>active</option>
+                                    <option value='pending'>pending</option>
+                                    <option value='needs_service'>need service</option>
+                                    <option value='sold'>sold</option>
+                                </Select>
+                                <Text mb='10px' color={'red'}>{errors.availabilityStatus && touched.availabilityStatus && errors.availabilityStatus}</Text>
+                            </GridItem>
+                            <GridItem colSpan={{ base: 12, sm: 6 }}>
+                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
+                                    Price
+                                </FormLabel>
+                                <Input
+                                    fontSize='sm'
+                                    onChange={handleChange} onBlur={handleBlur}
+                                    value={values.price}
+                                    name="price"
+                                    placeholder='price'
+                                    fontWeight='500'
+                                    borderColor={errors.price && touched.price ? "red.300" : null}
+                                />
+                                <Text mb='10px' color={'red'}>{errors.price && touched.price && errors.price}</Text>
+                            </GridItem>
+                            <GridItem colSpan={{ base: 12, sm: 6 }}>
+                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
+                                    Promotions
+                                </FormLabel>
+                                <Input
+                                    type='date'
+                                    fontSize='sm'
+                                    onChange={handleChange} onBlur={handleBlur}
+                                    value={values.promotions}
+                                    name="promotions"
+                                    fontWeight='500'
+                                    borderColor={errors.promotions && touched.promotions ? "red.300" : null}
+                                />
+                                <Text mb='10px' color={'red'}> {errors.promotions && touched.promotions && errors.promotions}</Text>
+                            </GridItem>
+                           
+
+                            <GridItem colSpan={{ base: 12 }}>
+                                <HSeparator />
+                                <Heading mt={2} as="h1" size="md" >
+                                    4. Vichle History
                                 </Heading>
                             </GridItem>
                             <GridItem colSpan={{ base: 12 }}>
@@ -406,132 +462,48 @@ const Add = (props) => {
                                 />
                                 <Text mb='10px' color={'red'}>{errors.previousOwners && touched.previousOwners && errors.previousOwners}</Text>
                             </GridItem>
+                            <GridItem colSpan={{ base: 12 }}>
+                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
+                                    Current Owners
+                                </FormLabel>
+                                <Input
+                                    fontSize='sm'
+                                    onChange={handleChange} onBlur={handleBlur}
+                                    value={values.currentOwner}
+                                    name="currentOwner"
+                                    type='number'
+                                    min={0}
+                                    placeholder='Enter current Owner'
+                                    fontWeight='500'
+                                    borderColor={errors.currentOwner && touched.currentOwner ? "red.300" : null}
+                                />
+                                <Text mb='10px' color={'red'}>{errors.currentOwner && touched.currentOwner && errors.currentOwner}</Text>
+                            </GridItem>
+
+                            <GridItem colSpan={{ base: 12 }}>
+                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
+                                    Current Owners
+                                </FormLabel>
+                                <Input
+                                    fontSize='sm'
+                                    onChange={handleChange} onBlur={handleBlur}
+                                    value={values.associatedServiceAgents}
+                                    name="associatedServiceAgents"
+                                    type='number'
+                                    min={0}
+                                    placeholder='Enter associated Service Agents'
+                                    fontWeight='500'
+                                    borderColor={errors.associatedServiceAgents && touched.associatedServiceAgents ? "red.300" : null}
+                                />
+                                <Text mb='10px' color={'red'}>{errors.associatedServiceAgents && touched.associatedServiceAgents && errors.associatedServiceAgents}</Text>
+                            </GridItem>
+
+                           
 
                             <GridItem colSpan={{ base: 12 }}>
                                 <HSeparator />
                                 <Heading mt={2} as="h1" size="md" >
-                                    5. Financial Information
-                                </Heading>
-                            </GridItem>
-
-                            <GridItem colSpan={{ base: 12, sm: 6 }}>
-                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
-                                    Property Taxes
-                                </FormLabel>
-                                <Input
-                                    fontSize='sm'
-                                    onChange={handleChange} onBlur={handleBlur}
-                                    value={values.propertyTaxes}
-                                    name="propertyTaxes"
-                                    placeholder=' Property Taxes'
-                                    fontWeight='500'
-                                    borderColor={errors.propertyTaxes && touched.propertyTaxes ? "red.300" : null}
-                                />
-                                <Text mb='10px' color={'red'}> {errors.propertyTaxes && touched.propertyTaxes && errors.propertyTaxes}</Text>
-                            </GridItem>
-                            <GridItem colSpan={{ base: 12, sm: 6 }}>
-                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
-                                    Homeowners Association
-                                </FormLabel>
-                                <Input
-                                    fontSize='sm'
-                                    onChange={handleChange} onBlur={handleBlur}
-                                    value={values.homeownersAssociation}
-                                    name="homeownersAssociation"
-                                    placeholder='Homeowners Association'
-                                    fontWeight='500'
-                                    borderColor={errors.homeownersAssociation && touched.homeownersAssociation ? "red.300" : null}
-                                />
-                                <Text mb='10px' color={'red'}> {errors.homeownersAssociation && touched.homeownersAssociation && errors.homeownersAssociation}</Text>
-                            </GridItem>
-                            <GridItem colSpan={{ base: 12 }}>
-                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
-                                    Mortgage Information
-                                </FormLabel>
-                                <Input
-                                    fontSize='sm'
-                                    onChange={handleChange} onBlur={handleBlur}
-                                    value={values.mortgageInformation}
-                                    name="mortgageInformation"
-                                    placeholder='Mortgage Information'
-                                    fontWeight='500'
-                                    borderColor={errors.mortgageInformation && touched.mortgageInformation ? "red.300" : null}
-                                />
-                                <Text mb='10px' color={'red'}> {errors.mortgageInformation && touched.mortgageInformation && errors.mortgageInformation}</Text>
-                            </GridItem>
-
-                            <GridItem colSpan={{ base: 12 }}>
-                                <HSeparator />
-                                <Heading mt={2} as="h1" size="md" >
-                                    6. Contacts Associated with Property
-                                </Heading>
-                            </GridItem>
-
-                            <GridItem colSpan={{ base: 12, sm: 6 }}>
-                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
-                                    Sellers
-                                </FormLabel>
-                                <Input
-                                    fontSize='sm'
-                                    onChange={handleChange} onBlur={handleBlur}
-                                    value={values.sellers}
-                                    name="sellers"
-                                    placeholder='Sellers'
-                                    fontWeight='500'
-                                    borderColor={errors.sellers && touched.sellers ? "red.300" : null}
-                                />
-                                <Text mb='10px' color={'red'}> {errors.sellers && touched.sellers && errors.sellers}</Text>
-                            </GridItem>
-                            <GridItem colSpan={{ base: 12, sm: 6 }}>
-                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
-                                    Buyers
-                                </FormLabel>
-                                <Input
-                                    fontSize='sm'
-                                    onChange={handleChange} onBlur={handleBlur}
-                                    value={values.buyers}
-                                    name="buyers"
-                                    placeholder='Buyers'
-                                    fontWeight='500'
-                                    borderColor={errors.buyers && touched.buyers ? "red.300" : null}
-                                />
-                                <Text mb='10px' color={'red'}> {errors.buyers && touched.buyers && errors.buyers}</Text>
-                            </GridItem>
-                            <GridItem colSpan={{ base: 12, sm: 6 }}>
-                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
-                                    Property Managers
-                                </FormLabel>
-                                <Input
-                                    fontSize='sm'
-                                    onChange={handleChange} onBlur={handleBlur}
-                                    value={values.propertyManagers}
-                                    name="propertyManagers"
-                                    placeholder='Property Managers'
-                                    fontWeight='500'
-                                    borderColor={errors.propertyManagers && touched.propertyManagers ? "red.300" : null}
-                                />
-                                <Text mb='10px' color={'red'}> {errors.propertyManagers && touched.propertyManagers && errors.propertyManagers}</Text>
-                            </GridItem>
-                            <GridItem colSpan={{ base: 12, sm: 6 }}>
-                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
-                                    Contractors Or Service Providers
-                                </FormLabel>
-                                <Input
-                                    fontSize='sm'
-                                    onChange={handleChange} onBlur={handleBlur}
-                                    value={values.contractorsOrServiceProviders}
-                                    name="contractorsOrServiceProviders"
-                                    placeholder='Contractors Or Service Providers'
-                                    fontWeight='500'
-                                    borderColor={errors.contractorsOrServiceProviders && touched.contractorsOrServiceProviders ? "red.300" : null}
-                                />
-                                <Text mb='10px' color={'red'}> {errors.contractorsOrServiceProviders && touched.contractorsOrServiceProviders && errors.contractorsOrServiceProviders}</Text>
-                            </GridItem>
-
-                            <GridItem colSpan={{ base: 12 }}>
-                                <HSeparator />
-                                <Heading mt={2} as="h1" size="md" >
-                                    7. Property Notes and Comments
+                                    5. Property Notes and Comments
                                 </Heading>
                             </GridItem>
 
