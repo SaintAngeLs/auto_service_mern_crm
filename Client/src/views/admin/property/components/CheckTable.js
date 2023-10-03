@@ -90,10 +90,10 @@ export default function CheckTable(props) {
 
   const handleCheckboxChange = (event, value) => {
     if (event.target.checked) {
-      setSelectedValues((prevSelectedValues) => [...prevSelectedValues, value]);
+      setSelectedValues(( ) => [...selectedValues, value]);
     } else {
-      setSelectedValues((prevSelectedValues) =>
-        prevSelectedValues.filter((selectedValue) => selectedValue !== value)
+      setSelectedValues((selectedValues) =>
+        selectedValues.filter((selectedValue) => selectedValue !== value)
       );
     }
   };

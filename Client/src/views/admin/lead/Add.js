@@ -164,6 +164,96 @@ const Add = (props) => {
                             <GridItem colSpan={{ base: 12 }}>
                                 <HSeparator />
                                 <Heading mt={2} as="h1" size="md" >
+                                    1.1. Lead Automotive specific information
+                                </Heading>
+                            </GridItem>
+
+                            <GridItem colSpan={{ base: 12, sm: 6 }}>
+                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
+                                    Car Brand<Text color={"red"}>*</Text>
+                                </FormLabel>
+                                <Input
+                                    fontSize='sm'
+                                    onChange={handleChange} onBlur={handleBlur}
+                                    value={values.carBrand}
+                                    name="carBrand"
+                                    placeholder='Enter Car Brand'
+                                    fontWeight='500'
+                                    borderColor={errors.leadAddress && touched.leadAddress ? "red.300" : null}
+                                />
+                                <Text mb='10px' color={'red'}>{errors.carBrand && touched.carBrand && errors.carBrand}</Text>
+                            </GridItem>
+
+                            <GridItem colSpan={{ base: 12, sm: 6 }}>
+                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
+                                    Car model<Text color={"red"}>*</Text>
+                                </FormLabel>
+                                <Input
+                                    fontSize='sm'
+                                    onChange={handleChange} onBlur={handleBlur}
+                                    value={values.carModel}
+                                    name="carModel"
+                                    placeholder='Enter Car Model'
+                                    fontWeight='500'
+                                    borderColor={errors.carModel && touched.carModel ? "red.300" : null}
+                                />
+                                <Text mb='10px' color={'red'}>{errors.carModel && touched.carModel && errors.carModel}</Text>
+                            </GridItem>
+
+                            <GridItem colSpan={{ base: 12, sm: 6 }}>
+                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
+                                    Car year<Text color={"red"}>*</Text>
+                                </FormLabel>
+                                <Input
+                                    fontSize='sm'
+                                    onChange={handleChange} onBlur={handleBlur}
+                                    value={values.carYear}
+                                    name="carYear"
+                                    placeholder='Enter Car Model'
+                                    fontWeight='500'
+                                    borderColor={errors.carYear && touched.carYear ? "red.300" : null}
+                                />
+                                <Text mb='10px' color={'red'}>{errors.carYear && touched.carYear && errors.carYear}</Text>
+                            </GridItem>
+
+                            <GridItem colSpan={{ base: 12, sm: 6 }}>
+                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
+                                    Car Required<Text color={"red"}>*</Text>
+                                </FormLabel>
+                                <Input
+                                    fontSize='sm'
+                                    onChange={handleChange} onBlur={handleBlur}
+                                    value={values.serviceRequired}
+                                    name="carYear"
+                                    placeholder='Enter Car Model'
+                                    fontWeight='500'
+                                    borderColor={errors.serviceRequired && touched.serviceRequired ? "red.300" : null}
+                                />
+                                <Text mb='10px' color={'red'}>{errors.serviceRequired && touched.serviceRequired && errors.carYear}</Text>
+                            </GridItem>
+                            
+                            <GridItem colSpan={{ base: 12, sm: 6 }}>
+                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
+                                    Service Date<Text color={"red"}>*</Text>
+                                </FormLabel>
+                                <Input
+                                    fontSize='sm'
+                                    onChange={handleChange} onBlur={handleBlur}
+                                    value={values.serviceDate}
+                                    name="serviceDate"
+                                    placeholder='Enter Service Date'
+                                    fontWeight='500'
+                                    borderColor={errors.serviceDate && touched.serviceDate ? "red.300" : null}
+                                />
+                                <Text mb='10px' color={'red'}>{errors.serviceDate && touched.serviceDate && errors.serviceDate}</Text>
+                            </GridItem>
+                            
+
+
+
+                            <GridItem colSpan={{ base: 12 }}>
+                                <HSeparator />
+                                <Heading mt={2} as="h1" size="md" >
                                     2. Lead Source and Details
                                 </Heading>
                             </GridItem>
@@ -197,7 +287,7 @@ const Add = (props) => {
                                 >
                                     <option value='active'>active</option>
                                     <option value='pending'>pending</option>
-                                    <option value='sold'>sold</option>
+                                    <option value='sold'>conducted</option>
                                 </Select>
                                 <Text mb='10px' color={'red'}>{errors.leadStatus && touched.leadStatus && errors.leadStatus}</Text>
                             </GridItem>

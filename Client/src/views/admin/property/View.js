@@ -110,33 +110,33 @@ const View = () => {
                                                 <GridItem colSpan={12}>
                                                     <Box>
                                                         <Heading size="md" mb={3}>
-                                                            Basic Property Information
+                                                            Basic Car Information
                                                         </Heading>
                                                         <HSeparator />
                                                     </Box>
                                                 </GridItem>
                                                 <GridItem colSpan={{ base: 12, md: 6 }}>
-                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Property Type</Text>
-                                                    <Text>{data?.propertyType ? data?.propertyType : 'N/A'}</Text>
+                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Car brand</Text>
+                                                    <Text>{data?.brand ? data?.brand : 'N/A'}</Text>
                                                 </GridItem>
                                                 <GridItem colSpan={{ base: 12, md: 6 }}>
-                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Year Built</Text>
-                                                    <Text>{data?.yearBuilt ? data?.yearBuilt : 'N/A'}</Text>
+                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Car model</Text>
+                                                    <Text>{data?.model ? data?.model : 'N/A'}</Text>
                                                 </GridItem>
                                                 <GridItem colSpan={{ base: 12, md: 6 }}>
-                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Listing Price</Text>
-                                                    <Text>{data?.listingPrice ? data?.listingPrice : 'N/A'}</Text>
+                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Year</Text>
+                                                    <Text>{data?.year ? data?.year : 'N/A'}</Text>
                                                 </GridItem>
                                                 <GridItem colSpan={{ base: 12, md: 6 }}>
-                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Square Footage</Text>
-                                                    <Text>{data?.squareFootage ? data?.squareFootage : 'N/A'}</Text>
+                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold">Millage</Text>
+                                                    <Text>{data?.mileage ? data?.mileage : 'N/A'}</Text>
                                                 </GridItem>
                                                 <GridItem colSpan={{ base: 12, md: 6 }}>
-                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Number Of Bedrooms</Text>
-                                                    <Text>{data?.numberofBedrooms ? data?.numberofBedrooms : 'N/A'}</Text>
+                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> VIN </Text>
+                                                    <Text>{data?.VIN ? data?.VIN : 'N/A'}</Text>
                                                 </GridItem>
                                                 <GridItem colSpan={{ base: 12, md: 6 }}>
-                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Number Of Bathrooms</Text>
+                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Chicke </Text>
                                                     <Text>{data?.numberofBathrooms ? data?.numberofBathrooms : 'N/A'}</Text>
                                                 </GridItem>
                                                 <GridItem colSpan={{ base: 12, md: 6 }}>
@@ -148,8 +148,8 @@ const View = () => {
                                                     <Text>{data?.propertyAddress ? data?.propertyAddress : 'N/A'}</Text>
                                                 </GridItem>
                                                 <GridItem colSpan={{ base: 12 }}>
-                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Property Description </Text>
-                                                    <Text>{data?.propertyDescription ? data?.propertyDescription : 'N/A'}</Text>
+                                                    <Text color={'blackAlpha.900'} fontSize="sm" fontWeight="bold"> Vhickle Description </Text>
+                                                    <Text>{data?.vehicleDescription ? data?.vehicleDescription : 'N/A'}</Text>
                                                 </GridItem>
                                             </Grid>
                                         </Card>

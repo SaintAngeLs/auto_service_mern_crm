@@ -53,23 +53,24 @@ const ContactModel = (props) => {
     }, [])
 
     return (
-        <Modal onClose={onClose} size='full' isOpen={isOpen} >
-            <ModalOverlay />
-            <ModalContent>
-                <ModalHeader>Select Lead</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                    {isLoding ?
-                        <Flex justifyContent={'center'} alignItems={'center'} width="100%" >
-                            <Spinner />
-                        </Flex> : <LeadTable tableData={data} selectedValues={selectedValues} setSelectedValues={setSelectedValues} columnsData={columns} title="Lead" />}
-                </ModalBody>
-                <ModalFooter>
-                    <Button variant='brand' onClick={handleSubmit} disabled={isLoding ? true : false} leftIcon={<GiClick />}> {isLoding ? <Spinner /> : 'Select'}</Button>
-                    <Button onClick={() => onClose()}>Close</Button>
-                </ModalFooter>
-            </ModalContent>
-        </Modal>
+        // <Modal onClose={onClose} size='full' isOpen={isOpen} >
+        //     <ModalOverlay />
+        //     <ModalContent>
+        //         <ModalHeader>Select Lead</ModalHeader>
+        //         <ModalCloseButton />
+        //         <ModalBody>
+        //             {isLoding ?
+        //                 <Flex justifyContent={'center'} alignItems={'center'} width="100%" >
+        //                     <Spinner />
+        //                 </Flex> : <LeadTable tableData={data} selectedValues={selectedValues} setSelectedValues={setSelectedValues} columnsData={columns} title="Lead" />}
+        //         </ModalBody>
+        //         <ModalFooter>
+        //             <Button variant='brand' onClick={handleSubmit} disabled={isLoding ? true : false} leftIcon={<GiClick />}> {isLoding ? <Spinner /> : 'Select'}</Button>
+        //             <Button onClick={() => onClose()}>Close</Button>
+        //         </ModalFooter>
+        //     </ModalContent>
+        // </Modal>
+        <h1>This page is in the development</h1>
 
     )
 }
