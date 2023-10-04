@@ -6,8 +6,8 @@ build
 # dependencies
 Client/node_modules
 server/node_modules
-server/.env
-Client/.env
+# server/.env
+# Client/.env
 
 /.pnp
 .pnp.js
