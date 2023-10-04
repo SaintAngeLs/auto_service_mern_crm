@@ -47,7 +47,7 @@ const view = async (req, res) => {
     let property = await Property.findOne({ _id: id })
     let result = await Contact.find({ deleted: false })
 
-    let filteredContacts = result.filter((contact) => contact.interestProperty.includes(id));
+    let filteredContacts = result.filter((contact) => contact?.interestProperty?.includes(id) || 0);
 
     if (!property) return res.status(404).json({ message: "no Data Found." })
     res.status(200).json({ property, filteredContacts })

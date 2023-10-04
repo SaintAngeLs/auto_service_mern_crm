@@ -3,8 +3,6 @@ const mongoose = require('mongoose');
 // vehicleSchema fot the mongoose
 const property = new mongoose.Schema({
 
-
-
     // 1. Basic Vehicle Information:
     brand: String,
     model: String,
@@ -52,4 +50,4 @@ const property = new mongoose.Schema({
     // 8. Custom Fields
 });
 
-module.exports = mongoose.model('property', property)
+module.exports = mongoose.model('Vehicle', property)
