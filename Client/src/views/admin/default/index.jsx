@@ -15,7 +15,7 @@ import MiniStatistics from "components/card/MiniStatistics";
 import IconBox from "components/icons/IconBox";
 import { HSeparator } from "components/separator/Separator";
 import { useEffect, useState } from "react";
-import { LuBuilding2 } from "react-icons/lu";
+import { AiFillCar } from "react-icons/ai";
 import {
   MdAddTask,
   MdContacts,
@@ -70,16 +70,16 @@ export default function UserReports() {
           name='Contacts'
           value={contactData?.length || 0}
         />
-        <MiniStatistics
+        {/* <MiniStatistics
           onClick={() => navigate('/lead')}
           startContent={<IconBox w='56px' h='56px' bg={boxBg} icon={<Icon w='32px' h='32px' as={MdLeaderboard} color={brandColor} />} />}
           name='Leads'
           value={leadData?.length || 0}
-        />
+        /> */}
         <MiniStatistics
           onClick={() => navigate('/properties')}
-          startContent={<IconBox w='56px' h='56px' bg={boxBg} icon={<Icon w='32px' h='32px' as={LuBuilding2} color={brandColor} />} />}
-          name='property'
+          startContent={<IconBox w='56px' h='56px' bg={boxBg} icon={<Icon w='32px' h='32px' as={AiFillCar} color={brandColor} />} />}
+          name='Autos'
           value={propertyData?.length || 0}
         />
 

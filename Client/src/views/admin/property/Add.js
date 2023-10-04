@@ -122,9 +122,8 @@ const Add = (props) => {
                                     onChange={handleChange} onBlur={handleBlur}
                                     value={values.model}
                                     name="model"
-                                    type='number'
-                                    min={1000}
-                                    max={new Date().getFullYear()}
+                                    type='string'
+                                    
                                     placeholder='Enter model of the car'
                                     fontWeight='500'
                                     borderColor={errors.model && touched.model ? "red.300" : null}
@@ -210,7 +209,7 @@ const Add = (props) => {
                                     fontSize='sm'
                                     onChange={handleChange} onBlur={handleBlur}
                                     value={values.engineType}
-                                    name="lotSize"
+                                    name="engineType"
                                     placeholder='Enter engine Type'
                                     fontWeight='500'
                                     borderColor={errors.engineType && touched.engineType ? "red.300" : null}
@@ -454,8 +453,8 @@ const Add = (props) => {
                                     onChange={handleChange} onBlur={handleBlur}
                                     value={values.previousOwners}
                                     name="previousOwners"
-                                    type='number'
-                                    min={0}
+                                    type='string'
+
                                     placeholder='Enter Previous Owners'
                                     fontWeight='500'
                                     borderColor={errors.previousOwners && touched.previousOwners ? "red.300" : null}
@@ -471,8 +470,7 @@ const Add = (props) => {
                                     onChange={handleChange} onBlur={handleBlur}
                                     value={values.currentOwner}
                                     name="currentOwner"
-                                    type='number'
-                                    min={0}
+                                    type='string'
                                     placeholder='Enter current Owner'
                                     fontWeight='500'
                                     borderColor={errors.currentOwner && touched.currentOwner ? "red.300" : null}
@@ -482,15 +480,14 @@ const Add = (props) => {
 
                             <GridItem colSpan={{ base: 12 }}>
                                 <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
-                                    Current Owners
+                                    Associated Service Agents
                                 </FormLabel>
                                 <Input
                                     fontSize='sm'
                                     onChange={handleChange} onBlur={handleBlur}
                                     value={values.associatedServiceAgents}
                                     name="associatedServiceAgents"
-                                    type='number'
-                                    min={0}
+                                    type='string'
                                     placeholder='Enter associated Service Agents'
                                     fontWeight='500'
                                     borderColor={errors.associatedServiceAgents && touched.associatedServiceAgents ? "red.300" : null}

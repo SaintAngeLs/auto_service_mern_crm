@@ -17,8 +17,8 @@ https://some-demo-link.demo-link
 Username: admin@email.com
 Password: admin3141592
 **User access:**
-Username:
-Password:
+Username: user@email.com
+Password: user3141592
 ## **Installation**
 
 ```bash

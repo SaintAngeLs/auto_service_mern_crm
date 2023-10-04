@@ -121,7 +121,7 @@ const routes = [
     component: Property,
   },
   {
-    name: "Property View",
+    name: "Auto View",
     layout: "/admin",
     both: true,
     under: "properties",

@@ -13,11 +13,11 @@ const PropertyModel = (props) => {
 
     const columns = [
         { Header: "#", accessor: "_id", isSortable: false, width: 10 },
-        { Header: 'property Type', accessor: 'propertyType' },
-        { Header: "property Address", accessor: "propertyAddress", },
-        { Header: "listing Price", accessor: "listingPrice", },
-        { Header: "square Footage", accessor: "squareFootage", },
-        { Header: "year Built", accessor: "yearBuilt", },
+        { Header: 'Brand', accessor: 'brand' },
+        { Header: "Model", accessor: "model", },
+        { Header: "Year", accessor: "year", },
+        { Header: "mileage", accessor: "mileage", },
+        { Header: "VIN", accessor: "VIN", },
     ];
     const [data, setData] = useState([])
     const user = JSON.parse(localStorage.getItem("user"))
