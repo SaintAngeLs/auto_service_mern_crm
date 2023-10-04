@@ -255,7 +255,7 @@ const routes = [
   {
     name: "Reporting and Analytics",
     layout: "/admin",
-    both: true,
+    //both: true,
     path: "/reporting-analytics",
     icon: <Icon as={MdInsertChartOutlined} width='20px' height='20px' color='inherit' />,
     component: Report,
