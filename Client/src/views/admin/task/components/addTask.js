@@ -23,10 +23,12 @@ const AddTask = (props) => {
     const initialValues = {
         title: '',
         category: props.from === 'contact' ? 'contact' : props.from === 'lead' ? 'lead' : 'None',
+        categoryTask: props.from === 'service',
         description: '',
         notes: '',
-        assignmentTo: props.from === 'contact' && props.id ? props.id : '',
+        assignmentToCustomer: props.from === 'contact' && props.id ? props.id : '',
         assignmentToLead: props.from === 'lead' && props.id ? props.id : '',
+        assignmentToVehicle: props.from ==='vehicle' && props.id ? props.id : '',
         reminder: '',
         start: '',
         end: '',
@@ -46,7 +48,14 @@ const AddTask = (props) => {
         },
     });
 
-    const { errors, touched, values, handleBlur, handleChange, handleSubmit, setFieldValue, } = formik
+    const { errors,
+         touched,
+          values,
+           handleBlur,
+            handleChange,
+             handleSubmit,
+              setFieldValue,
+             } = formik
 
     const AddData = async () => {
         try {
@@ -65,21 +74,24 @@ const AddTask = (props) => {
         }
     };
 
-    useEffect(async () => {
-        values.start = props?.date
-        try {
-            let result
-            if (values.category === "contact") {
-                result = await getApi(user.role === 'admin' ? 'api/contact/' : `api/contact/?createBy=${user._id}`)
-            } else if (values.category === "lead") {
-                result = await getApi(user.role === 'admin' ? 'api/lead/' : `api/lead/?createBy=${user._id}`);
+    useEffect(() => {
+        async function fetchDataAsync() {
+            values.start = props?.date;
+            try {
+                let result;
+                if (values.category === "contact") {
+                    result = await getApi(user.role === 'admin' ? 'api/contact/' : `api/contact/?createBy=${user._id}`);
+                } else if (values.category === "lead") {
+                    result = await getApi(user.role === 'admin' ? 'api/lead/' : `api/lead/?createBy=${user._id}`);
+                }
+                setAssignmentToData(result?.data);
+            } catch (e) {
+                console.log(e);
             }
-            setAssignmentToData(result?.data)
         }
-        catch (e) {
-            console.log(e);
-        }
-    }, [props, values.category])
+        
+        fetchDataAsync();
+    }, [props, values.assignmentToCustomer, values.assignmentToLead, values.assignmentToVehicle, values.category]);
 
     return (
         <Modal isOpen={isOpen} size={'xl'} >
@@ -116,7 +128,7 @@ const AddTask = (props) => {
                             <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
                                 Related
                             </FormLabel>
-                            <RadioGroup onChange={(e) => { setFieldValue('category', e); setFieldValue('assignmentTo', null); setFieldValue('assignmentToLead', null); }} value={values.category}>
+                            <RadioGroup onChange={(e) => { setFieldValue('category', e); setFieldValue('assignmentToCustomer', null); setFieldValue('assignmentToLead', null); }} value={values.category}>
                                 <Stack direction='row'>
                                     <Radio value='None' >None</Radio>
                                     <Radio value='contact'>Contact</Radio>
@@ -149,13 +161,13 @@ const AddTask = (props) => {
                                     </FormLabel>
                                     <Flex justifyContent={'space-between'}>
                                         <Select
-                                            value={values.assignmentTo}
-                                            name="assignmentTo"
+                                            value={values.assignmentToCustomer}
+                                            name="assignmentToCustomer"
                                             onChange={handleChange}
-                                            mb={errors.assignmentTo && touched.assignmentTo ? undefined : '10px'}
+                                            mb={errors.assignmentToCustomer && touched.assignmentToCustomer ? undefined : '10px'}
                                             fontWeight='500'
-                                            placeholder={'Assignment To'}
-                                            borderColor={errors.assignmentTo && touched.assignmentTo ? "red.300" : null}
+                                            placeholder={'Assignment To Customer'}
+                                            borderColor={errors.assignmentToCustomer && touched.assignmentToCustomer ? "red.300" : null}
                                         >
                                             {assignmentToData?.map((item) => {
                                                 return <option value={item._id} key={item._id}>{values.category === 'contact' ? `${item.firstName} ${item.lastName}` : item.leadName}</option>
@@ -163,8 +175,30 @@ const AddTask = (props) => {
                                         </Select>
                                         <IconButton onClick={() => setContactModel(true)} ml={2} fontSize='25px' icon={<LiaMousePointerSolid />} />
                                     </Flex>
-                                    <Text mb='10px' color={'red'}> {errors.assignmentTo && touched.assignmentTo && errors.assignmentTo}</Text>
+                                    <Text mb='10px' color={'red'}> {errors.assignmentToCustomer && touched.assignmentToCustomer && errors.assignmentToCustomer}</Text>
                                 </GridItem>
+                                <GridItem colSpan={{ base: 12, md: 6 }}>
+                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
+                                    Task Category<Text color={"red"}>*</Text>
+                                </FormLabel>
+                                <Select
+                                    value={values.categoryTask}
+                                    name="category"
+                                    onChange={handleChange}
+                                    mb={errors.categoryTask && touched.categoryTask ? undefined : '10px'}
+                                    fontWeight='500'
+                                    borderColor={errors.categoryTask && touched.categoryTask ? "red.300" : null}
+                                >
+                                    <option value="Service">Service</option>
+                                    <option value="Follow-Up">Follow-Up</option>
+                                    <option value="Sales">Sales</option>
+                                    <option value="Support">Support</option>
+                                    <option value="Warranty">Warranty</option>
+                                    <option value="Others">Others</option>
+                                </Select>
+                                <Text mb='10px' color={'red'}> {errors.categoryTask && touched.categoryTask && errors.categoryTask}</Text>
+                            </GridItem> 
+
                             </>
                             : values.category === "lead" ?
                                 <>
@@ -226,7 +260,7 @@ const AddTask = (props) => {
                                 fontWeight='500'
                                 borderColor={errors?.end && touched?.end ? "red.300" : null}
                             />
-                            <Text mb='10px' color={'red'}> {errors.end && touched.end && errors.end}</Text>
+                            <Text mb='10px' colorwatching={'red'}> {errors.end && touched.end && errors.end}</Text>
                         </GridItem>
                         <GridItem colSpan={{ base: 12, sm: 4 }} >
                             <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
