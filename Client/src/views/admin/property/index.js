@@ -14,13 +14,13 @@ const Index = () => {
             isSortable: false,
             width: 10
         },
-        { Header: 'property Type', accessor: 'propertyType' },
-        { Header: "property Address", accessor: "propertyAddress", },
-        { Header: "listing Price", accessor: "listingPrice", },
-        { Header: "square Footage", accessor: "squareFootage", },
-        { Header: "year Built", accessor: "yearBuilt", },
-        { Header: "number of Bedrooms", accessor: "numberofBedrooms", },
-        { Header: "number of Bathrooms", accessor: "numberofBathrooms", },
+        { Header: 'brand', accessor: 'brand' },
+        { Header: "model", accessor: "model", },
+        { Header: "year", accessor: "year", },
+        { Header: "VIN", accessor: "VIN", },
+        { Header: "price", accessor: "price", },
+        { Header: "mileage", accessor: "mileage", },
+        { Header: "current Owner", accessor: "currentOwner", },
     ];
 
     const { isOpen, onOpen, onClose } = useDisclosure()

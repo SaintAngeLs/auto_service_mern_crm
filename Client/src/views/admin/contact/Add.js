@@ -1,5 +1,5 @@
 import { CloseIcon, PhoneIcon, StarIcon } from '@chakra-ui/icons';
-import { Box, Button, Drawer, DrawerBody, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, FormLabel, Grid, GridItem, Heading, IconButton, Input, InputGroup, InputLeftElement, Radio, RadioGroup, Select, Slider, SliderFilledTrack, SliderThumb, SliderTrack, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Drawer, DrawerBody, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, FormLabel, Grid, GridItem, Textarea, Heading, IconButton, Input, InputGroup, InputLeftElement, Radio, RadioGroup, Select, Slider, SliderFilledTrack, SliderThumb, SliderTrack, Stack, Text } from '@chakra-ui/react';
 import { HSeparator } from 'components/separator/Separator';
 import Spinner from 'components/spinner/Spinner';
 import { useFormik } from 'formik';
@@ -271,6 +271,8 @@ const Add = (props) => {
                                 {errors.preferredContactMethod && touched.preferredContactMethod && <Text mb='10px' color={'red'}> {errors.preferredContactMethod}</Text>}
                             </GridItem>
 
+                            {/* in the case the lead informtation in the db will have a chance to be implemented */}
+                            {/* Update the Lead table document as the may be discennectivity with the inforamation with the other documents */}
                             <GridItem colSpan={{ base: 12 }}>
                                 <HSeparator />
                                 <Heading mt={2} as="h1" size="md" >
@@ -321,6 +323,8 @@ const Add = (props) => {
                                     <option value="friend">Friend</option>
                                     <option value="family">Family</option>
                                     <option value="colleague">Colleague</option>
+                                    <option value="colleague">Client</option>
+                                    <option value="colleague">Provision member</option>
                                 </Select>
                                 {errors.referralSource && touched.referralSource && <Text mb='10px' color={'red'}> {errors.referralSource}</Text>}
                             </GridItem>
@@ -409,6 +413,48 @@ const Add = (props) => {
                                 </Select>
                                 {errors.leadConversionProbability && touched.leadConversionProbability && <Text mb='10px' color={'red'}> {errors.leadConversionProbability}</Text>}
                             </GridItem>
+
+                            <GridItem colSpan={{ base: 12 }}>
+                                <HSeparator />
+                                <Heading mt={2} as="h1" size="md" >
+                                    3.1. Vehicles of Interest
+                                </Heading>
+                            </GridItem>
+
+                            <GridItem colSpan={{ base: 12, sm: 6 }}>
+                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
+                                    Interes Vehicles
+                                </FormLabel>
+                                <Input type="tel"
+                                        fontSize='sm'
+                                        onChange={handleChange} onBlur={handleBlur}
+                                        value={values.interestVehicle}
+                                        name="mobileNumber"
+                                        fontWeight='500'
+                                        borderColor={errors.interestVehicle && touched.interestVehicle ? "red.300" : null}
+                                        mb={errors.interestVehicle && touched.interestVehicle ? undefined : '10px'}
+                                        placeholder="Mobile number" borderRadius="16px" />
+                                
+                                {errors.interestVehicle && touched.interestVehicle && <Text mb='10px' color={'red'}> {errors.interestVehicle}</Text>}
+                            </GridItem>
+
+                            <GridItem colSpan={{ base: 12, sm: 6 }}>
+                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
+                                    Service History
+                                </FormLabel>
+                                <Textarea
+                                        value={values.serviceHistoryNotes}
+                                        name="serviceHistoryNotes"
+                                        onChange={handleChange}
+                                        placeholder="Enter service notes here..."
+                                        mb={errors.serviceHistory && touched.serviceHistory ? undefined : '10px'}
+                                        borderColor={errors.serviceHistory && touched.serviceHistory ? "red.300" : null}
+                                    />
+                                
+                                {errors.serviceHistory && touched.serviceHistory && <Text mb='10px' color={'red'}> {errors.serviceHistory}</Text>}
+                            </GridItem>
+
+
                             <GridItem colSpan={{ base: 12 }}>
                                 <HSeparator />
                                 <Heading mt={2} as="h1" size="md" >
@@ -430,7 +476,8 @@ const Add = (props) => {
                                 >
                                     <option value="seller">Seller</option>
                                     <option value="investor">Investor</option>
-                                    <option value="homeBuyer">First-Time Homebuyer</option>
+                                    <option value="homeBuyer">First-Time client</option>
+                                    <option value="client">Client</option>
                                 </Select>
                                 <Text mb='10px' color={'red'}> {errors.otherPropertySpecifications && touched.otherPropertySpecifications && errors.otherPropertySpecifications}</Text>
                             </GridItem>

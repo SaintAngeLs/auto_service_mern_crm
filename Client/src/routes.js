@@ -11,7 +11,7 @@ import { HiUsers } from "react-icons/hi";
 // icon
 import { AiFillFolderOpen, AiOutlineMail } from "react-icons/ai";
 import { PiPhoneCallBold } from "react-icons/pi";
-import { LuBuilding2 } from "react-icons/lu";
+import { AiFillCar } from "react-icons/ai";
 import { GiSatelliteCommunication } from "react-icons/gi";
 import { FaCalendarAlt, FaGooglePay, FaTasks } from "react-icons/fa";
 import { SiGooglemeet } from "react-icons/si";
@@ -78,14 +78,14 @@ const routes = [
   },
   // ========================== Admin Layout ==========================
   // ------------- lead Routes ------------------------
-  {
-    name: "Lead",
-    layout: "/admin",
-    both: true,
-    path: "/lead",
-    icon: <Icon as={MdLeaderboard} width='20px' height='20px' color='inherit' />,
-    component: Lead,
-  },
+  // {
+  //   name: "Lead",
+  //   layout: "/admin",
+  //   both: true,
+  //   path: "/lead",
+  //   icon: <Icon as={MdLeaderboard} width='20px' height='20px' color='inherit' />,
+  //   component: Lead,
+  // },
   {
     name: "Lead View",
     layout: "/admin",
@@ -98,7 +98,7 @@ const routes = [
   {
     name: "Contacts",
     layout: "/admin",
-    both: true,
+    //both: true,
     path: "/contacts",
     icon: <Icon as={MdContacts} width='20px' height='20px' color='inherit' />,
     component: Contact,
@@ -113,15 +113,15 @@ const routes = [
   },
   // ------------- Property Routes ------------------------
   {
-    name: "Property",
+    name: "Vichles / Autos",
     layout: "/admin",
     both: true,
     path: "/properties",
-    icon: <Icon as={LuBuilding2} width='20px' height='20px' color='inherit' />,
+    icon: <Icon as={AiFillCar} width='20px' height='20px' color='inherit' />,
     component: Property,
   },
   {
-    name: "Property View",
+    name: "Auto View",
     layout: "/admin",
     both: true,
     under: "properties",
@@ -255,7 +255,7 @@ const routes = [
   {
     name: "Reporting and Analytics",
     layout: "/admin",
-    both: true,
+    //both: true,
     path: "/reporting-analytics",
     icon: <Icon as={MdInsertChartOutlined} width='20px' height='20px' color='inherit' />,
     component: Report,

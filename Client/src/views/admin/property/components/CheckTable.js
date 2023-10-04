@@ -90,10 +90,10 @@ export default function CheckTable(props) {
 
   const handleCheckboxChange = (event, value) => {
     if (event.target.checked) {
-      setSelectedValues((prevSelectedValues) => [...prevSelectedValues, value]);
+      setSelectedValues(( ) => [...selectedValues, value]);
     } else {
-      setSelectedValues((prevSelectedValues) =>
-        prevSelectedValues.filter((selectedValue) => selectedValue !== value)
+      setSelectedValues((selectedValues) =>
+        selectedValues.filter((selectedValue) => selectedValue !== value)
       );
     }
   };
@@ -109,6 +109,7 @@ export default function CheckTable(props) {
       px="0px"
       overflowX={{ sm: "scroll", lg: "hidden" }}
     >
+      {/* Autos counter */}
       <Flex px="25px" justify="space-between" mb="20px" align="center">
         <Text
           color={textColor}
@@ -116,7 +117,9 @@ export default function CheckTable(props) {
           fontWeight="700"
           lineHeight="100%"
         >
-          Properties (<CountUpComponent targetNumber={data?.length} />)
+
+          Autos (<CountUpComponent targetNumber={data?.length} />)
+
         </Text>
         {/* <Menu /> */}
         {selectedValues.length > 0 && <DeleteIcon onClick={() => setDelete(true)} color={'red'} />}
@@ -186,7 +189,7 @@ export default function CheckTable(props) {
                             </Text>
                           </Flex>
                         );
-                      } else if (cell?.column.Header === "property Type") {
+                      } else if (cell?.column.Header === "brand") {
                         data = (
                           <Link to={user?.role !== 'admin' ? `/propertyView/${cell?.row?.values._id}` : `/admin/propertyView/${cell?.row?.values._id}`}>
                             <Text
@@ -200,7 +203,7 @@ export default function CheckTable(props) {
                             </Text>
                           </Link>
                         );
-                      } else if (cell?.column.Header === "property Address") {
+                      } else if (cell?.column.Header === "model") {
                         data = (
                           <Text
                             me="10px"
@@ -211,7 +214,7 @@ export default function CheckTable(props) {
                             {cell?.value}
                           </Text>
                         );
-                      } else if (cell?.column.Header === "listing Price") {
+                      } else if (cell?.column.Header === "year") {
                         data = (
                           <Text
                             me="10px"
@@ -222,25 +225,25 @@ export default function CheckTable(props) {
                             {cell?.value}
                           </Text>
                         );
-                      } else if (cell?.column.Header === "square Footage") {
+                      } else if (cell?.column.Header === "VIN") {
                         data = (
                           <Text color={textColor} fontSize="sm" fontWeight="700">
                             {cell?.value}
                           </Text>
                         );
-                      } else if (cell?.column.Header === "year Built") {
+                      } else if (cell?.column.Header === "pricet") {
                         data = (
                           <Text color={textColor} fontSize="sm" fontWeight="700">
                             {cell?.value}
                           </Text>
                         );
-                      } else if (cell?.column.Header === "number of Bedrooms") {
+                      } else if (cell?.column.Header === "mileage") {
                         data = (
                           <Text color={textColor} fontSize="sm" fontWeight="700">
                             {cell?.value}
                           </Text>
                         );
-                      } else if (cell?.column.Header === "number of Bathrooms") {
+                      } else if (cell?.column.Header === "current Owner") {
                         data = (
                           <Text color={textColor} fontSize="sm" fontWeight="700">
                             {cell?.value}

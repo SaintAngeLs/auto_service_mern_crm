@@ -29,6 +29,6 @@ class PieChart extends React.Component {
       />
     );
   }
-}
+};
 
 export default PieChart;
