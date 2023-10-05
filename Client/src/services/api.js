@@ -6,10 +6,8 @@ export const postApi = async (path, data, login) => {
     
     //constant.baseUrl = "http://localhost:3000/";
 
-    console.log('Base URL: ', constant.baseUrl)
-
-
     try {
+
         let result = await axios.post(constant.baseUrl + path, data, {
             headers: {
                 Authorization: localStorage.getItem("token") || sessionStorage.getItem("token")
@@ -30,6 +28,7 @@ export const postApi = async (path, data, login) => {
         return e
     }
 }
+
 export const putApi = async (path, data, id) => {
     try {
         let result = await axios.put(constant.baseUrl + path, data, {

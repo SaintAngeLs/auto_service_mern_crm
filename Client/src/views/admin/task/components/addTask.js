@@ -20,10 +20,12 @@ const AddTask = (props) => {
     const [leadModelOpen, setLeadModel] = useState(false);
 
 
+
+
     const initialValues = {
         title: '',
-        category: props.from === 'contact' ? 'contact' : props.from === 'lead' ? 'lead' : 'None',
-        categoryTask: props.from === 'service',
+        category: props.from === 'contact' ? 'contact' : props.from === 'lead' ? 'lead' :  props.from === 'vehicle' ? props.from === 'vehicle' : 'None',
+        categoryTask: '',
         description: '',
         notes: '',
         assignmentToCustomer: props.from === 'contact' && props.id ? props.id : '',
@@ -55,12 +57,16 @@ const AddTask = (props) => {
             handleChange,
              handleSubmit,
               setFieldValue,
+
              } = formik
 
     const AddData = async () => {
         try {
             setIsLoding(true)
+            console.log("addTask in the task components: AddData fucntion ... is going")
             let response = await postApi('api/task/add', values)
+            console.log("addTask in the task components: AddData fucntion ... is going")
+            
             if (response.status === 200) {
                 formik.resetForm()
                 onClose();
@@ -80,10 +86,15 @@ const AddTask = (props) => {
             try {
                 let result;
                 if (values.category === "contact") {
-                    result = await getApi(user.role === 'admin' ? 'api/contact/' : `api/contact/?createBy=${user._id}`);
+                    try{result = await getApi(user.role === 'admin' ? 'api/contact/' : `api/contact/?createBy=${user._id}`);}
+                    catch(e){console.log("error in the getapi",e)}
+                    
                 } else if (values.category === "lead") {
                     result = await getApi(user.role === 'admin' ? 'api/lead/' : `api/lead/?createBy=${user._id}`);
+                } else if (values.category === "vehicle") {
+                    result = await getApi(user.role === 'admin' ? 'api/property/' : `api/property/?createBy=${user._id}`);
                 }
+                
                 setAssignmentToData(result?.data);
             } catch (e) {
                 console.log(e);
@@ -91,7 +102,7 @@ const AddTask = (props) => {
         }
         
         fetchDataAsync();
-    }, [props, values.assignmentToCustomer, values.assignmentToLead, values.assignmentToVehicle, values.category]);
+    }, [props, values.category]);
 
     return (
         <Modal isOpen={isOpen} size={'xl'} >
@@ -129,10 +140,11 @@ const AddTask = (props) => {
                                 Related
                             </FormLabel>
                             <RadioGroup onChange={(e) => { setFieldValue('category', e); setFieldValue('assignmentToCustomer', null); setFieldValue('assignmentToLead', null); }} value={values.category}>
-                                <Stack direction='row'>
+                                <Stack direction='column'>
                                     <Radio value='None' >None</Radio>
                                     <Radio value='contact'>Contact</Radio>
                                     <Radio value='lead'>Lead</Radio>
+                                    <Radio value='vehicle'>Vehicle</Radio>
                                 </Stack>
                             </RadioGroup>
                             <Text mb='10px' color={'red'}> {errors.category && touched.category && errors.category}</Text>
@@ -177,27 +189,7 @@ const AddTask = (props) => {
                                     </Flex>
                                     <Text mb='10px' color={'red'}> {errors.assignmentToCustomer && touched.assignmentToCustomer && errors.assignmentToCustomer}</Text>
                                 </GridItem>
-                                <GridItem colSpan={{ base: 12, md: 6 }}>
-                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
-                                    Task Category<Text color={"red"}>*</Text>
-                                </FormLabel>
-                                <Select
-                                    value={values.categoryTask}
-                                    name="category"
-                                    onChange={handleChange}
-                                    mb={errors.categoryTask && touched.categoryTask ? undefined : '10px'}
-                                    fontWeight='500'
-                                    borderColor={errors.categoryTask && touched.categoryTask ? "red.300" : null}
-                                >
-                                    <option value="Service">Service</option>
-                                    <option value="Follow-Up">Follow-Up</option>
-                                    <option value="Sales">Sales</option>
-                                    <option value="Support">Support</option>
-                                    <option value="Warranty">Warranty</option>
-                                    <option value="Others">Others</option>
-                                </Select>
-                                <Text mb='10px' color={'red'}> {errors.categoryTask && touched.categoryTask && errors.categoryTask}</Text>
-                            </GridItem> 
+                                
 
                             </>
                             : values.category === "lead" ?
@@ -217,7 +209,7 @@ const AddTask = (props) => {
                                                 borderColor={errors.assignmentToLead && touched.assignmentToLead ? "red.300" : null}
                                             >
                                                 {assignmentToData?.map((item) => {
-                                                    return <option value={item._id} key={item._id}>{values.category === 'contact' ? `${item.firstName} ${item.lastName}` : item.leadName}</option>
+                                                    return <option value={item._id} key={item._id}>{values.category === 'contact' ? `${item.firstName} ${item.lastName}` :   item.leadName}</option>
                                                 })}
                                             </Select>
                                             <IconButton onClick={() => setLeadModel(true)} ml={2} fontSize='25px' icon={<LiaMousePointerSolid />} />
@@ -225,8 +217,56 @@ const AddTask = (props) => {
                                         <Text mb='10px' color={'red'}> {errors.assignmentToLead && touched.assignmentToLead && errors.assignmentToLead}</Text>
                                     </GridItem>
                                 </>
+                                : values.category === "vehicle" ?
+                                <>
+                                    <GridItem colSpan={{ base: 12, md: 6 }} >
+                                        <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
+                                            Assignment To Vehicle
+                                        </FormLabel>
+                                        <Flex justifyContent={'space-between'}>
+                                            <Select
+                                                value={values.assignmentToVehicle}
+                                                name="assignmentToVehicle"
+                                                onChange={handleChange}
+                                                mb={errors.assignmentToVehicle && touched.assignmentToVehicle ? undefined : '10px'}
+                                                fontWeight='500'
+                                                placeholder={'Assignment To'}
+                                                borderColor={errors.assignmentToVehicle && touched.assignmentToVehicle ? "red.300" : null}
+                                            >
+                                                {assignmentToData?.map((item) => {
+                                                    return <option value={item._id} key={item._id}>{values.category === 'contact' ? `${item.firstName} ${item.lastName}` : values.category === 'vehicle' ? `${item.VIN}` : item.leadName}</option>
+                                                })}
+                                            </Select>
+                                            <IconButton onClick={() => setLeadModel(true)} ml={2} fontSize='25px' icon={<LiaMousePointerSolid />} />
+                                        </Flex>
+                                        <Text mb='10px' color={'red'}> {errors.assignmentToVehicle && touched.assignmentToVehicle && errors.assignmentToVehicle}</Text>
+                                    </GridItem>
+                                </>
                                 : ''
                         }
+
+                            <GridItem colSpan={{ base: 12, md: 6 }}>
+                                <FormLabel display='flex' ms='4px' fontSize='sm' fontWeight='500' mb='8px'>
+                                    Task Category<Text color={"red"}>*</Text>
+                                </FormLabel>
+                                <Select
+                                    value={values.categoryTask}
+                                    name="categoryTask"
+                                    onChange={handleChange}
+                                    mb={errors.categoryTask && touched.categoryTask ? undefined : '10px'}
+                                    fontWeight='500'
+                                    defaultValue="Service"
+                                    borderColor={errors.categoryTask && touched.categoryTask ? "red.300" : null}
+                                >
+                                    <option value="Service">Service</option>
+                                    <option value="Follow-Up">Follow-Up</option>
+                                    <option value="Sales">Sales</option>
+                                    <option value="Support">Support</option>
+                                    <option value="Warranty">Warranty</option>
+                                    <option value="Others">Others</option>
+                                </Select>
+                                <Text mb='10px' color={'red'}> {errors.categoryTask && touched.categoryTask && errors.categoryTask}</Text>
+                            </GridItem> 
                         <GridItem colSpan={{ base: 12 }} >
                             <Checkbox isChecked={isChecked} onChange={(e) => setIsChecked(e.target.checked)}>All Day Task ? </Checkbox>
                         </GridItem>

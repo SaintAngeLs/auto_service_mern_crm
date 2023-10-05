@@ -4,6 +4,7 @@ const auth = require('../../middelwares/auth');
 
 const router = express.Router();
 
+
 router.get('/', auth, task.index)
 router.post('/add', auth, task.add)
 router.get('/view/:id', auth, task.view)

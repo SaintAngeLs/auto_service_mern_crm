@@ -3,11 +3,15 @@ const mongoose = require('mongoose');
 const Task = new mongoose.Schema({
 
     title: String,
-    category: {
+    category: String,
+
+    categoryTask: {
         type: String,
         enum: ['Service', 'Follow-Up', 'Sales', 'Support', 'Warranty', 'Others'], // Tailored categories for automotive
     },
+
     description: String,
+
     notes: String,
     
     assignmentToCustomer: {  // Renamed for clarity
