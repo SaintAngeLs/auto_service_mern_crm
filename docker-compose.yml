@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  frontend:
+    build:
+      context: ./Client/auto-service-system/
+    ports:
+      - "3000:3000"
+
+  admin:
+    build:
+      context: ./Server/Admin
+    ports:
+      - "8088:8088"
+
+  customer:
+    build:
+      context: ./Server/Customer
+    ports:
+      - "8080:8080"
+
+  manager:
+    build:
+      context: ./Server/Manager
+    ports:
+      - "8020:8020"
+
+  order:
+    build:
+      context: ./Server/Order
+    ports:
+      - "8030:8030"

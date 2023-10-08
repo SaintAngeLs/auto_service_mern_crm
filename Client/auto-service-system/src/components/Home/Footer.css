@@ -1,0 +1,10 @@
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background-color: aliceblue;
+}
+
+h5 {
+  color: black;
+}
