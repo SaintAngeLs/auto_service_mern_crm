@@ -39,7 +39,7 @@ function AdminNav() {
           className={`nav__link ${show && "nav__linkscroll"}`}
           to="/admin_home"
         >
-          MOHIT MUROTIYA
+          Admin
         </NavLink>
         <NavLink
           onClick={logout}

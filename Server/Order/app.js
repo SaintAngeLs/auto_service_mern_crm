@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const dbConfig = require("./config/dbConfig");
 const orderRoutes = require("./services/orderServices");
-const { mongoDBDriverConnectionString } = require("../utils/dbConnection");
+const { mongoDBDriverConnectionString } = require("./utils/dbConnection");
 
 /*
 Via Express routes, HTTP request that matches a route will be checked by 

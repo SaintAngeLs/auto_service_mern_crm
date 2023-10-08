@@ -6,7 +6,7 @@ const cors = require("cors");
 const dbConfig = require("./config/dbConfig");
 const accountRoutes = require("./services/accountServices");
 const orderRoutes = require("./services/orderServices");
-const { mongoDBDriverConnectionString } = require("../utils/dbConnection");
+const { mongoDBDriverConnectionString } = require("./utils/dbConnection");
 
 var corsOptions = {
   origin: "http://localhost:3000",

@@ -7,7 +7,7 @@ const dbConfig = require("./config/dbConfig");
 const authRoutes = require("./services/authServices");
 const accountRoutes = require("./services/accountServices");
 const orderRoutes = require("./services/orderServices");
-const { mongoDBDriverConnectionString } = require("../utils/dbConnection");
+const { mongoDBDriverConnectionString } = require("./utils/dbConnection");
 
 /*
 Via Express routes, HTTP request that matches a route will be checked by 

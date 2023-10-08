@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "../member/auth_header";
 
-const AUTH_URL = "http://localhost:8080/admin/auth/";
+const AUTH_URL = "http://localhost:8088/admin/auth/";
 
 class AuthService {
   login(email, password) {
