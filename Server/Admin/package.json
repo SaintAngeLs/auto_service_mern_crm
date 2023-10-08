@@ -2,12 +2,12 @@
   "name": "admin",
   "version": "1.0.0",
   "description": "Admin Microservices",
-  "main": "app.js",
+  "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "ts-node server.ts"
   },
-  "author": "Mohit Murotiya",
+  "author": "AV",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -15,7 +15,14 @@
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.10.0"
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cors": "^2.8.14",
+    "@types/express": "^4.17.18",
+    "@types/jsonwebtoken": "^9.0.3",
+    "mongoose": "^7.6.0",
+    "ts-node": "^10.9.1"
   }
 }
