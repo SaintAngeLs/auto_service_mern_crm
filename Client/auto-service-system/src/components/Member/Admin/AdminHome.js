@@ -73,7 +73,7 @@ function AdminHome(props) {
       <hr />
       <h1>WELCOME ADMIN</h1>
       <h1>
-        Your Total Earnings: &#8377;
+        Your Total Earnings: $
         {orders?.map((order) => order.servicePrice)
           .reduce((prev, next) => prev + next, 0)}
       </h1>

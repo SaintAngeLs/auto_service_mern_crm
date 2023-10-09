@@ -9,7 +9,7 @@ import axios, { AxiosResponse } from 'axios';
 import mechHeader from '../mech_header';
 import authHeader from '../auth_header';
 
-const API_URL = 'http://localhost:8010/admin/mechanic/';
+const API_URL = 'http://localhost:8088/admin/mechanic/';
 const ACC_URL = 'http://localhost:8020/mechanic/account/';
 
 class MechanicService {

@@ -8,7 +8,7 @@
 import axios, { AxiosResponse } from 'axios';
 import authHeader from '../auth_header';
 
-const API_URL = 'http://localhost:8010/admin/car-func/';
+const API_URL = 'http://localhost:8088/admin/car-func/';
 
 class CarService {
   /**
@@ -16,7 +16,7 @@ class CarService {
    */
   async getAllBrands(): Promise<any> {
     try {
-      const response: AxiosResponse = await axios.get(API_URL + 'findAllBrands');
+      const response: AxiosResponse = await axios.get(API_URL + 'findAllBrands', { headers: authHeader() });
       return response.data;
     } catch (err) {
       console.error(err);
@@ -29,7 +29,7 @@ class CarService {
    */
   async getCarsByBrand(brand: string): Promise<any> {
     try {
-      const response: AxiosResponse = await axios.post(API_URL + 'findByBrand', { brand });
+      const response: AxiosResponse = await axios.post(API_URL + 'findByBrand', { brand }, { headers: authHeader() });
       return response.data.cars;
     } catch (err) {
       console.error(err);
@@ -41,7 +41,7 @@ class CarService {
    */
   async getAllCars(): Promise<any> {
     try {
-      const response: AxiosResponse = await axios.get(API_URL + 'findAll');
+      const response: AxiosResponse = await axios.get(API_URL + 'findAll', { headers: authHeader() });
       return response.data;
     } catch (err) {
       console.error(err);
@@ -108,7 +108,7 @@ class CarService {
    */
   async findCarById(carId: string): Promise<any> {
     try {
-      const response: AxiosResponse = await axios.get(API_URL + `findByCar/${carId}`);
+      const response: AxiosResponse = await axios.get(API_URL + `findByCar/${carId}`, { headers: authHeader() });
       return response.data.response;
     } catch (err) {
       console.error(err);

@@ -22,7 +22,7 @@ class AuthService {
 
         if (response.data.token) {
           if (response.data.role === 'ADMIN') {
-            console.log(response.data.name);
+            console.log(response.data);
             localStorage.setItem('admin', JSON.stringify(response.data));
           } else {
             console.log(response.data.name);
