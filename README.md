@@ -248,6 +248,45 @@ ADMIN:
 4. Order Management: View Order Details and assign pending requests to washers
 5. Report Management: Admin can generate and filter reports based on orders, washers, dates
 
+#### ADMIN login:
+```bash
+Login
+{
+  role: 'ADMIN',
+  _id: 651f30fb21f4ce7d8c0cd0d4,
+  name: 'Admin',
+  email: 'admin@email.com',
+  password: '$2b$10$TN/Fs6vdx49NVUhY47BdIOJ.mw/r6FKWU56ptbcHcu77pQER/p2G2',
+  __v: 0
+}
+```
+
+#### User register:
+```bash
+Register
+{
+  role: 'CUSTOMER',
+  _id: 652420ad5f3999bba98b1311,
+  name: 'Customer',
+  email: 'customer@email.com',
+  password: '$2b$10$JT0R9mvnp/28IAb5hRzxe.ooaxrn2gbjpKXO1Awk5IjdYIR519dqq',
+  __v: 0
+}
+```
+
+#### Mechanic login
+```bash
+Login
+{
+  role: 'CUSTOMER',
+  _id: 651f30fc21f4ce7d8c0cd0d5,
+  name: 'Mechanic',
+  email: 'user@email.com',
+  password: '$2b$10$1t/PNFHPjJdlgjRsCmAgkO1dTI4vu/rdmljRAuW1OO34SzURwLxIq',
+  __v: 0
+}
+```
+
 
 
 
@@ -289,16 +328,27 @@ admin: admin@email.com  admin3141592   |  test@email.com    test3141592   |
 ```
 
 ```bash
-  npm install
+nvm use 18 && npm install
 ```
 - Start the server of all Microservices.
 
 ```bash
-  npm start or node Server.js
+  node Server.js # or the next like is far more comfortable for the specific reason 
+  npm start
 ```
 
 - For the ADMIN access you need to insert a record mannually in the members database as a role ADMIN. 
 
+## USer login
+
+ADMIN user_name: admin@email.com
+ADMIN password: admin3141592
+
+MECHANIC user_name: user@email.com
+MECHANIC password: user3141592
+
+CUSTOMER user_name: test@email.com
+CUSTOMER password: test3141592
 
 ### Docker section: it will be optimized later
 
