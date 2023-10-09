@@ -1,6 +1,14 @@
-const mongoose = require("mongoose");
+/**
+ * @file order-model.ts
+ * 
+ * @description Schema definition for order model in MongoDB using Mongoose.
+ * 
+ */
 
-const orderSchema = mongoose.Schema({
+import mongoose, { Document, Schema as MongooseSchema } from 'mongoose';
+
+
+const orderSchema: MongooseSchema = new MongooseSchema({
   customerId: { type: String },
   customerName: { type: String },
   carName: { type: String },
@@ -17,4 +25,7 @@ const orderSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("order", orderSchema);
+const OrderModel = mongoose.model('Order', orderSchema);
+export default OrderModel;
+
+
