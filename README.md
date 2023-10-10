@@ -27,11 +27,6 @@
 - [Backend Components and API end points](#features)
   - [App.ts (Main Express App Configuration)](#appts-main-express-app-configuration)
   - [Authentication and Authorization Middlewares](#check-authts-authentication-and-authorization-middlewares)
-    - [General](#controlers)
-    - [Specification](#authentication-specification)
-  - [Controlers](#controlers)
-    - [Controlers General](#contololers-general)
-    - [Controlers Specification](#constolers-specification)
   - [Models](#models)
     - [carModel.ts](#carmodelts)
     - [customerModel.ts](#customermodelts)
@@ -156,48 +151,6 @@ These are mongoose models that represent the data structures in MongoDB. They de
 
 The section below provides an overview of the various components and APIs in the backend of our application.
 
-### Customer-services:
-
-> General
-
-The base URL for all customer-related operations is: `http://localhost:8080/customer/`
-
-### Place Order (POST)
-
-- **Endpoint:** `/placeOrder`
-- **Payload:** `{ customerId, customerName, carName, carNumber, custAddress, serviceName, servicePrice }`
-- **Headers:** Authentication headers
-- **Description:** Places an order for a customer and returns a message indicating the order status.
-
-### Find Customer Orders (GET)
-
-- **Endpoint:** `/findOrders/:id`
-- **Headers:** Authentication headers
-- **Description:** Fetches orders placed by a specific customer based on their ID.
-
-### Find Customer By ID (GET)
-
-- **Endpoint:** `/account/findCustById/:id`
-- **Description:** Retrieves customer information based on the customer's ID.
-
-> Specific Cases of Usage
-
-#### Placing an Order
-
-To place an order, make a POST request to the following endpoint:
-
-**Endpoint:** `http://localhost:8080/customer/placeOrder`
-```json
-  {
-    "customerId": "123456",
-    "customerName": "John Doe",
-    "carName": "Car1",
-    "carNumber": "123ABC",
-    "custAddress": "123 Main St",
-    "serviceName": "Service1",
-    "servicePrice": 50.00
-  }
-```
 
 ### Login (POST)
 Login as a memeber, login as a memeber and logint as a user respectively
@@ -214,7 +167,6 @@ Login as a memeber, login as a memeber and logint as a user respectively
 
 - **Endpoint:** `/register`
 - **Payload:** `{ name, email, password, mobile }`
-- **Headers:** Authentication headers
 - **Response:** Returns a message indicating registration status.
 
  Register (POST)
@@ -265,55 +217,89 @@ Register
 
 
 
+### Customer-services:
+
+> General
+
+The base URL for all customer-related operations is: `http://localhost:8080/customer/`
+
+### Place Order (POST)
+
+- **Endpoint:** `/placeOrder`
+- **Payload:** `{ customerId, customerName, carName, carNumber, custAddress, serviceName, servicePrice }`
+- **Description:** Places an order for a customer and returns a message indicating the order status.
+
+### Find Customer Orders (GET)
+
+- **Endpoint:** `/findOrders/:id`
+- **Description:** Fetches orders placed by a specific customer based on their ID.
+
+### Find Customer By ID (GET)
+
+- **Endpoint:** `/account/findCustById/:id`
+- **Description:** Retrieves customer information based on the customer's ID.
+
+> Specific Cases of Usage
+
+#### Placing an Order
+
+To place an order, make a POST request to the following endpoint:
+
+**Endpoint:** `http://localhost:8080/customer/placeOrder`
+```json
+  {
+    "customerId": "123456",
+    "customerName": "John Doe",
+    "carName": "Car1",
+    "carNumber": "123ABC",
+    "custAddress": "123 Main St",
+    "serviceName": "Service1",
+    "servicePrice": 50.00
+  }
+```
+
 ### Car Management
 
 > General:
 
-The base URL for all car services is: `http://localhost:8088/admin/car-func/`
+The main endpoint for car services is: `http://localhost:8088/admin/car-func/`
 
 #### Get All Car Brands (GET)
 
 - **Endpoint:** `/findAllBrands`
-- **Headers:** Authentication headers
 - **Description:** Returns a list of all car brands.
 
 #### Get Cars By Brand (POST)
 
 - **Endpoint:** `/findByBrand`
 - **Payload:** `{ brand }`
-- **Headers:** Authentication headers
 - **Description:** Returns a list of cars by the given brand.
 
 #### Get All Cars (GET)
 
 - **Endpoint:** `/findAll`
-- **Headers:** Authentication headers
 - **Description:** Returns a list of all cars.
 
 #### Add Car (POST)
 
 - **Endpoint:** `/addCar`
 - **Payload:** `{ name, brand }`
-- **Headers:** Authentication headers
 - **Description:** Returns a message indicating car addition status.
 
 #### Update Car (PATCH)
 
 - **Endpoint:** `/updateCar/:carId`
 - **Payload:** `{ brand }`
-- **Headers:** Authentication headers
 - **Description:** Returns a message indicating car update status.
 
 #### Delete Car (DELETE)
 
 - **Endpoint:** `/deleteCar/:carId`
-- **Headers:** Authentication headers
 - **Description:** Returns deletion status.
 
 #### Find Car By ID (GET)
 
 - **Endpoint:** `/findByCar/:carId`
-- **Headers:** Authentication headers
 - **Description:** Returns car data by given ID.
 
 
@@ -364,20 +350,17 @@ http://localhost:8010/admin/car-services/
 
 - **Endpoint:** `/addService`
 - **Payload:** `{ serviceType, name, price, description, timeRequired, where }`
-- **Headers:** Authentication headers
 - **Response:** Returns a message indicating service addition status.
 
 #### Update Service (PATCH)
 
 - **Endpoint:** `/updateService/:id`
 - **Payload:** `{ id, serviceType, name, price, description, timeRequired, where }`
-- **Headers:** Authentication headers
 - **Response:** Returns a message indicating service update status.
 
 #### Delete Service (DELETE)
 
 - **Endpoint:** `/deleteService/:id`
-- **Headers:** Authentication headers
 - **Response:** Returns deletion status.
 
 #### Find Service By ID (GET)
@@ -391,10 +374,10 @@ http://localhost:8010/admin/car-services/
 
 To retrieve a list of all available services, make a GET request to the following endpoint:
 
-- **Endpoint:** `/findAll`
+**Endpoint:** `/findAll`
 
-<details>
-<summary>Response Example (Click to expand)</summary>
+
+Response Example (Click to expand)
 
 ```json
   {
@@ -481,6 +464,82 @@ Endpoint: '/findById/:id'
 
 ```
 
+#### Admin Orders
+
+> General
+
+
+
+> Specific cases
+
+To retrieve a list of all placed orders, make a GET request to the following endpoint:
+
+Admin Orders Endpoint: http://localhost:8010/admin/order/findPlacedOrder
+
+```json
+  {
+    "orderId": "1",
+    "customerId": "12345",
+    "mechanicId": null,
+    "orderStatus": "Placed",
+    "createdAt": "2023-10-10T12:00:00Z"
+  },
+  {
+    "orderId": "2",
+    "customerId": "54321",
+    "mechanicId": null,
+    "orderStatus": "Placed",
+    "createdAt": "2023-10-11T14:30:00Z"
+  }
+
+```
+
+#### Assign Order to Mechanic
+To assign an order to a mechanic, make a PATCH request to the following endpoint:
+
+Endpoint: 'http://localhost:8010/admin/order/updateOrder/:orderId'
+
+```json
+{
+  "mechanicId": "exampleMechanicId"
+}
+
+```
+
+Response:
+
+```json
+{
+  "message": "Order assigned to mechanic successfully."
+}
+
+
+```
+
+#### Get Completed Orders
+
+To retrieve a list of all completed orders, make a GET request to the following endpoint:
+
+Endpoint: 'http://localhost:8030/order/findCompletedOrders'
+
+Response:
+```json
+{
+    "orderId": "3",
+    "customerId": "67890",
+    "mechanicId": "mechanic314",
+    "orderStatus": "Completed",
+    "completedAt": "2023-10-12T15:45:00Z"
+  },
+  {
+    "orderId": "4",
+    "customerId": "98765",
+    "mechanicId": "mechanic314",
+    "orderStatus": "Completed",
+    "completedAt": "2023-10-13T10:15:00Z"
+  }
+
+```
 
 ## **Summary**
 
