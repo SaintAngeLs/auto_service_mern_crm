@@ -1,7 +1,15 @@
-const express = require("express");
+/**
+ * @file orderServices.ts
+ * 
+ * @description Routes related to order services.
+ * 
+ */
+
+import express from "express";
+import checkAuth from "../middlewares/check-auth";
+import * as OrderController from "../controllers/orderController";
+
 const router = express.Router();
-const checkAuth = require("../middlewares/check-auth");
-const OrderController = require("../controllers/orderController");
 
 router.patch(
   "/updateOrder/:orderId",
@@ -21,4 +29,4 @@ router.get(
   OrderController.findMyOrders
 );
 
-module.exports = router;
+export default router;
