@@ -10,9 +10,14 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
+import crypto from 'crypto';
 
 import Member from '../model/memberModel'; // Assuming memberModel.ts exports a type or interface Member
 import {secretKey} from '../utils/authConfig'; 
+
+// The Jwt is implemented in the usils: if there is a need to use the old version, uncommed the ```bash const token = ... ```
+import { createJWT } from '../utils/jwtUtil'
+
 
 interface MemberInput {
   email: string;
@@ -51,10 +56,15 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
         });
       }
 
-      const token = jwt.sign(
+      // const token = jwt.sign(
+      //   { userId: user._id },
+      //     secretKey,
+      //   { expiresIn: "1h" }
+      // );
+
+      const token = createJWT(
         { userId: user._id },
-          secretKey,
-        { expiresIn: "1h" }
+        3600 // 1 hour with 60 minutes
       );
 
       res.status(200).json({

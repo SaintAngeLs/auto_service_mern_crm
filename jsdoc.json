@@ -1,0 +1,17 @@
+{
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "source": {
+    "include": ["./Client/auto-service-system/src", "./Server/Admin", "./Server/Customer", "./Server/Manager", "./Server/Order"],
+    "includePattern": ".(jsx|js|ts|tsx)$",
+    "exclude": ["./**/node_modules/*"]
+  },
+  "opts": {
+    "destination": "./doc",
+    "recurse": true
+  },
+  "sourceType": "module"
+}
+

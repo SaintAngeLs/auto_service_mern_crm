@@ -1,0 +1,15 @@
+{
+  "source": {
+    "include": [
+      "../Client/auto-service-system//**/*.js",
+      "../Server/**/*.ts"
+    ],
+    "exclude": [
+      "../**/node_modules/*"
+    ]
+  },
+  "opts": {
+    "destination": "./",
+    "recurse": true
+  }
+}
