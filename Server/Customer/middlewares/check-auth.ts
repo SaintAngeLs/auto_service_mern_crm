@@ -10,6 +10,8 @@ import jwt from 'jsonwebtoken';
 import User from '../model/customerModel';
 import { secretKey } from '../config/authConfig';
 
+import { verifyJWT } from '../utils/jwtUtil';
+
 interface Request extends ExpressRequest {
     userId?: string;
 }
@@ -24,14 +26,17 @@ interface Request extends ExpressRequest {
  */
 export const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
     try {
-        const token = req.headers['x-access-token'] as string;
+        const token = req.headers['Authorization'] as string;
 
         if (!token) {
             res.status(403).send({ message: 'No token provided!' });
             return;
         }
 
-        const decoded: any = jwt.verify(token, secretKey);
+        // const decoded: any = jwt.verify(token, secretKey);
+        
+        const decoded = verifyJWT(token);
+
         req.userId = decoded.userId;
         next();
     } catch (error) {

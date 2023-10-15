@@ -12,6 +12,8 @@ import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import { secretKey }from '../config/authConfig';
 
+import { createJWT } from '../utils/jwtUtil';
+
 /**
  * Register a new user.
  *
@@ -74,7 +76,12 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
         const isMatch = await bcrypt.compare(req.body.password, user.password);
 
         if (isMatch) {
-            const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });
+            // const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });
+            const token = createJWT(
+                { userId: user._id },
+                3600 // 1 hour with 60 minutes
+              );
+        
             res.status(200).json({
                 message: 'Authentication Successful',
                 userId: user._id,
