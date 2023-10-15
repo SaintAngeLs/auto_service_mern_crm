@@ -34,7 +34,7 @@
     - [orderModel.ts](#ordermodelts)
     - [serviceModel.ts](#servicemodelts)
   - [API-endpoints](#api-endpoints)
-  - [JWT implementation)](#jwt-implementation)
+  - [JWT implementation](#jwt-implementation)
 
 - [Summary](#summary)
 

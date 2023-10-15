@@ -26,7 +26,7 @@ interface Request extends ExpressRequest {
  */
 export const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
   try {
-    const token: string | undefined = req.headers["x-access-token"] as string;
+    const token: string | undefined = req.headers["Authorization"] as string;
 
     if (!token) {
       res.status(403).send({ message: "No token provided!" });

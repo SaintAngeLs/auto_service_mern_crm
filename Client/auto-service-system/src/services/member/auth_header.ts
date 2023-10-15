@@ -5,7 +5,7 @@
  */
 
 /**
- * Generates an authentication header containing the token of the authenticated customer.
+ * Generates an authentication header containing the token of the authenticated admin.
  * @returns A header object with the token or an empty object.
  */
 

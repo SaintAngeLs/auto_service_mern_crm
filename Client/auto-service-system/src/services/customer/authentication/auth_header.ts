@@ -10,12 +10,11 @@
  * 
  * @returns A header object with the token or an empty object.
  */
-export default function authHeader(): { "x-access-token"?: string } {
+export default function authHeader(): { "Authorization"?: string } {
   const customer: { token?: string } | null = JSON.parse(localStorage.getItem("customer") || 'null');
 
   if (customer && customer.token) {
-    // for Node.js Express back-end
-    return { "x-access-token": customer.token };
+    return { "Authorization": "Bearer " + customer.token };
   } else {
     return {};
   }
