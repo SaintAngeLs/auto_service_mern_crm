@@ -34,6 +34,8 @@
     - [orderModel.ts](#ordermodelts)
     - [serviceModel.ts](#servicemodelts)
   - [API-endpoints](#api-endpoints)
+  - [JWT implementation)](#jwt-implementation)
+
 - [Summary](#summary)
 
 ## Introduction
@@ -329,7 +331,7 @@ Car Added: {
   name: '1Car1',
   brand: '1cAR1',
   _id: new ObjectId("652485e5defcb11e9b8da963"),
-  __v: 0
+  __v: 0Implementation as above
 }
 
 ```
@@ -541,6 +543,56 @@ Response:
 
 ```
 
+## JWT implementation
+
+
+> JWT Implementation
+
+In our application, we have implemented our own version of JSON Web Tokens (JWT) for authentication purposes. This solution is an alternative to the standard libraries available for JWT, crafted specifically for our needs.
+
+> How it Works:
+
+1. **Header**: The header typically consists of two parts: the type of the token (JWT) and the hashing algorithm being used (e.g., HS256). We encode this in base64 format.
+2. **Payload**: The second part of the token is the payload, which contains the claims. Claims are statements about the user and additional metadata. We have also added an expiration claim (`exp`) which specifies when the token expires. We encode this in base64 format.
+3. **Signature**: For the signature, we take the encoded header, the encoded payload, a secret, and then use the HMAC SHA256 algorithm to hash them together. This ensures that the message hasn't been changed along the way.
+
+> Code Implementation:
+
+> Creating a JWT:
+
+```typescript
+import crypto from 'crypto';
+
+const secret = '31415926535898_superSuperSecretKey';  // Ensure to keep this secret very secure.
+
+export const createJWT = (payload: object, expiresIn: number): string => {
+  // ... [more specific side of implementation is in the utils/jwtutil.ts]
+};
+```
+
+> Verifying a JWT:
+
+Verifying the token involves decoding it and ensuring the signature matches. Additionally, we check if the token has expired.
+
+```typescript
+export const verifyJWT = (token: string): any => {
+  // ... [more specific side of implementation is in the utils/jwtutil.ts]
+};
+```
+
+> Security Concerns:
+
+- The secret used in hashing the JWT should be kept private. Exposure can lead to JWTs being forged.
+  
+- The JWT does not encrypt the payload or the header. If there's any sensitive information, consider another method of transmitting it or use encryption methods in combination with JWT.
+
+- Ensure the expiration time (`exp` claim) is set appropriately to balance between user convenience and security.
+
+> Conclusion:
+
+Our JWT implementation provides a robust method for ensuring secure authentication in our application. Always validate JWTs server-side and never trust information from a client without verification.
+
+
 ## **Summary**
 
 Provide a summary of your project and its purpose. You can also include installation instructions, usage examples, and any other relevant information here.
@@ -561,7 +613,7 @@ CUSTOMERS:
 
 Mechanics: 
 
-1. Login
+1. Login## Authenctication - server-side JWT (implementation assumption)
 2. Wash Request: Wash Request is sent to the washer along with the user details. The washer can either accept or decline the request..
 3. Profile: Washers can view and update their profile information.
 4. My Orders: Washers can also view their past and current orders
@@ -625,7 +677,7 @@ nvm use 18 && npm install
 
 - For the ADMIN access you need to insert a record mannually in the members database as a role ADMIN. 
 
-## USer login
+## User login
 
 ADMIN user_name: admin@email.com
 ADMIN password: admin3141592
