@@ -9,14 +9,12 @@
  * @returns A header object with the token or an empty object.
  */
 
-export default function authHeader(): { "x-access-token"?: string } | null {
-  const customer: { token?: string } | null = JSON.parse(localStorage.getItem("admin") || 'null');
+export default function authHeader(): { "Authorization"?: string } {
+  const admin_user: { token?: string } | null = JSON.parse(localStorage.getItem("admin") || 'null');
 
-  if (customer && customer.token) {
-    return { "x-access-token": customer.token };
+  if (admin_user && admin_user.token) {
+    return { "Authorization": "Bearer " + admin_user.token };
   } else {
-    console.warn('No token found in local storage.');
-    return null;
+    return {};
   }
 }
-

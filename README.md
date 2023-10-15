@@ -655,3 +655,6 @@ docker-compose up
 - [ ] frontend update
 - [ ] updating the docker-compose 
 - [ ] adding the tests
+- [ ] Do not use the 'jsonwebtoken' 
+  - [ ] craft own JWT
+  - [ ] Use the JSON.Parse && JSON.Stringify implemented in the 'tasks/task13/task' fomm the  'node_laba_course' repository

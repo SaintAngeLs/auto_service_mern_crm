@@ -8,6 +8,7 @@ import jwt from 'jsonwebtoken';
 import {secretKey as authConfig} from '../utils/authConfig';
 import Member from '../model/memberModel';
 import { Request as ExpressRequest, Response, NextFunction } from 'express';
+import { verifyJWT } from '../utils/jwtUtil';
 
 // Define JWT Payload structure
 interface JwtPayload {
@@ -32,7 +33,8 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction): vo
       return;
     }
 
-    const decoded = jwt.verify(token, authConfig) as JwtPayload;
+    // const decoded = jwt.verify(token, authConfig) as JwtPayload;
+    const decoded = verifyJWT(token);
 
     if (decoded && decoded.userId) {
       req.userId = decoded.userId;
