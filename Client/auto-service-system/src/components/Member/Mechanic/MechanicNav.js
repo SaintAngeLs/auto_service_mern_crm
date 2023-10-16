@@ -23,7 +23,7 @@ function MechanicNav() {
 
   return (
     <nav className={`nav ${show && "nav__scroll"}`}>
-      <a href="/mechanic_home">
+      <a href="/manager_home">
         <img
           className="nav__logo"
           src="https://image4.owler.com/logo/wype_owler_20160516_093705_original.jpg"
@@ -37,7 +37,7 @@ function MechanicNav() {
       >
         <NavLink
           className={`nav__link ${show && "nav__linkscroll"}`}
-          to="/mechanic_home"
+          to="/manager_home"
         >
           MECHANIC
         </NavLink>

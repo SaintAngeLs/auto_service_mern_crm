@@ -10,12 +10,12 @@
  * @returns A header object with the token or an empty object.
  */
 export default function mechHeader(): { "x-access-token"?: string } {
-  const mechanic: { token?: string } | null = JSON.parse(localStorage.getItem("mechanic") || 'null');
+  const manager: { token?: string } | null = JSON.parse(localStorage.getItem("manager") || 'null');
 
-  if (mechanic && mechanic.token) {
+  if (manager && manager.token) {
     // for Node.js Express back-end
-    console.log('Mechanick tocken:', mechanic.token);
-    return { "x-access-token": mechanic.token };
+    console.log('Mechanick tocken:', manager.token);
+    return { "x-access-token": manager.token };
   } else {
     return {};
   }

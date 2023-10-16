@@ -20,17 +20,17 @@ function MechanicHome(props) {
     {
       text: "HOME",
       icon: <HomeIcon />,
-      onClick: () => history.push("/mechanic_home"),
+      onClick: () => history.push("/manager_home"),
     },
     {
       text: "FIND ORDERS",
       icon: <DriveEtaIcon />,
-      onClick: () => history.push("/mechanic_home/findOrders"),
+      onClick: () => history.push("/manager_home/findOrders"),
     },
     {
       text: "MY ORDERS",
       icon: <MonetizationOnIcon />,
-      onClick: () => history.push("/mechanic_home/myorders"),
+      onClick: () => history.push("/manager_home/myorders"),
     },
     {
       text: "Log Out",

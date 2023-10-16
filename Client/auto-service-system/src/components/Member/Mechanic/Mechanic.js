@@ -11,8 +11,8 @@ function mechanic() {
       <MechanicNav />
       <MechanicHome />
       <Switch>
-        <Route path="/mechanic_home/findOrders" component={FindOrders} />
-        <Route path="/mechanic_home/myorders" component={MyOrders} />
+        <Route path="/manager_home/findOrders" component={FindOrders} />
+        <Route path="/manager_home/myorders" component={MyOrders} />
       </Switch>
     </div>
   );

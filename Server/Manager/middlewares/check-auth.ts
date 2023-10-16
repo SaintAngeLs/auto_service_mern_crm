@@ -54,7 +54,7 @@ const isMechanic = (req: Request, res: Response, next: NextFunction): void => {
     Member.findById({ _id: req.userId })
         .exec()
         .then((user: any) => { // replace `any` with your member model type
-            if (user.role === "MECHANIC") {
+            if (user.role === "MANAGER") {
                 next();
                 return;
             }

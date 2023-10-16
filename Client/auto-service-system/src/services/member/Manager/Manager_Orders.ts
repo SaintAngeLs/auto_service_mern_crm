@@ -1,5 +1,5 @@
 /**
- * @file Mechanic_Orders.ts
+ * @file Manager_Orders.ts
  * 
  * @description Service functions to interact with mechanic orders API.
  * 

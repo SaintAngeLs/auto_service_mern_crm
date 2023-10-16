@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AuthServices from "../../../services/member/auth_service";
-import MechanicServices from "../../../services/member/Mechanic/Mechanic_Services";
+import ManagerServices from "../../../services/member/Manager/Manager_Services";
 import "./CSS/Cars.css";
 import MaterialTable from "material-table";
 import { useSnackbar } from "notistack";
@@ -10,14 +10,14 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { useForm } from "react-hook-form";
 
-function Mechanic() {
-  const [mechanic, setMechanic] = useState([]);
+function Manager() {
+  const [manager, setManager] = useState([]);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const getAllMecahnic = () => {
-    MechanicServices.findAll()
+    ManagerServices.findAll()
       .then((response) => {
-        setMechanic(response);
+        setManager(response);
       })
       .catch((err) => {
         console.log(err);
@@ -49,7 +49,7 @@ function Mechanic() {
   };
 
   const onSubmit = (values) => {
-    AuthServices.registerMechanic(
+    AuthServices.registerManager(
       values.name,
       values.email,
       values.password,
@@ -66,12 +66,12 @@ function Mechanic() {
   };
 
   const handleRowDelete = (oldData, resolve) => {
-    MechanicServices.deleteAccount(oldData._id)
+    ManagerServices.deleteAccount(oldData._id)
       .then((res) => {
-        const dataDelete = [...mechanic];
+        const dataDelete = [...manager];
         const index = oldData.tableData.id;
         dataDelete.splice(index, 1);
-        setMechanic([...dataDelete]);
+        setManager([...dataDelete]);
         resolve();
         enqueueSnackbar(res, {
           variant: "success",
@@ -87,15 +87,15 @@ function Mechanic() {
 
   return (
     <div className="cars_container">
-      <h3>Mechanic Operations</h3>
+      <h3>Manager Operations</h3>
       <br />
 
-      <button onClick={openForm}>Add Mechanic</button>
+      <button onClick={openForm}>Add Manager</button>
       <br />
       <MaterialTable
-        title="MECHANIC DATA"
+        title="MANAGER DATA"
         columns={columns}
-        data={mechanic}
+        data={manager}
         editable={{
           onRowDelete: (oldData) =>
             new Promise((resolve, reject) => {
@@ -113,7 +113,7 @@ function Mechanic() {
       {display ? (
         <Container maxWidth="xs">
           <div className="login__form">
-            <h4>Create Mechanic Account</h4>
+            <h4>Create Manager Account</h4>
             <br />
             <form onSubmit={handleSubmit(onSubmit)}>
               <Grid container spacing={2}>
@@ -197,4 +197,4 @@ function Mechanic() {
   );
 }
 
-export default Mechanic;
+export default Manager;

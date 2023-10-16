@@ -26,7 +26,7 @@ class AuthService {
             localStorage.setItem('admin', JSON.stringify(response.data));
           } else {
             console.log(response.data.name);
-            localStorage.setItem('mechanic', JSON.stringify(response.data));
+            localStorage.setItem('manager', JSON.stringify(response.data));
           }
         }
 
@@ -70,8 +70,8 @@ class AuthService {
   /**
    * Logs out a mechanic user.
    */
-  logoutMechanic(): void {
-    localStorage.removeItem('mechanic');
+  logoutManager(): void {
+    localStorage.removeItem('manager');
     console.log('Inside Logout Method');
   }
 
@@ -90,7 +90,7 @@ class AuthService {
    * Gets the current logged-in mechanic's details.
    */
   getCurrentMechanic(): any {
-    return JSON.parse(localStorage.getItem('mechanic') || '{}');
+    return JSON.parse(localStorage.getItem('manager') || '{}');
   }
 
   /**
@@ -102,3 +102,5 @@ class AuthService {
 }
 
 export default new AuthService();
+
+
