@@ -23,7 +23,7 @@ function Admin(props) {
         {/* <Route exact path="/admin_home" component={AdminHome} /> */}
         <Route path="/admin_home/cars" component={Cars} />
         <Route path="/admin_home/packages" component={Services} />
-        <Route path="/admin_home/mechanics" component={Manager} />
+        <Route path="/admin_home/managers" component={Manager} />
         <Route path="/admin_home/orders" component={Orders} />
       </Switch>
     </div>

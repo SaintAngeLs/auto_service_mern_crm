@@ -14,7 +14,7 @@ function Manager() {
   const [manager, setManager] = useState([]);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  const getAllMecahnic = () => {
+  const getAllManagers = () => {
     ManagerServices.findAll()
       .then((response) => {
         setManager(response);
@@ -24,7 +24,7 @@ function Manager() {
       });
   };
   useEffect(() => {
-    getAllMecahnic();
+    getAllManagers();
   }, []);
 
   const [columns, setColumns] = useState([

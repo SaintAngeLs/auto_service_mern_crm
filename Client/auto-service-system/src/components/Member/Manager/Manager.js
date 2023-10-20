@@ -5,7 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import FindOrders from "./FindOrders";
 import MyOrders from "./MyOrders";
 
-function mechanic() {
+function manager() {
   return (
     <div>
       <MechanicNav />
@@ -18,4 +18,4 @@ function mechanic() {
   );
 }
 
-export default mechanic;
+export default manager;

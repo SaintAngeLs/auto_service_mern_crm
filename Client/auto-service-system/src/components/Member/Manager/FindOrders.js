@@ -40,7 +40,7 @@ function FindOrders() {
     {
       title: "Status",
       field: "status",
-      lookup: dynamicMechanicsLookUp,
+      lookup: dynamicManagerLookUp,
     },
   ]);
 

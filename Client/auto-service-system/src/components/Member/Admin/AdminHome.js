@@ -38,9 +38,9 @@ function AdminHome(props) {
       onClick: () => history.push("/admin_home/packages"),
     },
     {
-      text: "Mechanics",
+      text: "Managers",
       icon: <SupervisorAccountIcon />,
-      onClick: () => history.push("/admin_home/mechanics"),
+      onClick: () => history.push("/admin_home/managers"),
     },
     {
       text: "Orders",

@@ -68,7 +68,7 @@ class AuthService {
   }
 
   /**
-   * Logs out a mechanic user.
+   * Logs out a manager user.
    */
   logoutManager(): void {
     localStorage.removeItem('manager');

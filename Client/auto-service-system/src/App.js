@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Customer from "./components/Customer/Customer";
 import Admin from "./components/Member/Admin/Admin";
-import Manager from "./components/Member/Memeber/Member";
+import Manager from "./components/Member/Manager/Manager";
 import Login from "./components/Home/Login";
 
 function App() {
