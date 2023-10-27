@@ -1,7 +1,7 @@
 /**
  * @file check-auth.ts
  * 
- * @description Middleware functions to verify JWT tokens and check if a user is a mechanic.
+ * @description Middleware functions to verify JWT tokens and check if a user is a manager.
  * 
  */
 
@@ -45,12 +45,12 @@ const verifyToken = (req: Request, res: Response, next: NextFunction): void => {
 };
 
 /**
- * Middleware to check if the user associated with the JWT token is a mechanic.
+ * Middleware to check if the user associated with the JWT token is a manager.
  * @param req Express request object.
  * @param res Express response object.
  * @param next Function to pass control to the next middleware function.
  */
-const isMechanic = (req: Request, res: Response, next: NextFunction): void => {
+const isManager = (req: Request, res: Response, next: NextFunction): void => {
     Member.findById({ _id: req.userId })
         .exec()
         .then((user: any) => { // replace `any` with your member model type
@@ -69,5 +69,5 @@ const isMechanic = (req: Request, res: Response, next: NextFunction): void => {
 // Exporting the middleware functions
 export default {
     verifyToken,
-    isMechanic
+    isManager
 };

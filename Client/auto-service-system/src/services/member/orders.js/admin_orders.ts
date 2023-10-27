@@ -29,15 +29,15 @@ class AdminOrders {
   }
 
   /**
-   * Assigns an order to a mechanic by the order ID and mechanic ID.
+   * Assigns an order to a manager by the order ID and manager ID.
    * @param orderId The order's ID.
-   * @param mechanicId The mechanic's ID.
+   * @param managerId The manager's ID.
    */
-  assignOrder(orderId: string, mechanicId: string): Promise<string> {
+  assignOrder(orderId: string, managerId: string): Promise<string> {
     return axios
       .patch(
         ORDER_URL + `updateOrder/${orderId}`,
-        { mechanicId },
+        { managerId },
         { headers: authHeader() }
       )
       .then((res: AxiosResponse) => {

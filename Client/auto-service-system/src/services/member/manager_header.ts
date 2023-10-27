@@ -1,20 +1,20 @@
 /**
- * @file mech_header.ts
+ * @file manager_header.ts
  * 
- * @description Provides an authentication header based on the mechanics's token.
+ * @description Provides an authentication header based on the manager's token.
  * 
  */
 
 /**
- * Generates an authentication header containing the token of the authenticated mechanic.
+ * Generates an authentication header containing the token of the authenticated manager.
  * @returns A header object with the token or an empty object.
  */
-export default function mechHeader(): { "x-access-token"?: string } {
+export default function managerHeader(): { "x-access-token"?: string } {
   const manager: { token?: string } | null = JSON.parse(localStorage.getItem("manager") || 'null');
 
   if (manager && manager.token) {
     // for Node.js Express back-end
-    console.log('Mechanick tocken:', manager.token);
+    console.log('Manager token:', manager.token);
     return { "x-access-token": manager.token };
   } else {
     return {};

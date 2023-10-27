@@ -39,9 +39,9 @@ class AuthService {
   }
 
   /**
-   * Registers a new mechanic with the given details.
+   * Registers a new manager with the given details.
    */
-  registerMechanic(name: string, email: string, password: string, mobile: string): Promise<string> {
+  registerManager(name: string, email: string, password: string, mobile: string): Promise<string> {
     return axios
       .post(
         AUTH_URL + 'register',
@@ -76,7 +76,7 @@ class AuthService {
   }
 
   /**
-   * Registers a new user (generic method, not specific to mechanics or admins).
+   * Registers a new user (generic method, not specific to managers or admins).
    */
   register(name: string, email: string, password: string): Promise<AxiosResponse> {
     return axios.post(AUTH_URL + 'register', {
@@ -87,9 +87,9 @@ class AuthService {
   }
 
   /**
-   * Gets the current logged-in mechanic's details.
+   * Gets the current logged-in managers's details.
    */
-  getCurrentMechanic(): any {
+  getCurrentManager(): any {
     return JSON.parse(localStorage.getItem('manager') || '{}');
   }
 

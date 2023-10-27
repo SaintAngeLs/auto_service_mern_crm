@@ -5,7 +5,7 @@
  */
 
 import express from 'express';
-// Middleware for authentication and mechanic controller
+// Middleware for authentication and manager controller
 import * as OrderController from '../controllers/orderController';
 import * as checkAuth from '../middlewares/check-auth';
 

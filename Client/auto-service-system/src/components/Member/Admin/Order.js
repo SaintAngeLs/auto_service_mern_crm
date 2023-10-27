@@ -38,7 +38,7 @@ function Orders() {
     getCompletedOrders();
   }, []);
 
-  const dynamicMechanicsLookUp = {
+  const dynamicManagersLookUp = {
     "5f4481fae2fd8a20782f6d82": "Mechanic 1",
     "5f448212e2fd8a20782f6d83": "Mechanic 2",
     "5f448222e2fd8a20782f6d84": "Mechanic 3",
@@ -53,9 +53,9 @@ function Orders() {
     { title: "Service Name", field: "serviceName", editable: "never" },
     { title: "Price", field: "servicePrice", editable: "never" },
     {
-      title: "Assign Mechanic",
-      field: "mechanicId",
-      lookup: dynamicMechanicsLookUp,
+      title: "Assign Manager",
+      field: "managerId",
+      lookup: dynamicManagersLookUp,
     },
   ]);
 
@@ -67,13 +67,13 @@ function Orders() {
     { title: "Address", field: "custAddress" },
     { title: "Service Name", field: "serviceName" },
     { title: "Price", field: "servicePrice" },
-    { title: "Assigned Mechanic", field: "mechanicId" },
+    { title: "Assigned Manager", field: "managerId" },
   ]);
 
   const handleRowUpdate = (newData, oldData, resolve) => {
     let errorList = [];
     if (errorList.length < 1) {
-      AdminOrders.assignOrder(newData._id, newData.mechanicId)
+      AdminOrders.assignOrder(newData._id, newData.meanagerId)
         .then((res) => {
           const dataUpdate = [...orders];
           const index = oldData.tableData.id;

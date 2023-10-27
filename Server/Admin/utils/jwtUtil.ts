@@ -3,6 +3,7 @@ import crypto from 'crypto';
 const secret = '31415926535898_superSuperSuperSuperSuperSuperSuperSecret%frifsoidjfnakls%Key'; // This should be a very long and complex secret, preferably stored in a secure environment.
 
 export const createJWT = (payload: object, expiresIn: number): string => {
+  
   const header = {
     alg: "HS256",
     typ: "JWT"

@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 
-function MechanicHome(props) {
+function ManagerHome(props) {
   const { history } = props;
 
   const itemList = [
@@ -41,7 +41,7 @@ function MechanicHome(props) {
   return (
     <div className="admin_home">
       <hr />
-      <h1>WELCOME MECHANIC</h1>
+      <h1>Hello,Manager</h1>
       <hr />
 
       <Drawer variant="permanent" className="drawer">
@@ -60,4 +60,4 @@ function MechanicHome(props) {
   );
 }
 
-export default withRouter(MechanicHome);
+export default withRouter(ManagerHome);

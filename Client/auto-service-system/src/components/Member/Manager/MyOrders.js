@@ -14,7 +14,7 @@ function MyOrders() {
   const [errorMessages, setErrorMessages] = useState([]);
 
   useEffect(() => {
-    const manager = AuthService.getCurrentMechanic();
+    const manager = AuthService.getCurrentManager();
     ManagerOrders.getAllOrders(manager.userId)
       .then((response) => {
         setOrders(response);

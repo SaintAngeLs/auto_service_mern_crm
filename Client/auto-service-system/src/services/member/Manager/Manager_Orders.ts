@@ -1,28 +1,28 @@
 /**
  * @file Manager_Orders.ts
  * 
- * @description Service functions to interact with mechanic orders API.
+ * @description Service functions to interact with manager orders API.
  * 
  */
 
 import axios, { AxiosResponse } from 'axios';
-import mechHeader from '../mech_header';
+import managerHeader from '../manager_header';
 
-const API_URL = 'http://localhost:8020/mechanic/orders/';
+const API_URL = 'http://localhost:8020/manager/orders/';
 
-class MechanicOrders {
+class ManagerOrders {
 
   /**
    * @function
    * 
-   * Retrieve orders that are currently in process for a given mechanic.
-   * @param mechId Mechanic's ID.
+   * Retrieve orders that are currently in process for a given manager.
+   * @param managerId Manager's ID.
    */
-  getInProcessOrders(mechId: string): Promise<any> {
-    console.log("Method: " + mechId);
+  getInProcessOrders(managerId: string): Promise<any> {
+    console.log("Method: " + managerId);
     return axios
-      .get(API_URL + `findInProcessOrders/${mechId}`, {
-        headers: mechHeader(),
+      .get(API_URL + `findInProcessOrders/${managerId}`, {
+        headers: managerHeader(),
       })
       .then((res: AxiosResponse) => {
         return res.data.orders;
@@ -48,7 +48,7 @@ class MechanicOrders {
           status,
         },
         {
-          headers: mechHeader(),
+          headers: managerHeader(),
         }
       )
       .then((res: AxiosResponse) => {
@@ -63,13 +63,13 @@ class MechanicOrders {
   /**
    * @function
    * 
-   * Retrieve all orders for a given mechanic.
-   * @param mechId Mechanic's ID.
+   * Retrieve all orders for a given manager.
+   * @param thisManagerId Manager's ID.
    */
-  getAllOrders(mechId: string): Promise<any> {
+  getAllOrders(thisManagerId: string): Promise<any> {
     return axios
-      .get(API_URL + `findMyOrders/${mechId}`, {
-        headers: mechHeader(),
+      .get(API_URL + `findMyOrders/${thisManagerId}`, {
+        headers: managerHeader(),
       })
       .then((res: AxiosResponse) => {
         return res.data.orders;
@@ -81,4 +81,4 @@ class MechanicOrders {
   }
 }
 
-export default new MechanicOrders();
+export default new ManagerOrders();

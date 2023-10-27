@@ -15,7 +15,7 @@ export interface IOrder extends Document {
     custAddress: string;
     serviceName: string;
     servicePrice: number;
-    mechanicId: string;
+    managerId: string;
     requestedOn: Date;
     deliveredOn?: Date;
     status: string;
@@ -29,7 +29,7 @@ const orderSchema: MongooseSchema = new mongoose.Schema({
     custAddress: { type: String, max: 40 },
     serviceName: { type: String },
     servicePrice: { type: Number },
-    mechanicId: { type: String },
+    managerId: { type: String },
     requestedOn: { type: Date, default: Date.now },
     deliveredOn: { type: Date },
     status: {
