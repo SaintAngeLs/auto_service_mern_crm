@@ -16,7 +16,7 @@ import authRoutes from './services/authServices';
 import carRoutes from './services/carServices';
 import serviceRoutes from './services/autoWashServices';
 import orderRoutes from './services/orderServices';
-import mechanicRoutes from './services/mechanicServices';
+import managerRoutes from './services/managerServices';
 
 const app = express();
 
@@ -60,7 +60,7 @@ app.use("/admin/auth", authRoutes);
 app.use("/admin/car-func", carRoutes);
 app.use("/admin/car-services", serviceRoutes);
 app.use("/admin/order", orderRoutes);
-app.use("/admin/mechanic", mechanicRoutes);
+app.use("/admin/manager", managerRoutes);
 
 // Middleware for handling 404 errors
 app.use((req: Request, res: Response, next: NextFunction) => {

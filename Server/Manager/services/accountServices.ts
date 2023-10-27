@@ -12,13 +12,13 @@ import * as AccountController from "../controllers/accountController";
 const router = express.Router();
 
 router.patch(
-  "/update/:mechId",
+  "/update/:thisManagerId",
   [checkAuth.verifyToken],
   AccountController.updateProfile
 );
 
 router.delete(
-  "/delete/:mechId",
+  "/delete/:thisManagerId",
   [checkAuth.verifyToken],
   AccountController.deleteProfile
 );

@@ -22,7 +22,7 @@ export default function Member_Login(props) {
         if (respone && respone.role === "ADMIN") {
           props.history.push("/admin_home");
         } else {
-          props.history.push("/mechanic_home");
+          props.history.push("/manager_home");
         }
       })
       .catch((error) => {

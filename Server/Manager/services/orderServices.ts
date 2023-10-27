@@ -13,19 +13,19 @@ const router = express.Router();
 
 router.patch(
   "/updateOrder/:orderId",
-  [checkAuth.verifyToken, checkAuth.isMechanic],
+  [checkAuth.verifyToken, checkAuth.isManager],
   OrderController.updateOrder
 );
 
 router.get(
-  "/findInProcessOrders/:mechId",
-  [checkAuth.verifyToken, checkAuth.isMechanic],
+  "/findInProcessOrders/:thisManagerId",
+  [checkAuth.verifyToken, checkAuth.isManager],
   OrderController.findInProcessOrders
 );
 
 router.get(
-  "/findMyOrders/:mechId",
-  [checkAuth.verifyToken, checkAuth.isMechanic],
+  "/findMyOrders/:thisManagerId",
+  [checkAuth.verifyToken, checkAuth.isManager],
   OrderController.findMyOrders
 );
 

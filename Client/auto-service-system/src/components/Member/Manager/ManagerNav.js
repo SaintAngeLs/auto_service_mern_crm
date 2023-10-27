@@ -3,7 +3,7 @@ import "../../Home/Navbar.css";
 import { Link, NavLink } from "react-router-dom";
 import AuthService from "../../../services/member/auth_service";
 
-function MechanicNav() {
+function ManagerNav() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
@@ -18,12 +18,12 @@ function MechanicNav() {
   }, []);
 
   const logout = () => {
-    AuthService.logoutMechanic();
+    AuthService.logoutManager();
   };
 
   return (
     <nav className={`nav ${show && "nav__scroll"}`}>
-      <a href="/mechanic_home">
+      <a href="/manager_home">
         <img
           className="nav__logo"
           src="https://image4.owler.com/logo/wype_owler_20160516_093705_original.jpg"
@@ -37,9 +37,9 @@ function MechanicNav() {
       >
         <NavLink
           className={`nav__link ${show && "nav__linkscroll"}`}
-          to="/mechanic_home"
+          to="/manager_home"
         >
-          MECHANIC
+          Manager
         </NavLink>
         <NavLink
           onClick={logout}
@@ -53,4 +53,4 @@ function MechanicNav() {
   );
 }
 
-export default MechanicNav;
+export default ManagerNav;

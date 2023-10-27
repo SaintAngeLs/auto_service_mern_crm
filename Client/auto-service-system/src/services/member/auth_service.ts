@@ -26,7 +26,7 @@ class AuthService {
             localStorage.setItem('admin', JSON.stringify(response.data));
           } else {
             console.log(response.data.name);
-            localStorage.setItem('mechanic', JSON.stringify(response.data));
+            localStorage.setItem('manager', JSON.stringify(response.data));
           }
         }
 
@@ -39,9 +39,9 @@ class AuthService {
   }
 
   /**
-   * Registers a new mechanic with the given details.
+   * Registers a new manager with the given details.
    */
-  registerMechanic(name: string, email: string, password: string, mobile: string): Promise<string> {
+  registerManager(name: string, email: string, password: string, mobile: string): Promise<string> {
     return axios
       .post(
         AUTH_URL + 'register',
@@ -68,15 +68,15 @@ class AuthService {
   }
 
   /**
-   * Logs out a mechanic user.
+   * Logs out a manager user.
    */
-  logoutMechanic(): void {
-    localStorage.removeItem('mechanic');
+  logoutManager(): void {
+    localStorage.removeItem('manager');
     console.log('Inside Logout Method');
   }
 
   /**
-   * Registers a new user (generic method, not specific to mechanics or admins).
+   * Registers a new user (generic method, not specific to managers or admins).
    */
   register(name: string, email: string, password: string): Promise<AxiosResponse> {
     return axios.post(AUTH_URL + 'register', {
@@ -87,10 +87,10 @@ class AuthService {
   }
 
   /**
-   * Gets the current logged-in mechanic's details.
+   * Gets the current logged-in managers's details.
    */
-  getCurrentMechanic(): any {
-    return JSON.parse(localStorage.getItem('mechanic') || '{}');
+  getCurrentManager(): any {
+    return JSON.parse(localStorage.getItem('manager') || '{}');
   }
 
   /**
@@ -102,3 +102,5 @@ class AuthService {
 }
 
 export default new AuthService();
+
+

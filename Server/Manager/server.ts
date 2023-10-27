@@ -18,7 +18,7 @@ let server: http.Server;
 const startServer = (): void => {
   server = http.createServer(app);
   server.listen(port, () => {
-    console.log(`Server is Listening on Mechanic MS Port: ${port}`);
+    console.log(`Server is Listening on Manager MS Port: ${port}`);
   });
 };
 

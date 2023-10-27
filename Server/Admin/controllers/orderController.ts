@@ -13,8 +13,7 @@ import CustomerModel from '../model/customerModel'; // Assuming you have a TypeS
 
 interface IOrder {
   status: string;
-  mechanicId?: string;
-  // any other properties associated with orders
+  ManagerId?: string;
 }
 
 // Maybe let's use this interface ib the future better times of dummy reality...
@@ -22,7 +21,6 @@ interface UpdateResult {
   n?: number;
   nModified?: number;
   ok?: number;
-  // ... possibly other fields
 }
 
 /**
@@ -61,11 +59,11 @@ export const findPlacedOrders = (req: Request, res: Response): void => {
 };
 
 /**
- * Update an order's status to "IN-PROCESS" and assign it to a mechanic.
+ * Update an order's status to "IN-PROCESS" and assign it to a manager.
  * 
  * @function
  * 
- * @param {Object} req: Express request object. Contains orderId in parameters and mechanicId in the body.
+ * @param {Object} req: Express request object. Contains orderId in parameters and managerId in the body.
  * @param {Object} res: Express response object.
  * 
  * @returns {Object} JSON response indicating successful assignment or an error message.
@@ -74,17 +72,17 @@ export const updateOrder = (req: Request, res: Response): void => {
   const orderId: string = req.params.orderId;
 
   // Update the order in the database using the provided orderId.
-  // Set its status to "IN-PROCESS" and assign the mechanicId from the request body.
+  // Set its status to "IN-PROCESS" and assign the managerId from the request body.
 
   OrderModel.updateOne(
     { _id: orderId },
-    { $set: { status: "IN-PROCESS", mechanicId: req.body.mechanicId } }
+    { $set: { status: "IN-PROCESS", managerId: req.body.managerId } }
   )
     .exec()
     .then((response: any) => { // Using UpdateResult
       if (response.nModified && response.nModified > 0) {
         res.status(200).json({
-          message: "Order Successfully Assigned to Mechanic",
+          message: "Order Successfully Assigned to Manager",
         });
       } else {
         res.status(404).json({

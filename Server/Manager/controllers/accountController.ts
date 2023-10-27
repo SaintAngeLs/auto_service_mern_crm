@@ -16,7 +16,7 @@ import MemberModel from '../model/memberModel';
  * @param {Response} res - Express response object used to send responses to the client.
  */
 export const updateProfile = (req: Request, res: Response): void => {
-  const id: string = req.params.mechId;
+  const id: string = req.params.thisManagerId;
   
   MemberModel.updateMany({ _id: id }, { $set: req.body })
     .exec()
@@ -39,7 +39,7 @@ export const updateProfile = (req: Request, res: Response): void => {
  * @param {Response} res - Express response object used to send responses to the client.
  */
 export const deleteProfile = (req: Request, res: Response): void => {
-  const id: string = req.params.mechId;
+  const id: string = req.params.thisManagerId;
 
   MemberModel.deleteOne({ _id: id })
     .exec()

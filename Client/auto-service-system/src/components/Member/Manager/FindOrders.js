@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MechanicOrders from "../../../services/member/Mechanic/Mechanic_Orders";
+import ManagerOrders from "../../../services/member/Manager/Manager_Orders";
 import AuthService from "../../../services/member/auth_service";
 import "../Admin/CSS/Cars.css";
 import MaterialTable from "material-table";
@@ -14,8 +14,8 @@ function FindOrders() {
   const [errorMessages, setErrorMessages] = useState([]);
 
   useEffect(() => {
-    const mechanic = AuthService.getCurrentMechanic();
-    MechanicOrders.getInProcessOrders(mechanic.userId)
+    const manager = AuthService.getCurrentManager();
+    ManagerOrders.getInProcessOrders(manager.userId)
       .then((response) => {
         setOrders(response);
       })
@@ -24,7 +24,7 @@ function FindOrders() {
       });
   }, []);
 
-  const dynamicMechanicsLookUp = {
+  const dynamicManagerLookUp = {
     ACCEPTED: "ACCEPTED",
     REJECT: "REJECTED",
     COMPLETED: "COMPLETED",
@@ -40,14 +40,14 @@ function FindOrders() {
     {
       title: "Status",
       field: "status",
-      lookup: dynamicMechanicsLookUp,
+      lookup: dynamicManagerLookUp,
     },
   ]);
 
   const handleRowUpdate = (newData, oldData, resolve) => {
     let errorList = [];
     if (errorList.length < 1) {
-      MechanicOrders.updateOrder(newData._id, newData.status)
+      ManagerOrders.updateOrder(newData._id, newData.status)
         .then((res) => {
           const dataUpdate = [...orders];
           const index = oldData.tableData.id;

@@ -1,20 +1,20 @@
 /**
- * @file mechanic_service.ts
+ * @file Manager_Services.ts
  * 
- * @description Service functions for the Mechanic API endpoints.
+ * @description Service functions for the Manager API endpoints.
  * 
  */
 
 import axios, { AxiosResponse } from 'axios';
-import mechHeader from '../mech_header';
+import managerHeader from '../manager_header';
 import authHeader from '../auth_header';
 
-const API_URL = 'http://localhost:8088/admin/mechanic/';
-const ACC_URL = 'http://localhost:8020/mechanic/account/';
+const API_URL = 'http://localhost:8088/admin/manager/';
+const ACC_URL = 'http://localhost:8020/manager/account/';
 
-class MechanicService {
+class ManagerService {
   /**
-   * Fetch all mechanics.
+   * Fetch all managers.
    */
   findAll(): Promise<any> {
     return axios
@@ -33,8 +33,8 @@ class MechanicService {
   /**
    * @function
    * 
-   * Delete a mechanic's account by ID.
-   * @param id The mechanic's ID.
+   * Delete a manager's account by ID.
+   * @param id The manager's ID.
    * 
    * @void
    */
@@ -56,7 +56,7 @@ class MechanicService {
   /**
    * @function
    * 
-   * Fetch all available mechanics.
+   * Fetch all available managers.
    * @void
    */
   findAvailable(): Promise<any> {
@@ -74,4 +74,4 @@ class MechanicService {
   }
 }
 
-export default new MechanicService();
+export default new ManagerService();

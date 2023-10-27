@@ -58,7 +58,7 @@ It connects to MongoDB using mongoose and provides error handling for connection
 
 - `bodyParser`: Parses incoming request bodies.
 - Custom middleware for CORS errors.
-- Routing for different services like authentication, cars, services, orders, and mechanics.
+- Routing for different services like authentication, cars, services, orders, and managers.
 - Error handling for 404 and general errors.
 
 ### **check-auth.ts (Authentication and Authorization Middlewares)**

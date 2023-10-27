@@ -13,24 +13,24 @@ import {
 } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
 
-function MechanicHome(props) {
+function ManagerHome(props) {
   const { history } = props;
 
   const itemList = [
     {
       text: "HOME",
       icon: <HomeIcon />,
-      onClick: () => history.push("/mechanic_home"),
+      onClick: () => history.push("/manager_home"),
     },
     {
       text: "FIND ORDERS",
       icon: <DriveEtaIcon />,
-      onClick: () => history.push("/mechanic_home/findOrders"),
+      onClick: () => history.push("/manager_home/findOrders"),
     },
     {
       text: "MY ORDERS",
       icon: <MonetizationOnIcon />,
-      onClick: () => history.push("/mechanic_home/myorders"),
+      onClick: () => history.push("/manager_home/myorders"),
     },
     {
       text: "Log Out",
@@ -41,7 +41,7 @@ function MechanicHome(props) {
   return (
     <div className="admin_home">
       <hr />
-      <h1>WELCOME MECHANIC</h1>
+      <h1>Hello,Manager</h1>
       <hr />
 
       <Drawer variant="permanent" className="drawer">
@@ -60,4 +60,4 @@ function MechanicHome(props) {
   );
 }
 
-export default withRouter(MechanicHome);
+export default withRouter(ManagerHome);

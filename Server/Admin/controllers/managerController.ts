@@ -1,15 +1,15 @@
 /**
- * @file mechanicController.ts
+ * @file managerController.ts
  * 
- * @description Provides operations for managing mechanics.
- * Contains endpoints for retrieving available mechanics and listing all mechanics.
+ * @description Provides operations for managing managers.
+ * Contains endpoints for retrieving available managers and listing all managers.
  * 
  */
 
 import { Request, Response } from 'express';
 import Member from '../model/memberModel';
 
-interface IMechanic {
+interface IManager {
   name: string;
   email: string;
   mobile: string;
@@ -17,25 +17,25 @@ interface IMechanic {
 }
 
 /**
- * Retrieves all mechanics with a status of "AVAILABLE".
+ * Retrieves all managers with a status of "AVAILABLE".
  * 
  * @param {Object} req: Express request object.
  * @param {Object} res: Express response object.
  * 
- * @returns {Array|Object} JSON array of available mechanics or a message indicating no available mechanics.
+ * @returns {Array|Object} JSON array of available managers or a message indicating no available managers.
  */
 export const findAvailable = (req: Request, res: Response): void => {
   // Query the database for members with the specific status of "AVAILABLE"
   Member.find({ status: "AVAILABLE" })
     .exec()
     .then((response: any) => {
-      // If no mechanics are found, return a message
+      // If no managers are found, return a message
       if (response.length === 0) {
         res.status(200).json({
-          message: "No Mechanics are Available",
+          message: "No managers are Available",
         });
       } else {
-        // Else: return the list of available mechanics
+        // Else: return the list of available managers
         res.status(200).json({
           response,
         });
@@ -50,12 +50,12 @@ export const findAvailable = (req: Request, res: Response): void => {
 };
 
 /**
- * Retrieves all mechanics, listing their names, emails, mobile numbers, and statuses.
+ * Retrieves all managers, listing their names, emails, mobile numbers, and statuses.
  * 
  * @param {Object} req: Express request object.
  * @param {Object} res: Express response object.
  * 
- * @returns {Array|Object} JSON array of all mechanics or a message prompting to add a mechanic if none are found.
+ * @returns {Array|Object} JSON array of all managers or a message prompting to add a managers if none are found.
  */
 export const findAll = (req: Request, res: Response): void => {
   // Query the database for all members, selecting specific fields
@@ -63,13 +63,13 @@ export const findAll = (req: Request, res: Response): void => {
     .select("name email mobile status")
     .exec()
     .then((response: any) => {
-      // If no mechanics are found, return a message
+      // If no managers are found, return a message
       if (response.length === 0) {
         res.status(200).json({
-          message: "Add a Mechanic",
+          message: "Add a manager",
         });
       } else {
-        // Return the list of all mechanics
+        // Return the list of all managers
         res.status(200).json({
           response,
         });

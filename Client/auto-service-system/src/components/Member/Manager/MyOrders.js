@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MechanicOrders from "../../../services/member/Mechanic/Mechanic_Orders";
+import ManagerOrders from "../../../services/member/Manager/Manager_Orders";
 import AuthService from "../../../services/member/auth_service";
 import "../Admin/CSS/Cars.css";
 import MaterialTable from "material-table";
@@ -14,8 +14,8 @@ function MyOrders() {
   const [errorMessages, setErrorMessages] = useState([]);
 
   useEffect(() => {
-    const mechanic = AuthService.getCurrentMechanic();
-    MechanicOrders.getAllOrders(mechanic.userId)
+    const manager = AuthService.getCurrentManager();
+    ManagerOrders.getAllOrders(manager.userId)
       .then((response) => {
         setOrders(response);
       })
