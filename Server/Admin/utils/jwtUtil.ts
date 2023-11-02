@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import {cryptoLib} from './Crypto-lib/crypto-lib';
 
 const secret = '31415926535898_superSuperSuperSuperSuperSuperSuperSecret%frifsoidjfnakls%Key'; // This should be a very long and complex secret, preferably stored in a secure environment.
 
@@ -15,7 +15,7 @@ export const createJWT = (payload: object, expiresIn: number): string => {
     exp: Math.floor(Date.now() / 1000) + expiresIn
   })).toString('base64');
 
-  const signature = crypto
+  const signature = cryptoLib
     .createHmac('sha256', secret)
     .update(encodedHeader + '.' + encodedPayload)
     .digest('base64');
@@ -31,7 +31,7 @@ export const verifyJWT = (token: string): any => {
   }
 
   // Verify Signature
-  const expectedSignature = crypto
+  const expectedSignature = cryptoLib
     .createHmac('sha256', secret)
     .update(encodedHeader + '.' + encodedPayload)
     .digest('base64');
