@@ -63,6 +63,3 @@ export const mode = {
 export const AES = lib.BlockCipher._createHelper(algo.AES);
 export const SHA256 = lib.Hasher._createHelper(algo.SHA256);
 
-export function createHmac(arg0: string, secret: string) {
-  throw new Error('Function not implemented.');
-}

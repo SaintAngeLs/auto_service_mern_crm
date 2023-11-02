@@ -15,11 +15,12 @@ export const createJWT = (payload: object, expiresIn: number): string => {
     exp: Math.floor(Date.now() / 1000) + expiresIn
   })).toString('base64');
 
-  const signature = cryptoLib
-    .createHmac('sha256', secret)
-    .update(encodedHeader + '.' + encodedPayload)
-    .digest('base64');
+  // const signature = crypto
+  //   .createHmac('sha256', secret)
+  //   .update(encodedHeader + '.' + encodedPayload)
+  //   .digest('base64');
 
+  const signature = cryptoLib.AES.encrypt(encodedHeader + '.' + encodedPayload, secret).toString();
   return encodedHeader + '.' + encodedPayload + '.' + signature;
 };
 
@@ -31,10 +32,7 @@ export const verifyJWT = (token: string): any => {
   }
 
   // Verify Signature
-  const expectedSignature = cryptoLib
-    .createHmac('sha256', secret)
-    .update(encodedHeader + '.' + encodedPayload)
-    .digest('base64');
+  const expectedSignature = cryptoLib.AES.decrypt(encodedHeader + '.' + encodedPayload, secret).toString();
 
   if (expectedSignature !== signature) {
     throw new Error("Invalid Signature");
