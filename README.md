@@ -145,8 +145,10 @@ Login as a memeber, login as a memeber and logint as a user respectively
 - **Response:** Initiates user registration.
 
 > Specific cases of usage
+
 #### ADMIN login:
-```json
+
+```shell
 Login
 {
   role: 'ADMIN',
@@ -157,8 +159,10 @@ Login
   __v: 0
 }
 ```
+
 #### MECHANIC login
-```json
+
+```shell
 Login
 {
   role: 'CUSTOMER',
@@ -170,9 +174,9 @@ Login
 }
 ```
 
-
 #### User register:
-```json
+
+```shell
 Register
 {
   role: 'CUSTOMER',
