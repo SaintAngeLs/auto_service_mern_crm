@@ -148,7 +148,7 @@ Login as a memeber, login as a memeber and logint as a user respectively
 
 #### ADMIN login:
 
-```shell
+```bash
 Login
 {
   role: 'ADMIN',
@@ -162,7 +162,7 @@ Login
 
 #### MECHANIC login
 
-```shell
+```bash
 Login
 {
   role: 'CUSTOMER',
@@ -176,7 +176,7 @@ Login
 
 #### User register:
 
-```shell
+```bash
 Register
 {
   role: 'CUSTOMER',
