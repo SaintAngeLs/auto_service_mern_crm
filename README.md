@@ -25,8 +25,8 @@
 
 - [Introduction](#introduction)
 - [Backend Components and API end points](#features)
-  - [App.ts (Main Express App Configuration)](#appts-main-express-app-configuration)
-  - [Authentication and Authorization Middlewares](#check-authts-authentication-and-authorization-middlewares)
+  <!-- - [App.ts (Main Express App Configuration)](#appts-main-express-app-configuration)
+  - [Authentication and Authorization Middlewares](#check-authts-authentication-and-authorization-middlewares) -->
   - [Models](#models)
     - [carModel.ts](#carmodelts)
     - [customerModel.ts](#customermodelts)
@@ -34,48 +34,16 @@
     - [orderModel.ts](#ordermodelts)
     - [serviceModel.ts](#servicemodelts)
   - [API-endpoints](#api-endpoints)
+  - [Database Schema Documentation](#database-schema-documentation)
+  - [Models](#models)
   - [JWT implementation](#jwt-implementation)
 
 - [Summary](#summary)
+- [Run Locally](#run-locally)
 
 ## Introduction
 
-Provide a brief introduction to your project. Explain what it does and its purpose.
-
-## Features
-
-List the key features of your project:
-
-### **App.ts (Main Express App Configuration)**
-
-This file sets up the Express application and incorporates the required middleware for request processing, database connection, CORS, and routing.
-
-#### **Database Connection**
-
-It connects to MongoDB using mongoose and provides error handling for connection errors.
-
-#### **Middlewares**
-
-- `bodyParser`: Parses incoming request bodies.
-- Custom middleware for CORS errors.
-- Routing for different services like authentication, cars, services, orders, and managers.
-- Error handling for 404 and general errors.
-
-### **check-auth.ts (Authentication and Authorization Middlewares)**
-
-This file contains middleware for verifying JWT tokens and checking if a user has an ADMIN role.
-
-#### **verifyToken**
-
-Extracts the token from the headers and verifies it. If valid, the user ID is attached to the request object.
-
-#### **isAdmin**
-
-Checks if the authenticated user has the ADMIN role.
-
-### **Controlers**
-
-
+The Car Service App V2 enhances the user experience in automotive servicing by integrating various roles within a car service ecosystem. It simplifies the process of ordering, managing, and delivering car services through an intuitive interface supported by a robust backend.
 
 ### **Models**
 
@@ -97,7 +65,7 @@ These are mongoose models that represent the data structures in MongoDB. They de
 | `password` | Password of the customer         |
 | `role`     | The role of the user (defaulting to "CUSTOMER") |
 
-#### **userModel.ts**
+#### **mamberModel.ts**
 
 | Property    | Description                     |
 | ----------- | ------------------------------- |
@@ -146,7 +114,6 @@ These are mongoose models that represent the data structures in MongoDB. They de
 | `role`     | The role of the user (defaulting to "CUSTOMER") |
 
 
-####
 
 ### **API-endpoints**
 
@@ -593,9 +560,75 @@ export const verifyJWT = (token: string): any => {
 Our JWT implementation provides a robust method for ensuring secure authentication in our application. Always validate JWTs server-side and never trust information from a client without verification.
 
 
+
+## Database Schema Documentation
+
+This document provides an overview of the MongoDB schema used in the system. Each table represents a collection within the MongoDB database, detailing the fields, data types, and descriptions of their roles within the application.
+
+## Collections
+
+Below are the collections defined in the MongoDB database, along with their respective schemas.
+
+### `Cars`
+| Field  | Type   | Description          | Unique | Required | Default |
+|--------|--------|----------------------|--------|----------|---------|
+| `name` | String | Name of the car      | Yes    | Yes      | N/A     |
+| `brand`| String | Brand of the car     | No     | Yes      | N/A     |
+
+### `Customers`
+| Field     | Type   | Description                             | Unique | Required | Default     |
+|-----------|--------|-----------------------------------------|--------|----------|-------------|
+| `name`    | String | Name of the customer                    | No     | Yes      | N/A         |
+| `email`   | String | Email address of the customer           | Yes    | Yes      | N/A         |
+| `password`| String | Encrypted password for the account      | No     | Yes      | N/A         |
+| `role`    | String | Role of the customer within the system  | No     | No       | "CUSTOMER"  |
+
+### `Members`
+| Field     | Type   | Description                             | Unique | Required | Default     |
+|-----------|--------|-----------------------------------------|--------|----------|-------------|
+| `_id`     | ObjectID | Unique identifier for the user        | Yes    | Yes      | N/A         |
+| `name`    | String | Name of the user                        | No     | Yes      | N/A         |
+| `email`   | String | User's email address                    | Yes    | Yes      | N/A         |
+| `password`| String | Encrypted password for the account      | No     | Yes      | N/A         |
+| `mobile`  | String | Mobile number of the user               | No     | No       | N/A         |
+| `role`    | String | User's role within the system           | No     | No       | "MECHANIC"  |
+| `status`  | String | Mechanic's availability status          | No     | No       | "AVAILABLE" |
+
+### `Orders`
+| Field          | Type     | Description                                     | Unique | Required | Default   |
+|----------------|----------|-------------------------------------------------|--------|----------|-----------|
+| `customerId`   | ObjectID | Reference to the customer placing the order     | No     | Yes      | N/A       |
+| `customerName` | String   | Name of the customer                            | No     | Yes      | N/A       |
+| `carName`      | String   | Name of the car for service                     | No     | Yes      | N/A       |
+| `carNumber`    | String   | License plate of the car                        | No     | Yes      | N/A       |
+| `custAddress`  | String   | Customer's address                              | No     | Yes      | N/A       |
+| `serviceName`  | String   | Type of service requested                       | No     | Yes      | N/A       |
+| `servicePrice` | Number   | Price of the service                            | No     | Yes      | N/A       |
+| `mechanicId`   | ObjectID | Reference to the mechanic assigned to the order | No     | No       | N/A       |
+| `requestedOn`  | Date     | Date when the service was requested             | No     | Yes      | `Date.now`|
+| `deliveredOn`  | Date     | Date when the service was delivered             | No     | No       | N/A       |
+| `status`       | String   | Current status of the order                     | No     | Yes      | N/A       |
+
+### `Services`
+| Field         | Type   | Description                             | Unique | Required | Default                 |
+|---------------|--------|-----------------------------------------|--------|----------|-------------------------|
+| `serviceType` | String | Type of service (e.g., "Cleaning")      | No     | Yes      | N/A                     |
+| `name`        | String | Unique name of the service              | Yes    | Yes      | N/A                     |
+| `price`       | Number | Cost of the service                     | No     | Yes      | N/A                     |
+| `description` | String | Brief description of the service        | No     | Yes      | N/A                     |
+| `timeRequired`| String | Estimated time to complete the service  | No     | Yes      | N/A                     |
+| `where`       | String | Location of service performance         | No     | Yes      | N/A                     |
+
+
+This schema overview represents the current state of the MongoDB collections and their fields as of [last update date]. The schema is subject to change as the application evolves.
+
+
+
 ## **Summary**
 
-Provide a summary of your project and its purpose. You can also include installation instructions, usage examples, and any other relevant information here.
+The Car Service App V2 is not just an upgrade in technology but also an enhancement in operational efficiency and user experience. The app is designed to cater to the diverse needs of the car service industry, enabling all stakeholders to interact in a cohesive and efficient ecosystem.
+
+Stay tuned to this space for any updates or new features that will be rolled out. Your feedback is invaluable to us as we strive to improve and evolve the Car Service App V2.
 
 
 SERVICES FOR EACH ROLE
@@ -611,7 +644,7 @@ CUSTOMERS:
 7. Wash Status: Get the update of car’s wash status: done, in progress or in queue.
 8. My Washes: Users can view the timeline of all car washes that they have carried out
 
-Mechanics: 
+Managers: 
 
 1. Login## Authenctication - server-side JWT (implementation assumption)
 2. Wash Request: Wash Request is sent to the washer along with the user details. The washer can either accept or decline the request..
@@ -620,7 +653,7 @@ Mechanics:
 
 ADMIN: 
 
-1. Washer Management: Add/Edit Washer Details
+1. Washer/Manager Management: Add/Edit Washer Details
 2. Car Management: Add/Edit Car Details
 3. Service Plan Management: Add/Edit Plans and Service Add-ons
 4. Order Management: View Order Details and assign pending requests to washers
