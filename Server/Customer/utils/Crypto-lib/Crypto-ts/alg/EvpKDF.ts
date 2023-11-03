@@ -1,6 +1,6 @@
 import { WordArray } from '../lib/WordArray';
 import { Hasher } from '../lib/Hasher';
-import { MD5 } from '../algo/MD5';
+import { MD5 } from '../alg/MD5';
 
 export interface OptionalEvpKDFConfig {
     keySize?: number;

@@ -25,7 +25,7 @@ const app = express();
  * Handles preflight requests and headers for Cross-Origin Resource Sharing 
  */
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "http://localhost:3001",
 };
 app.use(cors(corsOptions));
 
@@ -44,7 +44,7 @@ const db = mongoose.connection;
 
 /** Log successful database connection */
 db.once("open", () => {
-  console.log("Connected to MongoDB Database");
+  console.log(" - Connected to MongoDB Database");
 });
 
 /** Middleware to parse URL encoded data */

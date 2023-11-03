@@ -74,9 +74,9 @@ export class AES extends BlockCipher {
 
     _nRounds!: number;
 
-    _key!: WordArray;
+    declare _key: WordArray;
 
-    _keyPriorReset!: WordArray;
+    declare _keyPriorReset: WordArray;
 
     _keySchedule!: Array<number>;
 

@@ -48,7 +48,7 @@ const createDefaultUsers = () => {
           });
         });
       }
-      console.log(`Default ${userObj.role} created: admin := { email:= admin@email.com ; password := admin3141592 } \n user := { email:= user@email.com ; password := user3141592 }`);
+      console.log(`Default ${userObj.role} created: \n admin.email:= admin@email.com \n admin.password := admin3141592  \n user := \n user.email := user@email.com \n user.password := user3141592 \n`);
     });
   });
 };

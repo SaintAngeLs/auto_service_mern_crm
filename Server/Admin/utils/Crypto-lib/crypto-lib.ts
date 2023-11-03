@@ -1,1 +1,1 @@
-export * as cryptoLib from './Crypto-ts/crypto';
+export * as cryptoLib from "./Crypto-ts/index";
