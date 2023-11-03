@@ -33,7 +33,7 @@ const orderSchema: MongooseSchema = new mongoose.Schema({
   serviceName: { type: String },
   servicePrice: { type: Number },
   managerId: { type: String },
-  requestedOn: { type: Date, default: Date.now },
+  requestedOn: { type: Date, default: Date.now, index: true },
   deliveredOn: { type: Date },
   status: { type: String },
 });

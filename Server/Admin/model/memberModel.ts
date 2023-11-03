@@ -24,7 +24,7 @@ const userSchema: MongooseSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true, match: /.../ },
   password: { type: String, required: true },
-  mobile: { type: String },
+  mobile: { type: String, index: true },
   role: { type: String, default: "MANAGER" },
   status: { type: String, default: "AVAILABLE" },
 });

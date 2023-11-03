@@ -21,6 +21,7 @@ const customerSchema: MongooseSchema = new mongoose.Schema({
     type: String,
     min: 4,
     max: 20,
+    index: true,
   },
   email: {
     type: String,
