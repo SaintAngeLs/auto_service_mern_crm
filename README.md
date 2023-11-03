@@ -284,7 +284,7 @@ Main end-point: http://localhost:8088/admin/car-func/
 
 Adding the car: http://localhost:8088/admin/car-func/addCar
 
-```json
+```bash
 Car Added: {
   name: 'Car1',
   brand: 'cAR1',
@@ -296,7 +296,7 @@ Car Added: {
 Updating the car: http://localhost:8088/admin/car-func/addCar/updateCar/${carId_car_to_update}
 
 
-```json
+```bash
 Updated Successfully
 Car Added: {
   name: '1Car1',
