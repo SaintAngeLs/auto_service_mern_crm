@@ -1,7 +1,8 @@
+import * as tsCryptoLib from './Crypto-lib/Crypto-ts/src/HmacSHA256';
+import { Base64, Hex, Utf8, Word32Array, Word64Array } from './Crypto-lib/Crypto-ts/src';
 
-
-const secretString = '31415926535898_superSuperSupeSecret%frifsoidjfnakls%Key'; // This should be a very long and complex secret, preferably stored in a secure environment.
-const secret = Hex.parse(secretString);
+const secretString = '31415926535898_superSuperSupcret%frifsoidjfnakls%Key'; // This should be a very long and complex secret, preferably stored in a secure environment.
+const secret: Word32Array = Utf8.parse(secretString);
 
 export const createJWT = (payload: object, expiresIn: number): string => {
   
@@ -23,31 +24,35 @@ export const createJWT = (payload: object, expiresIn: number): string => {
 
   // const signature = cryptoLib.AES.encrypt(encodedHeader + '.' + encodedPayload, secret).toString();
   // return encodedHeader + '.' + encodedPayload + '.' + signature;
-  hmacSHA256
-  const encodedHeader = Uint8Array(
-    libs.converters.stringToBytes(JSON.stringify(header))
-  );
+  
+  const stringifiedHeader = JSON.stringify(header);
+  const encodedHeader = Base64.parse(stringifiedHeader);
+
   const stringifiedPayload = JSON.stringify({
     ...payload,
     exp: Math.floor(Date.now() / 1000) + expiresIn
   });
-  const encodedPayload = libs.base64.fromByteArray(
-    libs.converters.stringToBytes(stringifiedPayload)
-  );
+  const encodedPayload = Base64.parse(stringifiedPayload);
 
-  const signature = libs.crypto.hmacSha256(secret, libs.converters.stringToBytes(encodedHeader + '.' + encodedPayload));
-  const encodedSignature = libs.base64.fromByteArray(signature);
+  const signature = tsCryptoLib.HmacSHA256(encodedHeader + '.' + encodedPayload, secret);
+  const encodedSignature = urlSafeBase64Encode(signature);
 
-  return encodedHeader + '.' + encodedPayload + '.' + encodedSignature;
+  return `${encodedHeader}.${encodedPayload}.${encodedSignature}`;
 };
-};
+
 
 export const verifyJWT = (token: string): any => {
-  const [encodedHeader, encodedPayload, signature] = token.split('.');
+  const parts = token.split('.');
 
-  if (!encodedHeader || !encodedPayload || !signature) {
+  if (parts.length !== 3) {
     throw new Error("Invalid Token");
   }
+
+  // const [encodedHeader, encodedPayload, encodedSignature] = parts;
+
+  // if (!encodedHeader || !encodedPayload || !signature) {
+  //   throw new Error("Invalid Token");
+  // }
 
   // Verify Signature
   // const expectedSignature = cryptoLib.AES.decrypt(encodedHeader + '.' + encodedPayload, secret).toString();
@@ -72,15 +77,22 @@ export const verifyJWT = (token: string): any => {
 
   // return payload;
 
-  const cipherParams = cryptoLib.AES.encrypt(encodedHeader + '.' + encodedPayload, secret);
-  const base64String = cipherParams.toString();
-  const urlSafeExpectedSignature = urlSafeBase64Encode(base64String);
 
-  if (urlSafeExpectedSignature !== signature) {
+  const [encodedHeader, encodedPayload, encodedSignature] = parts;
+
+  if (!encodedHeader || !encodedPayload || !encodedSignature) {
+    throw new Error("Invalid Token");
+  }
+
+  const expectedSignature = tsCryptoLib.HmacSHA256(encodedHeader + '.' + encodedPayload, secret);
+  const expectedEncodedSignature = urlSafeBase64Encode(expectedSignature);
+
+  if (expectedEncodedSignature !== encodedSignature) {
     throw new Error("Invalid Signature");
   }
 
-  const payload = JSON.parse(urlSafeBase64Decode(encodedPayload));
+  const payloadString = urlSafeBase64Decode(encodedPayload).toString();
+  const payload = JSON.parse(payloadString);
 
   if (payload.exp && Date.now() / 1000 > payload.exp) {
     throw new Error("Token Expired");
@@ -90,12 +102,21 @@ export const verifyJWT = (token: string): any => {
 };
 
 
-function urlSafeBase64Encode(str: string): string {
-  return cryptoLib.enc.Base64.parse(str).toString(cryptoLib.enc.Base64);
+function urlSafeBase64Encode(wordArray: Word32Array): string {
+  // Assuming toString(Base64) converts the Word32Array to a Base64 string
+  const base64String = wordArray.toString(Base64); // This needs to be checked against the actual library
+  // Make it URL safe by replacing '+' with '-' and '/' with '_'
+  return base64String.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
-function urlSafeBase64Decode(str: string): string {
-  return cryptoLib.enc.Base64.parse(str).toString(cryptoLib.enc.Utf8);
+function urlSafeBase64Decode(str: string): Word32Array {
+  // Add the required '=' padding back based on the string length
+  const padding = 4 - (str.length % 4);
+  if (padding < 4) {
+    str += "=".repeat(padding);
+  }
+  // Replace URL-safe characters back to the original Base64 characters
+  const base64String = str.replace(/-/g, '+').replace(/_/g, '/');
+  // Assuming parse() converts the Base64 string to Word32Array
+  return Base64.parse(base64String); // This needs to be checked against the actual library
 }
-
-

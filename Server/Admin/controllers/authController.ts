@@ -51,6 +51,7 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
 
     bcrypt.compare(memberInput.password, user.password, (err, response) => {
       if (err || !response) {
+        console.log(" - ERROR: Authentication failed \n")
         return res.status(401).json({
           message: "Authentication Failed",
         });
@@ -66,7 +67,7 @@ export const login = async (req: Request, res: Response, next: NextFunction): Pr
         { userId: user._id },
         3600 // 1 hour with 60 minutes
       );
-
+      console.log("- SUCESS: ADMIN-MEMBER LOGING \n")
       res.status(200).json({
         message: "Authentication Successful",
         userId: user._id,
