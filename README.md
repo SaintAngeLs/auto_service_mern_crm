@@ -532,7 +532,10 @@ In our application, we have implemented our own version of JSON Web Tokens (JWT)
 > Creating a JWT:
 
 ```typescript
-import crypto from 'crypto';
+
+import * as tsCryptoLib from './Crypto-lib/Crypto-ts/src/HmacSHA256';
+import { Base64, Hex, Utf8, Word32Array, Word64Array } from './Crypto-lib/Crypto-ts/src';
+
 
 const secret = '31415926535898_superSuperSecretKey';  // Ensure to keep this secret very secure.
 
@@ -683,7 +686,11 @@ ADMIN:
 ```
 
 ## Auth:
-admin: admin@email.com  admin3141592   |  test@email.com    test3141592   |    
+user      |           email |        password |
+|---------|-----------------|-----------------|
+admin     | admin@email.com | admin3141592    | 
+customer  |  test@email.com |  test3141592    |    
+manager   | user@email.com  |  user3141592    |
 
 ### For Back-End
 
