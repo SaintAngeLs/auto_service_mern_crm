@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import FindOrders from "./FindOrders";
 import MyOrders from "./MyOrders";
 import ManagerNav from "./ManagerNav";
+import ManagerHome from "./ManagerHome";
 
 function manager() {
   return (
