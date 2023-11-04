@@ -21,8 +21,8 @@ export interface IUser extends Document {
 
 const userSchema: MongooseSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true, match: /.../ },
+  name: { type: String, required: true},
+  email: { type: String, required: true, index: true, unique: true, match: /.../ },
   password: { type: String, required: true },
   mobile: { type: String, index: true },
   role: { type: String, default: "MANAGER" },

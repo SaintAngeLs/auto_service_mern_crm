@@ -2,18 +2,41 @@ import { WordArray } from '../lib/WordArray';
 import { Hasher } from '../lib/Hasher';
 import { MD5 } from '../alg/MD5';
 
+/**
+ * An optional configuration object for EvpKDF.
+ * @interface
+ * 
+ * @property {number} [keySize] - The size in words of the key to generate. Default is 128 / 32.
+ * @property {typeof Hasher} [hasher] - The hashing algorithm to use. Default is MD5.
+ * @property {number} [iterations] - The number of iterations to perform. Default is 1.
+ */
 export interface OptionalEvpKDFConfig {
     keySize?: number;
     hasher?: typeof Hasher;
     iterations?: number;
 }
 
+/**
+ * The mandatory configuration object for EvpKDF.
+ * @interface
+ * 
+ * @property {number} keySize - The size in words of the key to generate.
+ * @property {typeof Hasher} hasher - The hashing algorithm to use.
+ * @property {number} iterations - The number of iterations to perform.
+ */
 export interface EvpKDFConfig extends OptionalEvpKDFConfig {
     keySize: number;
     hasher: typeof Hasher;
     iterations: number;
 }
 
+/**
+ * Implementation of the EVP Key Derivation Function as defined by OpenSSL.
+ * 
+ * @class
+ * 
+ * @property {EvpKDFConfig} cfg - The configuration options for key derivation.
+ */
 export class EvpKDF {
     public cfg: EvpKDFConfig;
 

@@ -23,7 +23,6 @@ const carSchema: MongooseSchema = new mongoose.Schema({
   brand: {
       type: String,
       required: true,
-      index: true,
   }
 });
 

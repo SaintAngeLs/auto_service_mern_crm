@@ -35,7 +35,7 @@ const orderSchema: MongooseSchema = new mongoose.Schema({
   managerId: { type: String },
   requestedOn: { type: Date, default: Date.now, index: true },
   deliveredOn: { type: Date },
-  status: { type: String },
+  status: { type: String, index: true},
 });
 
 export default mongoose.model<IOrder>('order', orderSchema);

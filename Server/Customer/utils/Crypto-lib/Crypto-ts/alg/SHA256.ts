@@ -8,9 +8,21 @@ const K: Array<number> = [];
 // Reusable object
 const W: Array<number> = [];
 
+/**
+ * SHA-256 hash algorithm implementation.
+ * 
+ * Inherits all the methods and properties of the Hasher class.
+ * 
+ * @extends {Hasher}
+ */
 export class SHA256 extends Hasher {
     public _hash!: WordArray;
 
+    /**
+     * Resets the SHA256 instance to its initial state, ready for a new hashing operation.
+     * 
+     * Overrides the reset method of the Hasher base class.
+     */
     public reset() {
         // reset core values
         super.reset();
@@ -18,6 +30,12 @@ export class SHA256 extends Hasher {
         this._hash = new WordArray(H.slice(0));
     }
 
+    /**
+     * Processes a block of the message to update the hash's internal state.
+     * 
+     * @param {Array<number>} M - The message represented as an array of 32-bit words.
+     * @param {number} offset - The position in the message where the current block starts.
+     */
     public _doProcessBlock(M: Array<number>, offset: number) {
         // Shortcut
         const Hl = this._hash.words;
@@ -80,6 +98,13 @@ export class SHA256 extends Hasher {
         Hl[7] = (Hl[7] + h) | 0;
     }
 
+    /**
+     * Finalizes the hash and returns the SHA-256 digest.
+     * 
+     * Adds the padding to the data, processes additional blocks if needed, and finalizes the hash.
+     * 
+     * @returns {WordArray} - The final hash value as a WordArray.
+     */
     public _doFinalize(): WordArray {
         const nBitsTotal = this._nDataBytes * 8;
         const nBitsLeft = this._data.sigBytes * 8;

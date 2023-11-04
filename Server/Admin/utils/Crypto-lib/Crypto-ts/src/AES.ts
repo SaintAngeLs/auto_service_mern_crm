@@ -1,3 +1,9 @@
+/** 
+ * This module exports the AES (Advanced Encryption Standard) class which extends the BlockCipher.
+ * It contains the implementation for AES encryption and decryption functionalities.
+ * The module also contains necessary lookup tables and computations for the AES algorithm.
+ */
+
 import {Cipher, CipherProps, PropsWithKey} from "./lib/algorithm/cipher/Cipher";
 import type {Word32Array} from "./lib/Word32Array";
 import {BlockCipher, BlockCipherProps} from "./lib/algorithm/cipher/BlockCipher";
@@ -20,7 +26,8 @@ const INV_SUB_MIX_3: number[] = [];
 (function computeLookupTables() {
   // Compute double table
   const d: number[] = [];
-  for (let i = 0; i < 256; i++) {
+  for (let i = 0; i < 256; i++) 
+  {
     if (i < 128) {
       d[i] = i << 1;
     } else {
@@ -31,7 +38,8 @@ const INV_SUB_MIX_3: number[] = [];
   // Walk GF(2^8)
   let x = 0;
   let xi = 0;
-  for (let i = 0; i < 256; i++) {
+  for (let i = 0; i < 256; i++) 
+  {
     // Compute sbox
     let sx = xi ^ (xi << 1) ^ (xi << 2) ^ (xi << 3) ^ (xi << 4);
     sx = (sx >>> 8) ^ (sx & 0xff) ^ 0x63;
@@ -73,6 +81,9 @@ const RCON = [0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36];
 export interface AESProps extends BlockCipherProps {
 }
 
+/**
+ * AES class is an implementation of the AES encryption algorithm.
+ */
 export class AES extends BlockCipher {
   public static readonly keySize = 256/32;
   protected _props: PropsWithKey<AESProps>;
@@ -81,6 +92,10 @@ export class AES extends BlockCipher {
   protected _keySchedule: number[] = [];
   protected _invKeySchedule: number[] = [];
   
+  /**
+   * The AES class constructor.
+   * @param {PropsWithKey<AESProps>} props The properties including the key, mode of operation, padding, etc.
+   */
   public constructor(props: PropsWithKey<AESProps>) {
     super(props);
     this._props = props;
@@ -88,6 +103,9 @@ export class AES extends BlockCipher {
     this._doReset();
   }
   
+   /**
+   * Initializes or resets the internal state of the cipher to start encryption or decryption.
+   */
   protected _doReset() {
     let t;
   
@@ -109,7 +127,8 @@ export class AES extends BlockCipher {
   
     // Compute key schedule
     const keySchedule: number[] = this._keySchedule = [];
-    for (let ksRow = 0; ksRow < ksRows; ksRow++) {
+    for (let ksRow = 0; ksRow < ksRows; ksRow++) 
+    {
       if (ksRow < keySize) {
         keySchedule[ksRow] = keyWords[ksRow];
       }
@@ -137,7 +156,8 @@ export class AES extends BlockCipher {
   
     // Compute inv key schedule
     this._invKeySchedule = [];
-    for (let invKsRow = 0; invKsRow < ksRows; invKsRow++) {
+    for (let invKsRow = 0; invKsRow < ksRows; invKsRow++) 
+    {
       const ksRow = ksRows - invKsRow;
       
       if (invKsRow % 4) {
@@ -157,10 +177,20 @@ export class AES extends BlockCipher {
     }
   }
   
+  /**
+   * Encrypts a block of data.
+   * @param {number[]} words The plaintext represented as an array of words.
+   * @param {number} offset The offset within the array where the block starts.
+   */
   public encryptBlock(words: number[], offset: number) {
     this._doCryptBlock(words, offset, this._keySchedule, SUB_MIX_0, SUB_MIX_1, SUB_MIX_2, SUB_MIX_3, SBOX);
   }
   
+  /**
+   * Decrypts a block of data.
+   * @param {number[]} words The ciphertext represented as an array of words.
+   * @param {number} offset The offset within the array where the block starts.
+   */
   public decryptBlock(words: number[], offset: number) {
     // Swap 2nd and 4th rows
     let t = words[offset + 1];
@@ -175,6 +205,17 @@ export class AES extends BlockCipher {
     words[offset + 3] = t;
   }
   
+  /**
+   * Processes the data block through the AES algorithm.
+   * @param {number[]} words The data block represented as an array of words.
+   * @param {number} offset The offset within the array where the block starts.
+   * @param {number[]} keySchedule The key schedule array.
+   * @param {number[]} subMix0 S-box transformation for column 0.
+   * @param {number[]} subMix1 S-box transformation for column 1.
+   * @param {number[]} subMix2 S-box transformation for column 2.
+   * @param {number[]} subMix3 S-box transformation for column 3.
+   * @param {number[]} sBox The S-box used for subBytes step.
+   */
   protected _doCryptBlock(
     words: number[],
     offset: number,
@@ -198,7 +239,8 @@ export class AES extends BlockCipher {
     let ksRow = 4;
   
     // Rounds
-    for (let round = 1; round < nRounds; round++) {
+    for (let round = 1; round < nRounds; round++) 
+    {
       // Shift rows, sub bytes, mix columns, add round key
       const _s0 = subMix0[s0 >>> 24] ^ subMix1[(s1 >>> 16) & 0xff]
         ^ subMix2[(s2 >>> 8) & 0xff] ^ subMix3[s3 & 0xff] ^ keySchedule[ksRow++];
@@ -234,11 +276,10 @@ export class AES extends BlockCipher {
   }
   
   /**
-   * Creates this cipher in encryption mode.
-   *
-   * @param {Word32Array} key The key.
-   * @param {Partial<CipherProps>?} props (Optional) The configuration options to use for this operation.
-   * @return {Cipher} A cipher instance.
+   * Creates an AES cipher instance for encryption.
+   * @param {Word32Array} key The encryption key as a Word32Array.
+   * @param {Partial<CipherProps>?} props Optional configuration options.
+   * @return {Cipher} The cipher instance for encryption.
    * @example
    *   var cipher = AES.createEncryptor(keyWordArray, { iv: ivWordArray });
    */
@@ -282,11 +323,11 @@ export class AES extends BlockCipher {
   }
   
   /**
-   * Encrypt a encrypted message with key
-   *
-   * @param {CipherParams|string} cipherParams
-   * @param {Word32Array|string} key
-   * @param {Partial<AESProps>?} props
+   * Performs a password-based decryption of data using the AES algorithm.
+   * @param {string} password The password to derive the decryption key from.
+   * @param {CipherParams} ciphertext The ciphertext to decrypt.
+   * @param {CipherParams?} cfg Optional decryption configuration parameters.
+   * @return {Word32Array} The decrypted plaintext.
    * @example
    *   var encryptedMessage = AES.decrypt(cipherProps, "pass");
    */

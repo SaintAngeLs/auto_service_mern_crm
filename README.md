@@ -16,7 +16,7 @@
 - [NodeJS](https://nodejs.org/en/)
 - [ExpressJS](https://expressjs.com/)
 - [MongoDB Atlas](https://www.mongodb.com/cloud)
-- [JsonWebToken](https://github.com/auth0/node-jsonwebtoken#readme)
+<!-- - [JsonWebToken](https://github.com/auth0/node-jsonwebtoken#readme) -->
 
 
 # Documentation

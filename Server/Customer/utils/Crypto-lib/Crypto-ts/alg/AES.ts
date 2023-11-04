@@ -1,3 +1,18 @@
+/**
+ * AES (Advanced Encryption Standard) is a symmetric block cipher standardized by NIST.
+ * It has been adopted by the U.S. government and is now used worldwide. It supersedes
+ * the Data Encryption Standard (DES), which was published in 1977. AES is based on the
+ * Rijndael cipher developed by two Belgian cryptographers, Vincent Rijmen and Joan Daemen,
+ * who submitted a proposal to NIST during the AES selection process.
+ *
+ * This module provides an implementation of AES encryption and decryption.
+ *
+ * The implementation includes:
+ * - The AES block cipher class itself (`AES`).
+ * - Precomputed lookup tables for efficient encryption and decryption.
+ * - The `encryptBlock` and `decryptBlock` methods for processing data blocks.
+ */
+
 import { BlockCipher } from '../lib/BlockCipher';
 import { WordArray } from '../lib/WordArray';
 import { BufferedBlockAlgorithmConfig } from '../lib/BufferedBlockAlgorithmConfig';
@@ -68,6 +83,9 @@ const INV_SUB_MIX_3: Array<number> = [];
 // Precomputed Rcon lookup
 const RCON = [0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36];
 
+/**
+ * AES block cipher implementation.
+ */
 export class AES extends BlockCipher {
     // 256 / 32
     public static keySize = 8;
@@ -82,10 +100,20 @@ export class AES extends BlockCipher {
 
     _invKeySchedule!: Array<number>;
 
+    /**
+     * Initializes a newly created AES object.
+     * @param {number} xformMode - The cipher transformation mode.
+     * @param {WordArray} key - The key to be used for encryption or decryption.
+     * @param {BufferedBlockAlgorithmConfig} [cfg] - The configuration options to use for this block algorithm.
+     */
     constructor(xformMode: number, key: WordArray, cfg?: BufferedBlockAlgorithmConfig) {
         super(xformMode, key, cfg);
     }
 
+    /**
+     * Resets internal state of the cipher to its initial state.
+     * It's useful for repetitive operations using the same key.
+     */
     reset() {
         // reset core values
         super.reset();
@@ -153,10 +181,20 @@ export class AES extends BlockCipher {
         }
     }
 
+    /**
+     * Encrypts a block of data.
+     * @param {number[]} M - The plaintext message to be encrypted.
+     * @param {number} offset - The offset in the message array where the block starts.
+     */
     encryptBlock(M: Array<number>, offset: number) {
         this._doCryptBlock(M, offset, this._keySchedule, SUB_MIX_0, SUB_MIX_1, SUB_MIX_2, SUB_MIX_3, SBOX);
     }
 
+    /**
+     * Decrypts a block of data.
+     * @param {number[]} M - The ciphertext message to be decrypted.
+     * @param {number} offset - The offset in the message array where the block starts.
+     */
     decryptBlock(M: Array<number>, offset: number) {
         // Swap 2nd and 4th rows
         let t = M[offset + 1];
@@ -171,6 +209,17 @@ export class AES extends BlockCipher {
         M[offset + 3] = t;
     }
 
+    /**
+     * Processes the data block with encryption or decryption operations.
+     * @param {number[]} M - The data block to be processed.
+     * @param {number} offset - The offset in the data block.
+     * @param {number[]} keySchedule - The key schedule to use for this operation.
+     * @param {number[]} subMix0 - Lookup table for subMix transformation.
+     * @param {number[]} subMix1 - Lookup table for subMix transformation.
+     * @param {number[]} subMix2 - Lookup table for subMix transformation.
+     * @param {number[]} subMix3 - Lookup table for subMix transformation.
+     * @param {number[]} sBox - The S-box lookup table.
+     */
     _doCryptBlock(
         M: Array<number>,
         offset: number,
