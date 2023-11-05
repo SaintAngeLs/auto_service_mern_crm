@@ -26,7 +26,7 @@ const userSchema: MongooseSchema = new MongooseSchema({
     email: {
         type: String,
         required: true,
-        unique: true,
+        unique: true, // creating the unique index in the mongo DB
         match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
     },
     password: { type: String, required: true },
@@ -35,5 +35,9 @@ const userSchema: MongooseSchema = new MongooseSchema({
     status: { type: String },
 });
 
+// Adding the single field inxes on the status
+userSchema.index({ status: 1 });
+
 const MemberModel = mongoose.model<IMember>('member', userSchema);
+
 export default MemberModel;
