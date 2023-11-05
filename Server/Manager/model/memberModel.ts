@@ -32,7 +32,7 @@ const userSchema: MongooseSchema = new MongooseSchema({
     password: { type: String, required: true },
     role: { type: String },
     mobile: { type: String },
-    status: { type: String },
+    status: { type: String , index: true}, // creating the index for the status
 });
 
 // Adding the single field inxes on the status
