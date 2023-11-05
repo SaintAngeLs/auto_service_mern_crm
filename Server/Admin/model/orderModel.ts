@@ -25,17 +25,21 @@ export interface IOrder extends Document {
 }
 
 const orderSchema: MongooseSchema = new mongoose.Schema({
-  customerId: { type: String },
+  customerId: { type: String, index: true }, // Adding the index for the customerId
   customerName: { type: String },
   carName: { type: String },
-  carNumber: { type: String },
+  carNumber: { type: String, index: true }, // Adding the index for the carNumber
   custAddress: { type: String, max: 40 },
   serviceName: { type: String },
   servicePrice: { type: Number },
-  managerId: { type: String },
-  requestedOn: { type: Date, default: Date.now, index: true },
+  managerId: { type: String, index: true }, // Adding the index for the managerId
+  requestedOn: { type: Date, default: Date.now, index: true }, // Add the index on requestedOn
   deliveredOn: { type: Date },
-  status: { type: String, index: true},
+  status: { type: String, index: true}, // Adding the index for the status
 });
+
+// Create compound indexes if there are queries that will benefit from these
+// orderSchema.index({ customerId: 1, status: 1 });
+// orderSchema.index({ managerId: 1, status: 1 });
 
 export default mongoose.model<IOrder>('order', orderSchema);
