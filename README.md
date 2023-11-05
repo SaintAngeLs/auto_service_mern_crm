@@ -74,8 +74,8 @@ These are mongoose models that represent the data structures in MongoDB. They de
 | `email`     | Email of the user                |
 | `password`  | Password of the user             |
 | `mobile`    | Mobile number of the user        |
-| `role`      | The role of the user (defaulting to "MECHANIC") |
-| `status`    | The availability status of the mechanic (defaulting to "AVAILABLE") |
+| `role`      | The role of the user (defaulting to "MANGER") |
+| `status`    | The availability status of the manager (defaulting to "AVAILABLE") |
 
 #### **orderModel.ts**
 
@@ -88,7 +88,7 @@ These are mongoose models that represent the data structures in MongoDB. They de
 | `custAddress`    | Address of the customer         |
 | `serviceName`    | The type of service requested   |
 | `servicePrice`   | The price of the requested service |
-| `mechanicId`     | ID of the mechanic assigned to the order |
+| `managerId`      | ID of the manager assigned to the order |
 | `requestedOn`    | Date when the service was requested |
 | `deliveredOn`    | Date when the service was completed |
 | `status`         | Status of the order (e.g., "Pending", "Completed") |
@@ -132,7 +132,7 @@ Login as a memeber, login as a memeber and logint as a user respectively
 - **Payload:** `{ email, password }`
 - **Response:** Returns user data and a token. Stores user data to localStorage.
 
- Register Mechanic (POST)
+ Register Manager (POST)
 
 - **Endpoint:** `/register`
 - **Payload:** `{ name, email, password, mobile }`
@@ -160,14 +160,14 @@ Login
 }
 ```
 
-#### MECHANIC login
+#### MANAGER login
 
 ```bash
 Login
 {
   role: 'CUSTOMER',
   _id: 651f30fc21f4ce7d8c0cd0d5,
-  name: 'Mechanic',
+  name: 'Manager',
   email: 'user@email.com',
   password: '$2b$10$1t/PNFHPjJdlgjRsCmAgkO1dTI4vu/rdmljRAuW1OO34SzURwLxIq',
   __v: 0
@@ -453,28 +453,28 @@ Admin Orders Endpoint: http://localhost:8010/admin/order/findPlacedOrder
   {
     "orderId": "1",
     "customerId": "12345",
-    "mechanicId": null,
+    "managerId": null,
     "orderStatus": "Placed",
     "createdAt": "2023-10-10T12:00:00Z"
   },
   {
     "orderId": "2",
     "customerId": "54321",
-    "mechanicId": null,
+    "managerId": null,
     "orderStatus": "Placed",
     "createdAt": "2023-10-11T14:30:00Z"
   }
 
 ```
 
-#### Assign Order to Mechanic
-To assign an order to a mechanic, make a PATCH request to the following endpoint:
+#### Assign Order to Manager
+To assign an order to a manager, make a PATCH request to the following endpoint:
 
 Endpoint: 'http://localhost:8010/admin/order/updateOrder/:orderId'
 
 ```json
 {
-  "mechanicId": "exampleMechanicId"
+  "managerId": "exampleManagerId"
 }
 
 ```
@@ -483,7 +483,7 @@ Response:
 
 ```json
 {
-  "message": "Order assigned to mechanic successfully."
+  "message": "Order assigned to manager successfully."
 }
 
 
@@ -500,14 +500,14 @@ Response:
 {
     "orderId": "3",
     "customerId": "67890",
-    "mechanicId": "mechanic314",
+    "mangerId": "manger314",
     "orderStatus": "Completed",
     "completedAt": "2023-10-12T15:45:00Z"
   },
   {
     "orderId": "4",
     "customerId": "98765",
-    "mechanicId": "mechanic314",
+    "managerId": "manager314",
     "orderStatus": "Completed",
     "completedAt": "2023-10-13T10:15:00Z"
   }
@@ -598,8 +598,8 @@ Below are the collections defined in the MongoDB database, along with their resp
 | `email`   | String | User's email address                    | Yes    | Yes      | N/A         |
 | `password`| String | Encrypted password for the account      | No     | Yes      | N/A         |
 | `mobile`  | String | Mobile number of the user               | No     | No       | N/A         |
-| `role`    | String | User's role within the system           | No     | No       | "MECHANIC"  |
-| `status`  | String | Mechanic's availability status          | No     | No       | "AVAILABLE" |
+| `role`    | String | User's role within the system           | No     | No       | "MANAGER"  |
+| `status`  | String | Manager's availability status          | No     | No       | "AVAILABLE" |
 
 ### `Orders`
 | Field          | Type     | Description                                     | Unique | Required | Default   |
@@ -611,7 +611,7 @@ Below are the collections defined in the MongoDB database, along with their resp
 | `custAddress`  | String   | Customer's address                              | No     | Yes      | N/A       |
 | `serviceName`  | String   | Type of service requested                       | No     | Yes      | N/A       |
 | `servicePrice` | Number   | Price of the service                            | No     | Yes      | N/A       |
-| `mechanicId`   | ObjectID | Reference to the mechanic assigned to the order | No     | No       | N/A       |
+| `managerId`   | ObjectID | Reference to the manager assigned to the order | No     | No       | N/A       |
 | `requestedOn`  | Date     | Date when the service was requested             | No     | Yes      | `Date.now`|
 | `deliveredOn`  | Date     | Date when the service was delivered             | No     | No       | N/A       |
 | `status`       | String   | Current status of the order                     | No     | Yes      | N/A       |
@@ -703,7 +703,7 @@ manager   | user@email.com  |  user3141592    |
 ```
 - There are 4 Microservices
 - Inside each Microservice a dbConfig.js file is there in config folder. Inside that you have to provide your database credentials.
-- Install dependencies for each Microservice (Admin, Customer, Mechaninc, Order).
+- Install dependencies for each Microservice (Admin, Customer, Manager, Order).
 
 ```bash
   cd Admin
@@ -726,8 +726,8 @@ nvm use 18 && npm install
 ADMIN user_name: admin@email.com
 ADMIN password: admin3141592
 
-MECHANIC user_name: user@email.com
-MECHANIC password: user3141592
+MANAGER user_name: user@email.com
+MANAGER password: user3141592
 
 CUSTOMER user_name: test@email.com
 CUSTOMER password: test3141592
