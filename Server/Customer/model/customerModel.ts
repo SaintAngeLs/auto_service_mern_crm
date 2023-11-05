@@ -32,4 +32,9 @@ const customerSchema: MongooseSchema = new mongoose.Schema({
     },
 });
 
+// Impoertant examples of the indexes creation in the schema:
+// customerSchema.index({ fieldname: 1 }); // For ascending order
+// customerSchema.index({ fieldname: -1 }); // For descending order
+
+
 export default mongoose.model<ICustomer>('customer', customerSchema);

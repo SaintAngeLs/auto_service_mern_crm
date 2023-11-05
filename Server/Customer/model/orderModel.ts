@@ -37,4 +37,6 @@ const orderSchema: MongooseSchema = new mongoose.Schema({
     },
 });
 
+orderSchema.index({ customerId: 1, managerId: 1, status: 1 });
+
 export default mongoose.model<IOrder>('order', orderSchema);
