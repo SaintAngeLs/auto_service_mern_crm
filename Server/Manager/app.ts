@@ -30,6 +30,7 @@ mongoose.connect(mongoDBDriverConnectionString, {
 .then(async () => {
   console.log("Connected to MongoDB");
   await setupManagerDatabaseIndexes(); 
+  console.log("Creating the indexes... ");
 })
 .catch((err) => {
   console.error("Database Connection Error: " + err);
