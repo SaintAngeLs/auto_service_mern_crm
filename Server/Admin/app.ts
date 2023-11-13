@@ -18,6 +18,9 @@ import serviceRoutes from './services/autoWashServices';
 import orderRoutes from './services/orderServices';
 import managerRoutes from './services/managerServices';
 
+
+// Set up the database indexes
+import { setupDatabaseIndexes } from './utils/setupDatabaseIndexes'
 const app = express();
 
 // Set CORS options
@@ -28,9 +31,14 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Connect to MongoDB
-mongoose.connect(mongoDBDriverConnectionString).catch((err: Error) => {
-  console.log("Database Connection Error:", err.message);
-});
+mongoose.connect(mongoDBDriverConnectionString)
+  .then(async () => {
+    console.log('Connected to MongoDB');
+    await setupDatabaseIndexes(); 
+  })
+  .catch((err: Error) => {
+    console.error("Database Connection Error:", err.message);
+  });
 
 let db = mongoose.connection;
 
@@ -39,6 +47,7 @@ db.once("open", function () {
   console.log("Connected to MongoDb Database");
   // Create default users once the database is connected: with the ADMIN and the CUSTOMER roles
   createDefaultUsers();
+  console.log("Created indexes")
 });
 
 // Use body-parser middleware

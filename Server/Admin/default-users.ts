@@ -16,7 +16,16 @@ interface User {
  * parsed correctly. Function handle the situation in the case the password hashing is not sucessfull
  * @return function has the type of the void: it populdates the database with the default users unly
  */
-const createDefaultUsers = () => {
+const createDefaultUsers = async () => {
+
+  try {
+    await memberModel.collection.createIndex({ email: 1 }, { unique: true });
+    await memberModel.collection.createIndex({ role: 1, status: 1 });
+    console.log('Indexes ensured on the member model.');
+  } catch (error) {
+    console.error('Error creating indexes:', error);
+    throw error; // Stop the function if indexes cannot be created
+  }
 
   // Array of default users
   const users: User[] = [

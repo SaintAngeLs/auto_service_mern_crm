@@ -29,6 +29,8 @@ const userSchema: MongooseSchema = new mongoose.Schema({
   status: { type: String, default: "AVAILABLE", index: true }, // The index of the status
 });
 
+
+
 userSchema.index({ role: 1, status: 1 });
 
 export default mongoose.model<IUser>('member', userSchema);

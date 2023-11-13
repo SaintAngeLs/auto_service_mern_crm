@@ -12,7 +12,7 @@ import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
 import crypto from 'crypto';
 
-import Member from '../model/memberModel'; // Assuming memberModel.ts exports a type or interface Member
+import Member from '../model/memberModel'; 
 import {secretKey} from '../utils/authConfig'; 
 
 // The Jwt is implemented in the usils: if there is a need to use the old version, uncommed the ```bash const token = ... ```
