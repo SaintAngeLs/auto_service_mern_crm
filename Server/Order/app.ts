@@ -11,6 +11,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import orderRoutes from './services/orderServices';
 import { mongoDBDriverConnectionString } from './utils/dbConnection';
+import { setupOrderDatabaseIndexes } from './utils/setupDatabaseIndexes';
 
 
 class ExtendedError extends Error {
@@ -27,11 +28,18 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Database Connection
-mongoose.connect(
-  mongoDBDriverConnectionString,
-  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }
-).catch((err: Error) => {
-  console.log(`Database Connection Error: ${err.message}`);
+mongoose.connect(mongoDBDriverConnectionString, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+})
+.then(async () => {
+  console.log('Connected to MongoDB');
+  console.log('Index Creating ...')
+  await setupOrderDatabaseIndexes(); 
+})
+.catch((err: Error) => {
+  console.error(`Database Connection Error: ${err.message}`);
 });
 
 const db = mongoose.connection;

@@ -1,7 +1,7 @@
 // setupManagerDatabaseIndexes.ts
 
-import Member from '../model/memberModel'; // Import the Member model
-import Order from '../model/orderModel'; // Import the Order model
+import Member from '../model/memberModel'; 
+import Order from '../model/orderModel'; 
 
 export const setupManagerDatabaseIndexes = async () => {
   try {

@@ -16,6 +16,7 @@ import { mongoDBDriverConnectionString } from "./utils/dbConnection";
 
 /** Middleware for handling non-matched routes */
 import { Request, Response, NextFunction } from 'express';
+import { setupCustomerDatabaseIndexes } from "./utils/setupCustomerDatabaseIndexes";
 
 
 const app = express();
@@ -36,8 +37,13 @@ mongoose
     useUnifiedTopology: true,
     useCreateIndex: true,
   })
+  .then(async () => {
+    console.log('Connected to MongoDB');
+    await setupCustomerDatabaseIndexes();
+    console.log('Index creating... '); 
+  })
   .catch((err) => {
-    console.error("Database Connection Error: ", err);
+    console.error(`Database Connection Error: ${err.message}`);
   });
 
 const db = mongoose.connection;
