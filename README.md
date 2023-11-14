@@ -37,7 +37,7 @@
   - [Database Schema Documentation](#database-schema-documentation)
   - [Models](#models)
   - [JWT implementation](#jwt-implementation)
-
+- [Coverages](#coverages)
 - [Summary](#summary)
 - [Run Locally](#run-locally)
 
@@ -628,6 +628,15 @@ Below are the collections defined in the MongoDB database, along with their resp
 
 
 This schema overview represents the current state of the MongoDB collections and their fields as of [last update date]. The schema is subject to change as the application evolves.
+
+## **Coverages**
+
+`Admin` microservice coverage status:
+
+![Coverage Status](./Server/Admin/coverage_images/Screenshot_20231114_192625.png)
+
+
+
 
 
 
