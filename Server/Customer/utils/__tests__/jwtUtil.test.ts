@@ -3,7 +3,7 @@ import { createJWT, verifyJWT } from '../jwtUtil';
 describe('JWT Utilities', () => {
   const payload = { userId: '123' };
   const expiresIn = 60; // expiresIn time in seconds
-  let token;
+  let token: any;
 
   beforeAll(() => {
     // Mock Date.now to return a fixed timestamp
@@ -29,7 +29,7 @@ describe('JWT Utilities', () => {
   });
 
   it('should throw an error for an invalid JWT', () => {
-    const invalidToken = 'invalid.token.signature';
+    const invalidToken = 'invalid.token';
     expect(() => {
       verifyJWT(invalidToken);
     }).toThrow("Invalid Token");

@@ -26,8 +26,16 @@ export const createJWT = (payload: object, expiresIn: number): string => {
 };
 
 export const verifyJWT = (token: string): any => {
+
+  const parts = token.split('.');
+  if (parts.length !== 3) {
+    throw new Error("Invalid Token");
+  }
+
+  
   const [encodedHeader, encodedPayload, signature] = token.split('.');
 
+  
   if (!encodedHeader || !encodedPayload || !signature) {
     throw new Error("Invalid Token");
   }
