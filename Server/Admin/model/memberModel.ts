@@ -21,12 +21,16 @@ export interface IUser extends Document {
 
 const userSchema: MongooseSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true, match: /.../ },
+  name: { type: String, required: true},
+  email: { type: String, required: true, index: true, unique: true, match: /.../ }, // the index for the email
   password: { type: String, required: true },
-  mobile: { type: String },
-  role: { type: String, default: "MANAGER" },
-  status: { type: String, default: "AVAILABLE" },
+  mobile: { type: String, index: true}, // The index of the mobile
+  role: { type: String, default: "MANAGER",  index: true},
+  status: { type: String, default: "AVAILABLE", index: true }, // The index of the status
 });
+
+
+
+userSchema.index({ role: 1, status: 1 });
 
 export default mongoose.model<IUser>('member', userSchema);

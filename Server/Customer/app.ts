@@ -16,6 +16,7 @@ import { mongoDBDriverConnectionString } from "./utils/dbConnection";
 
 /** Middleware for handling non-matched routes */
 import { Request, Response, NextFunction } from 'express';
+import { setupCustomerDatabaseIndexes } from "./utils/setupCustomerDatabaseIndexes";
 
 
 const app = express();
@@ -25,7 +26,7 @@ const app = express();
  * Handles preflight requests and headers for Cross-Origin Resource Sharing 
  */
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "http://localhost:3001",
 };
 app.use(cors(corsOptions));
 
@@ -36,15 +37,20 @@ mongoose
     useUnifiedTopology: true,
     useCreateIndex: true,
   })
+  .then(async () => {
+    console.log('Connected to MongoDB');
+    await setupCustomerDatabaseIndexes();
+    console.log('Index creating... '); 
+  })
   .catch((err) => {
-    console.error("Database Connection Error: ", err);
+    console.error(`Database Connection Error: ${err.message}`);
   });
 
 const db = mongoose.connection;
 
 /** Log successful database connection */
 db.once("open", () => {
-  console.log("Connected to MongoDB Database");
+  console.log(" - Connected to MongoDB Database");
 });
 
 /** Middleware to parse URL encoded data */

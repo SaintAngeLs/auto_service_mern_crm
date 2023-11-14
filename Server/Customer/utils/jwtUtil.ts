@@ -1,4 +1,7 @@
 import crypto from 'crypto';
+/** 
+ *  @note The Crypto library is implemented only in the Admin Microservice
+ */
 
 const secret = '31415926535898_superSuperSuperSuperSuperSuperSuperSecret%frifsoidjfnakls%Key'; // This should be a very long and complex secret, preferably stored in a secure environment.
 
@@ -23,8 +26,16 @@ export const createJWT = (payload: object, expiresIn: number): string => {
 };
 
 export const verifyJWT = (token: string): any => {
+
+  const parts = token.split('.');
+  if (parts.length !== 3) {
+    throw new Error("Invalid Token");
+  }
+
+  
   const [encodedHeader, encodedPayload, signature] = token.split('.');
 
+  
   if (!encodedHeader || !encodedPayload || !signature) {
     throw new Error("Invalid Token");
   }

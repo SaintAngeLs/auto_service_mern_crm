@@ -23,18 +23,23 @@ interface IOrder extends Document {
 }
 
 const orderSchema: MongooseSchema = new MongooseSchema({
-    customerId: { type: String },
+    customerId: { type: String, index: true }, // index for the customerID
     customerName: { type: String },
     carName: { type: String },
     carNumber: { type: String },
     custAddress: { type: String, max: 40 },
     serviceName: { type: String },
     servicePrice: { type: Number },
-    managerId: { type: String },
+    managerId: { type: String, index: true }, // index for managerID
     requestedOn: { type: Date, default: Date.now() },
     deliveredOn: { type: Date },
-    status: { type: String },
+    status: { type: String,  index: true }, // Index for status
 });
 
+
+// Create a compound index for frequently query on multiple fields
+orderSchema.index({ customerId: 1, status: 1, managerId: 1 });
+
 const OrderModel = mongoose.model<IOrder>('order', orderSchema);
+
 export default OrderModel;

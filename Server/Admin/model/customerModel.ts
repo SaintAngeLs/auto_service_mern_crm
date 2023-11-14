@@ -21,6 +21,7 @@ const customerSchema: MongooseSchema = new mongoose.Schema({
     type: String,
     min: 4,
     max: 20,
+    index: true, // Adding the Index for the name
   },
   email: {
     type: String,
@@ -31,6 +32,7 @@ const customerSchema: MongooseSchema = new mongoose.Schema({
   role: {
     type: String,
     default: "CUSTOMER",
+    index: true, // Adding the index for the status
   },
 
 });

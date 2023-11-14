@@ -82,7 +82,7 @@ export const updateOrder = (req: Request, res: Response): void => {
  * @param res Express response object used to send responses to the client.
  */
 export const findMyOrders = (req: Request, res: Response): void => {
-  OrderModel.find({ mmanagerId: req.params.thisManagerId })
+  OrderModel.find({ managerId: req.params.thisManagerId })
     .exec()
     .then((response: any[]) => { // Replace `any` with the appropriate type of your order model.
       if (response.length === 0) {

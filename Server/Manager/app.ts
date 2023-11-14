@@ -12,11 +12,12 @@ import cors from "cors";
 import accountRoutes from "./services/accountServices";
 import orderRoutes from "./services/orderServices";
 import { mongoDBDriverConnectionString } from "./utils/dbConnection";
+import { setupManagerDatabaseIndexes } from "./utils/setupDatabaseIndexes";
 
 const app = express();
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "http://localhost:3001",
 };
 
 app.use(cors(corsOptions));
@@ -26,8 +27,13 @@ mongoose.connect(mongoDBDriverConnectionString, {
   useUnifiedTopology: true,
   useCreateIndex: true,
 })
+.then(async () => {
+  console.log("Connected to MongoDB");
+  await setupManagerDatabaseIndexes(); 
+  console.log("Creating the indexes... ");
+})
 .catch((err) => {
-  console.log("Database Connection Error: " + err);
+  console.error("Database Connection Error: " + err);
 });
 
 const db = mongoose.connection;

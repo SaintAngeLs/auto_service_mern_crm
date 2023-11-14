@@ -16,7 +16,7 @@
 - [NodeJS](https://nodejs.org/en/)
 - [ExpressJS](https://expressjs.com/)
 - [MongoDB Atlas](https://www.mongodb.com/cloud)
-- [JsonWebToken](https://github.com/auth0/node-jsonwebtoken#readme)
+<!-- - [JsonWebToken](https://github.com/auth0/node-jsonwebtoken#readme) -->
 
 
 # Documentation
@@ -25,8 +25,8 @@
 
 - [Introduction](#introduction)
 - [Backend Components and API end points](#features)
-  - [App.ts (Main Express App Configuration)](#appts-main-express-app-configuration)
-  - [Authentication and Authorization Middlewares](#check-authts-authentication-and-authorization-middlewares)
+  <!-- - [App.ts (Main Express App Configuration)](#appts-main-express-app-configuration)
+  - [Authentication and Authorization Middlewares](#check-authts-authentication-and-authorization-middlewares) -->
   - [Models](#models)
     - [carModel.ts](#carmodelts)
     - [customerModel.ts](#customermodelts)
@@ -34,48 +34,16 @@
     - [orderModel.ts](#ordermodelts)
     - [serviceModel.ts](#servicemodelts)
   - [API-endpoints](#api-endpoints)
+  - [Database Schema Documentation](#database-schema-documentation)
+  - [Models](#models)
   - [JWT implementation](#jwt-implementation)
-
+- [Coverages](#coverages)
 - [Summary](#summary)
+- [Run Locally](#run-locally)
 
 ## Introduction
 
-Provide a brief introduction to your project. Explain what it does and its purpose.
-
-## Features
-
-List the key features of your project:
-
-### **App.ts (Main Express App Configuration)**
-
-This file sets up the Express application and incorporates the required middleware for request processing, database connection, CORS, and routing.
-
-#### **Database Connection**
-
-It connects to MongoDB using mongoose and provides error handling for connection errors.
-
-#### **Middlewares**
-
-- `bodyParser`: Parses incoming request bodies.
-- Custom middleware for CORS errors.
-- Routing for different services like authentication, cars, services, orders, and managers.
-- Error handling for 404 and general errors.
-
-### **check-auth.ts (Authentication and Authorization Middlewares)**
-
-This file contains middleware for verifying JWT tokens and checking if a user has an ADMIN role.
-
-#### **verifyToken**
-
-Extracts the token from the headers and verifies it. If valid, the user ID is attached to the request object.
-
-#### **isAdmin**
-
-Checks if the authenticated user has the ADMIN role.
-
-### **Controlers**
-
-
+The Car Service App V2 enhances the user experience in automotive servicing by integrating various roles within a car service ecosystem. It simplifies the process of ordering, managing, and delivering car services through an intuitive interface supported by a robust backend.
 
 ### **Models**
 
@@ -97,7 +65,7 @@ These are mongoose models that represent the data structures in MongoDB. They de
 | `password` | Password of the customer         |
 | `role`     | The role of the user (defaulting to "CUSTOMER") |
 
-#### **userModel.ts**
+#### **mamberModel.ts**
 
 | Property    | Description                     |
 | ----------- | ------------------------------- |
@@ -106,8 +74,8 @@ These are mongoose models that represent the data structures in MongoDB. They de
 | `email`     | Email of the user                |
 | `password`  | Password of the user             |
 | `mobile`    | Mobile number of the user        |
-| `role`      | The role of the user (defaulting to "MECHANIC") |
-| `status`    | The availability status of the mechanic (defaulting to "AVAILABLE") |
+| `role`      | The role of the user (defaulting to "MANGER") |
+| `status`    | The availability status of the manager (defaulting to "AVAILABLE") |
 
 #### **orderModel.ts**
 
@@ -120,7 +88,7 @@ These are mongoose models that represent the data structures in MongoDB. They de
 | `custAddress`    | Address of the customer         |
 | `serviceName`    | The type of service requested   |
 | `servicePrice`   | The price of the requested service |
-| `mechanicId`     | ID of the mechanic assigned to the order |
+| `managerId`      | ID of the manager assigned to the order |
 | `requestedOn`    | Date when the service was requested |
 | `deliveredOn`    | Date when the service was completed |
 | `status`         | Status of the order (e.g., "Pending", "Completed") |
@@ -146,7 +114,6 @@ These are mongoose models that represent the data structures in MongoDB. They de
 | `role`     | The role of the user (defaulting to "CUSTOMER") |
 
 
-####
 
 ### **API-endpoints**
 
@@ -165,7 +132,7 @@ Login as a memeber, login as a memeber and logint as a user respectively
 - **Payload:** `{ email, password }`
 - **Response:** Returns user data and a token. Stores user data to localStorage.
 
- Register Mechanic (POST)
+ Register Manager (POST)
 
 - **Endpoint:** `/register`
 - **Payload:** `{ name, email, password, mobile }`
@@ -178,8 +145,10 @@ Login as a memeber, login as a memeber and logint as a user respectively
 - **Response:** Initiates user registration.
 
 > Specific cases of usage
+
 #### ADMIN login:
-```json
+
+```bash
 Login
 {
   role: 'ADMIN',
@@ -190,22 +159,24 @@ Login
   __v: 0
 }
 ```
-#### MECHANIC login
-```json
+
+#### MANAGER login
+
+```bash
 Login
 {
   role: 'CUSTOMER',
   _id: 651f30fc21f4ce7d8c0cd0d5,
-  name: 'Mechanic',
+  name: 'Manager',
   email: 'user@email.com',
   password: '$2b$10$1t/PNFHPjJdlgjRsCmAgkO1dTI4vu/rdmljRAuW1OO34SzURwLxIq',
   __v: 0
 }
 ```
 
-
 #### User register:
-```json
+
+```bash
 Register
 {
   role: 'CUSTOMER',
@@ -313,7 +284,7 @@ Main end-point: http://localhost:8088/admin/car-func/
 
 Adding the car: http://localhost:8088/admin/car-func/addCar
 
-```json
+```bash
 Car Added: {
   name: 'Car1',
   brand: 'cAR1',
@@ -325,7 +296,7 @@ Car Added: {
 Updating the car: http://localhost:8088/admin/car-func/addCar/updateCar/${carId_car_to_update}
 
 
-```json
+```bash
 Updated Successfully
 Car Added: {
   name: '1Car1',
@@ -482,28 +453,28 @@ Admin Orders Endpoint: http://localhost:8010/admin/order/findPlacedOrder
   {
     "orderId": "1",
     "customerId": "12345",
-    "mechanicId": null,
+    "managerId": null,
     "orderStatus": "Placed",
     "createdAt": "2023-10-10T12:00:00Z"
   },
   {
     "orderId": "2",
     "customerId": "54321",
-    "mechanicId": null,
+    "managerId": null,
     "orderStatus": "Placed",
     "createdAt": "2023-10-11T14:30:00Z"
   }
 
 ```
 
-#### Assign Order to Mechanic
-To assign an order to a mechanic, make a PATCH request to the following endpoint:
+#### Assign Order to Manager
+To assign an order to a manager, make a PATCH request to the following endpoint:
 
 Endpoint: 'http://localhost:8010/admin/order/updateOrder/:orderId'
 
 ```json
 {
-  "mechanicId": "exampleMechanicId"
+  "managerId": "exampleManagerId"
 }
 
 ```
@@ -512,7 +483,7 @@ Response:
 
 ```json
 {
-  "message": "Order assigned to mechanic successfully."
+  "message": "Order assigned to manager successfully."
 }
 
 
@@ -529,14 +500,14 @@ Response:
 {
     "orderId": "3",
     "customerId": "67890",
-    "mechanicId": "mechanic314",
+    "mangerId": "manger314",
     "orderStatus": "Completed",
     "completedAt": "2023-10-12T15:45:00Z"
   },
   {
     "orderId": "4",
     "customerId": "98765",
-    "mechanicId": "mechanic314",
+    "managerId": "manager314",
     "orderStatus": "Completed",
     "completedAt": "2023-10-13T10:15:00Z"
   }
@@ -561,7 +532,10 @@ In our application, we have implemented our own version of JSON Web Tokens (JWT)
 > Creating a JWT:
 
 ```typescript
-import crypto from 'crypto';
+
+import * as tsCryptoLib from './Crypto-lib/Crypto-ts/src/HmacSHA256';
+import { Base64, Hex, Utf8, Word32Array, Word64Array } from './Crypto-lib/Crypto-ts/src';
+
 
 const secret = '31415926535898_superSuperSecretKey';  // Ensure to keep this secret very secure.
 
@@ -593,9 +567,84 @@ export const verifyJWT = (token: string): any => {
 Our JWT implementation provides a robust method for ensuring secure authentication in our application. Always validate JWTs server-side and never trust information from a client without verification.
 
 
+
+## Database Schema Documentation
+
+This document provides an overview of the MongoDB schema used in the system. Each table represents a collection within the MongoDB database, detailing the fields, data types, and descriptions of their roles within the application.
+
+## Collections
+
+Below are the collections defined in the MongoDB database, along with their respective schemas.
+
+### `Cars`
+| Field  | Type   | Description          | Unique | Required | Default |
+|--------|--------|----------------------|--------|----------|---------|
+| `name` | String | Name of the car      | Yes    | Yes      | N/A     |
+| `brand`| String | Brand of the car     | No     | Yes      | N/A     |
+
+### `Customers`
+| Field     | Type   | Description                             | Unique | Required | Default     |
+|-----------|--------|-----------------------------------------|--------|----------|-------------|
+| `name`    | String | Name of the customer                    | No     | Yes      | N/A         |
+| `email`   | String | Email address of the customer           | Yes    | Yes      | N/A         |
+| `password`| String | Encrypted password for the account      | No     | Yes      | N/A         |
+| `role`    | String | Role of the customer within the system  | No     | No       | "CUSTOMER"  |
+
+### `Members`
+| Field     | Type   | Description                             | Unique | Required | Default     |
+|-----------|--------|-----------------------------------------|--------|----------|-------------|
+| `_id`     | ObjectID | Unique identifier for the user        | Yes    | Yes      | N/A         |
+| `name`    | String | Name of the user                        | No     | Yes      | N/A         |
+| `email`   | String | User's email address                    | Yes    | Yes      | N/A         |
+| `password`| String | Encrypted password for the account      | No     | Yes      | N/A         |
+| `mobile`  | String | Mobile number of the user               | No     | No       | N/A         |
+| `role`    | String | User's role within the system           | No     | No       | "MANAGER"  |
+| `status`  | String | Manager's availability status          | No     | No       | "AVAILABLE" |
+
+### `Orders`
+| Field          | Type     | Description                                     | Unique | Required | Default   |
+|----------------|----------|-------------------------------------------------|--------|----------|-----------|
+| `customerId`   | ObjectID | Reference to the customer placing the order     | No     | Yes      | N/A       |
+| `customerName` | String   | Name of the customer                            | No     | Yes      | N/A       |
+| `carName`      | String   | Name of the car for service                     | No     | Yes      | N/A       |
+| `carNumber`    | String   | License plate of the car                        | No     | Yes      | N/A       |
+| `custAddress`  | String   | Customer's address                              | No     | Yes      | N/A       |
+| `serviceName`  | String   | Type of service requested                       | No     | Yes      | N/A       |
+| `servicePrice` | Number   | Price of the service                            | No     | Yes      | N/A       |
+| `managerId`   | ObjectID | Reference to the manager assigned to the order | No     | No       | N/A       |
+| `requestedOn`  | Date     | Date when the service was requested             | No     | Yes      | `Date.now`|
+| `deliveredOn`  | Date     | Date when the service was delivered             | No     | No       | N/A       |
+| `status`       | String   | Current status of the order                     | No     | Yes      | N/A       |
+
+### `Services`
+| Field         | Type   | Description                             | Unique | Required | Default                 |
+|---------------|--------|-----------------------------------------|--------|----------|-------------------------|
+| `serviceType` | String | Type of service (e.g., "Cleaning")      | No     | Yes      | N/A                     |
+| `name`        | String | Unique name of the service              | Yes    | Yes      | N/A                     |
+| `price`       | Number | Cost of the service                     | No     | Yes      | N/A                     |
+| `description` | String | Brief description of the service        | No     | Yes      | N/A                     |
+| `timeRequired`| String | Estimated time to complete the service  | No     | Yes      | N/A                     |
+| `where`       | String | Location of service performance         | No     | Yes      | N/A                     |
+
+
+This schema overview represents the current state of the MongoDB collections and their fields as of [last update date]. The schema is subject to change as the application evolves.
+
+## **Coverages**
+
+`Admin` microservice coverage status:
+
+![Coverage Status](./Server/Admin/coverage_images/Screenshot_20231114_192625.png)
+
+
+
+
+
+
 ## **Summary**
 
-Provide a summary of your project and its purpose. You can also include installation instructions, usage examples, and any other relevant information here.
+The Car Service App V2 is not just an upgrade in technology but also an enhancement in operational efficiency and user experience. The app is designed to cater to the diverse needs of the car service industry, enabling all stakeholders to interact in a cohesive and efficient ecosystem.
+
+Stay tuned to this space for any updates or new features that will be rolled out. Your feedback is invaluable to us as we strive to improve and evolve the Car Service App V2.
 
 
 SERVICES FOR EACH ROLE
@@ -611,7 +660,7 @@ CUSTOMERS:
 7. Wash Status: Get the update of car’s wash status: done, in progress or in queue.
 8. My Washes: Users can view the timeline of all car washes that they have carried out
 
-Mechanics: 
+Managers: 
 
 1. Login## Authenctication - server-side JWT (implementation assumption)
 2. Wash Request: Wash Request is sent to the washer along with the user details. The washer can either accept or decline the request..
@@ -620,7 +669,7 @@ Mechanics:
 
 ADMIN: 
 
-1. Washer Management: Add/Edit Washer Details
+1. Washer/Manager Management: Add/Edit Washer Details
 2. Car Management: Add/Edit Car Details
 3. Service Plan Management: Add/Edit Plans and Service Add-ons
 4. Order Management: View Order Details and assign pending requests to washers
@@ -646,7 +695,11 @@ ADMIN:
 ```
 
 ## Auth:
-admin: admin@email.com  admin3141592   |  test@email.com    test3141592   |    
+user      |           email |        password |
+|---------|-----------------|-----------------|
+admin     | admin@email.com | admin3141592    | 
+customer  |  test@email.com |  test3141592    |    
+manager   | user@email.com  |  user3141592    |
 
 ### For Back-End
 
@@ -659,7 +712,7 @@ admin: admin@email.com  admin3141592   |  test@email.com    test3141592   |
 ```
 - There are 4 Microservices
 - Inside each Microservice a dbConfig.js file is there in config folder. Inside that you have to provide your database credentials.
-- Install dependencies for each Microservice (Admin, Customer, Mechaninc, Order).
+- Install dependencies for each Microservice (Admin, Customer, Manager, Order).
 
 ```bash
   cd Admin
@@ -682,8 +735,8 @@ nvm use 18 && npm install
 ADMIN user_name: admin@email.com
 ADMIN password: admin3141592
 
-MECHANIC user_name: user@email.com
-MECHANIC password: user3141592
+MANAGER user_name: user@email.com
+MANAGER password: user3141592
 
 CUSTOMER user_name: test@email.com
 CUSTOMER password: test3141592

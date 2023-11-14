@@ -135,18 +135,22 @@ export const findByBrand = async (req: Request, res: Response): Promise<void> =>
  * @returns {Object} JSON object of the car or a message indicating the car is not available.
  */
 export const findByCarId = async (req: Request, res: Response): Promise<void> => {
-  try {
-      const car = await CarModel.findOne({ _id: req.params.carId }).exec();
-
-      if (!car) {
-          res.status(404).json({ message: "This Car is Not available" });
-      } else {
-          res.status(200).json({ car });
-      }
-  } catch (err) {
-      console.log("Find By Car Error:", err);
-      res.status(500).json({ error: err });
-  }
+    const carId = req.params.carId;
+    try {
+        const car = await CarModel.findById(carId).exec();
+  
+        if (!car) {
+            res.status(404).json({ message: "Car not found" });
+        } else {
+            res.status(200).json(car);
+        }
+    } catch (err: any) {
+        if (err.name === 'CastError') {
+            res.status(400).json({ message: "Invalid car ID" });
+        } else {
+            res.status(500).json({ error: "An error occurred while retrieving the car" });
+        }
+    }
 };
 
 
@@ -159,14 +163,22 @@ export const findByCarId = async (req: Request, res: Response): Promise<void> =>
  * @returns {Object} JSON response indicating the outcome of the update.
  */
 export const updateCar = async (req: Request, res: Response): Promise<void> => {
-  try {
-      await CarModel.updateOne({ _id: req.params.id }, { $set: req.body }).exec();
-      console.log("Updated Successfully");
-      res.status(200).json({ message: "Car Updated Successfully" });
-  } catch (err) {
-      console.log("Update Car Error:", err);
-      res.status(500).json({ error: err });
-  }
+    const carId = req.params.carId;
+    try {
+        const result = await CarModel.findByIdAndUpdate(carId, req.body, { new: true }).exec();
+
+        if (!result) {
+            res.status(404).json({ message: "Car not found or no update made" });
+        } else {
+            res.status(200).json({ message: "Car updated successfully", car: result });
+        }
+    } catch (err: any) {
+        if (err.name === 'CastError') {
+            res.status(400).json({ message: "Invalid car ID" });
+        } else {
+            res.status(500).json({ error: "An error occurred while updating the car" });
+        }
+    }
 };
 
 

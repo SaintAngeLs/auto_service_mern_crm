@@ -22,19 +22,23 @@ export interface IOrder extends Document {
 }
 
 const orderSchema: MongooseSchema = new mongoose.Schema({
-    customerId: { type: String },
+    customerId: { type: String, index: true }, // addingt the index for the customerId
     customerName: { type: String },
     carName: { type: String },
     carNumber: { type: String },
     custAddress: { type: String, max: 40 },
     serviceName: { type: String },
     servicePrice: { type: Number },
-    managerId: { type: String },
+    managerId: { type: String }, // adding the index for the managerId
     requestedOn: { type: Date, default: Date.now },
     deliveredOn: { type: Date },
     status: {
         type: String,
+        index: true
     },
 });
+
+// Creating the indef for the specific pattern of the indexing
+orderSchema.index({ customerId: 1, managerId: 1, status: 1 });
 
 export default mongoose.model<IOrder>('order', orderSchema);
