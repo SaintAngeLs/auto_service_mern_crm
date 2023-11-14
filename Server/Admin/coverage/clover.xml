@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1699985597735" clover="3.2.0">
-  <project timestamp="1699985597735" name="All files">
-    <metrics statements="2279" coveredstatements="666" conditionals="497" coveredconditionals="63" methods="359" coveredmethods="64" elements="3135" coveredelements="793" complexity="0" loc="2279" ncloc="2279" packages="15" files="81" classes="81"/>
+<coverage generated="1699985892299" clover="3.2.0">
+  <project timestamp="1699985892299" name="All files">
+    <metrics statements="2291" coveredstatements="678" conditionals="497" coveredconditionals="63" methods="359" coveredmethods="64" elements="3147" coveredelements="805" complexity="0" loc="2291" ncloc="2291" packages="15" files="82" classes="82"/>
     <package name="services">
-      <metrics statements="30" coveredstatements="30" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="42" coveredstatements="42" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="authServices.ts" path="/home/kaliuser/Documents/portfolio/commercial_apps/automitive_service_app/a-CarServiceApplication-new/auto_service_mern_crm/Server/Admin/services/authServices.ts">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="7" count="1" type="stmt"/>
@@ -25,6 +25,21 @@
         <line num="30" count="1" type="stmt"/>
         <line num="33" count="1" type="stmt"/>
         <line num="36" count="1" type="stmt"/>
+      </file>
+      <file name="carServices.ts" path="/home/kaliuser/Documents/portfolio/commercial_apps/automitive_service_app/a-CarServiceApplication-new/auto_service_mern_crm/Server/Admin/services/carServices.ts">
+        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
       </file>
       <file name="managerServices.ts" path="/home/kaliuser/Documents/portfolio/commercial_apps/automitive_service_app/a-CarServiceApplication-new/auto_service_mern_crm/Server/Admin/services/managerServices.ts">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>

@@ -13,9 +13,27 @@ jest.mock('../../middlewares/check-auth', () => ({
 }));
 
 jest.mock('../../controllers/carController', () => ({
-    addCar: jest.fn().mockResolvedValue({ status: 201, message: 'Car Added Successfully' }),
-    findAllCars: jest.fn(() => (req: any, res: any) => res.status(200).send([{ id: 'car1', brand: 'Brand' }])),
-    // ...other mocks
+    addCar: jest.fn().mockImplementation((req, res, next) => {
+        res.status(201).json({ message: 'Car Added Successfully' });
+      }),
+      findAllCars: jest.fn().mockImplementation((req, res, next) => {
+        res.status(200).json([{ id: 'car1', brand: 'Brand' }]);
+      }),
+      findAllBrands: jest.fn().mockImplementation((req, res, next) => {
+        res.status(200).json(['Brand1', 'Brand2']);
+      }),
+      findByBrand: jest.fn().mockImplementation((req, res, next) => {
+        res.status(200).json([{ name: 'Car1' }]);
+      }),
+      findByCarId: jest.fn().mockImplementation((req, res, next) => {
+        res.status(200).json({ id: req.params.carId, name: 'Car1' });
+      }),
+      updateCar: jest.fn().mockImplementation((req, res, next) => {
+        res.status(200).json({ message: 'Car updated successfully' });
+      }),
+      deleteCar: jest.fn().mockImplementation((req, res, next) => {
+        res.status(200).json({ message: 'Car deleted successfully' });
+      }),
   }));
   
 // Create an express application and apply the car router
