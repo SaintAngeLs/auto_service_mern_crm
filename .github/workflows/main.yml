@@ -1,0 +1,59 @@
+name: MERN CI/CD Pipeline
+
+on:
+  push:
+    branches: [ V2, V2Development ]
+  pull_request:
+    branches: [ V2, V2Development ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install client dependencies
+      run: |
+        cd Client/auto-service-system
+        npm install --legacy-peer-deps
+
+    - name: Build client
+      env:
+        CI: false
+      run: |
+        cd Client/auto-service-system
+        npm run build
+
+    - name: Run Server Admin tests
+      run: |
+        cd Server/Admin
+        npm install --legacy-peer-deps
+        npm test
+
+    - name: Run Server Customer tests
+      run: |
+        cd Server/Customer
+        npm install --legacy-peer-deps
+        npm test
+
+    - name: Run Server Manager tests
+      run: |
+        cd Server/Manager
+        npm install --legacy-peer-deps
+        npm test
+
+    - name: Run Server Order tests
+      run: |
+        cd Server/Order
+        npm install --legacy-peer-deps
+        npm test
