@@ -26,13 +26,20 @@ export const createJWT = (payload: object, expiresIn: number): string => {
   // return encodedHeader + '.' + encodedPayload + '.' + signature;
   
   const stringifiedHeader = JSON.stringify(header);
-  const encodedHeader = Base64.parse(stringifiedHeader);
+  // Test failing:
+  // const encodedHeader = Base64.parse(stringifiedHeader);
 
   const stringifiedPayload = JSON.stringify({
     ...payload,
     exp: Math.floor(Date.now() / 1000) + expiresIn
   });
-  const encodedPayload = Base64.parse(stringifiedPayload);
+
+  // Test failing:
+  // const encodedPayload = Base64.parse(stringifiedPayload);
+
+  const encodedHeader = Base64.stringify(Utf8.parse(stringifiedHeader));
+  const encodedPayload = Base64.stringify(Utf8.parse(stringifiedPayload));
+
 
   const signature = tsCryptoLib.HmacSHA256(encodedHeader + '.' + encodedPayload, secret);
   const encodedSignature = urlSafeBase64Encode(signature);
@@ -91,7 +98,11 @@ export const verifyJWT = (token: string): any => {
     throw new Error("Invalid Signature");
   }
 
-  const payloadString = urlSafeBase64Decode(encodedPayload).toString();
+  // Test failure:
+  // const payloadString = urlSafeBase64Decode(encodedPayload).toString();
+  // const payload = JSON.parse(payloadString);
+
+  const payloadString = Utf8.stringify(urlSafeBase64Decode(encodedPayload));
   const payload = JSON.parse(payloadString);
 
   if (payload.exp && Date.now() / 1000 > payload.exp) {
