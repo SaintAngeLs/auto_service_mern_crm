@@ -74,4 +74,7 @@ class ManagerService {
   }
 }
 
-export default new ManagerService();
+
+const managerService = new ManagerService();
+export default managerService;
+

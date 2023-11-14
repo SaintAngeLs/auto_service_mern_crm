@@ -81,4 +81,5 @@ class ManagerOrders {
   }
 }
 
-export default new ManagerOrders();
+const managerOrders = new ManagerOrders();
+export default managerOrders;

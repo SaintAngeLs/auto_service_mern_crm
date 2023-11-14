@@ -85,4 +85,5 @@ class CustomerService {
   }
 }
 
-export default new CustomerService();
+const customerService = new CustomerService()
+export default customerService;
