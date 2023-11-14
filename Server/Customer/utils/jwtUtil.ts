@@ -1,4 +1,7 @@
 import crypto from 'crypto';
+/** 
+ *  @note The Crypto library is implemented only in the Admin Microservice
+ */
 
 const secret = '31415926535898_superSuperSuperSuperSuperSuperSuperSecret%frifsoidjfnakls%Key'; // This should be a very long and complex secret, preferably stored in a secure environment.
 
