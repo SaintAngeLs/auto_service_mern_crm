@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for services/authServices.ts</title>
+    <title>Code coverage report for services/managerServices.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> authServices.ts</h1>
+        <h1><a href="../index.html">All files</a> / <a href="index.html">services</a> managerServices.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -82,11 +82,17 @@
 <a name='L17'></a><a href='#L17'>17</a>
 <a name='L18'></a><a href='#L18'>18</a>
 <a name='L19'></a><a href='#L19'>19</a>
-<a name='L20'></a><a href='#L20'>20</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -94,33 +100,39 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
- * @file autoService.ts
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ * @file managerServices.ts
  * 
- * Routes for authentication services.
+ * Routes for manager-related operations.
  */
 &nbsp;
 import express from 'express';
-import * as AuthController from '../controllers/authController';
+// Middleware for authentication and manager controller
+import * as ManagerController from '../controllers/managerController';
+import * as checkAuth from '../middlewares/check-auth';
 &nbsp;
 const router = express.Router();
 &nbsp;
-// Routing for user login
-router.post("/login", AuthController.login);
+// Define routes for finding available managers and all managers
+// These routes are protected and accessible by admins only
 &nbsp;
-// Routing for the user registration
-router.post("/register", AuthController.register);
+// Route to find available managers, accessible only by the ADMIN
+router.get("/findAvailable", [checkAuth.verifyToken, checkAuth.isAdmin], ManagerController.findAvailable);
+&nbsp;
+// Route to find all managers, accessible only by the ADMIN
+router.get("/findAll", [checkAuth.verifyToken, checkAuth.isAdmin], ManagerController.findAll);
 &nbsp;
 // Export the router for use in external app
-export default router;
-&nbsp;</pre></td></tr></table></pre>
+export default router;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->
