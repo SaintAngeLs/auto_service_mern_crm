@@ -2,7 +2,7 @@ import { createJWT, verifyJWT } from "../jwtUtil";
 
 describe('JWT Utility Functions', () => {
   const payload = { userId: '123' };
-  const expiresIn = 3600; 
+  const expiresIn = 3600; // 1 hour
 
   describe('createJWT', () => {
     it('creates a JWT for a payload', () => {
